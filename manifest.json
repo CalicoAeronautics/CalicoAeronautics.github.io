@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "general-relativity",
+    "title": "General Relativity, or Why Gravity Isn't a Force",
+    "category": "Physics",
+    "tags": ["Relativity", "Einstein", "Gravity", "Spacetime"],
+    "readTime": 12,
+    "date": "2026-06-01",
+    "excerpt": "Einstein's realization that gravity is geometry, not a pull \u2014 and why a falling elevator is the key to understanding it.",
+    "file": "articles/general-relativity.md"
+  },
+  {
+    "slug": "black-holes-101",
+    "title": "Black Holes 101: The Point of No Return",
+    "category": "Astronomy",
+    "tags": ["Black Holes", "Relativity", "Spacetime"],
+    "readTime": 9,
+    "date": "2026-06-15",
+    "excerpt": "What an event horizon actually is, why light can't escape it, and what happens to time near one.",
+    "file": "articles/black-holes-101.md"
+  },
+  {
+    "slug": "imaginary-numbers",
+    "title": "Imaginary Numbers Are Real (Sort Of)",
+    "category": "Mathematics",
+    "tags": ["Complex Numbers", "Algebra"],
+    "readTime": 7,
+    "date": "2026-06-22",
+    "excerpt": "Why i isn't a trick, what it means to rotate on the complex plane, and where engineers actually use it.",
+    "file": "articles/imaginary-numbers.md"
+  }
+]
