@@ -85,7 +85,23 @@ space explorer (click-through planets + moons), IPhyC.
 more scientists, more news items, real API integrations for Space Explorer) is just a matter of adding data,
 not new code.
 
+## Language support
+
+A language switcher (EN/TR/FR) is built into the nav and persists via `localStorage`. It's fully wired
+for the **nav, footer, homepage, and About page**. The rest of the site (articles, calculators, formula
+library, etc.) stays in English when you switch languages - translating everything by hand would be a huge,
+error-prone job, so the system is built to be extended gradually instead:
+
+To translate more text on a page:
+1. Add `data-i18n="section.key"` and `data-i18n-default="Original English text"` to the element.
+2. Add matching `tr` / `fr` entries in `js/i18n.js` under `TRANSLATIONS`.
+3. That's it - `applyPageTranslations()` picks it up automatically, including on language switch.
+
+Thai was mentioned as a "later" language in the original vision - add it the same way: a new `th` block
+in `TRANSLATIONS`, plus one more `<option>` in the `LANGUAGES` array in `js/layout.js`.
+
 ## Notes
+
 
 - No dependencies except one CDN script (`marked.js`) for Markdown rendering on `article.html`, and Google Fonts.
 - Everything else is vanilla JS - no framework, no build tooling.

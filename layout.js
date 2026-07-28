@@ -1,7 +1,11 @@
 /* ==========================================================================
    Shared header/footer injection so every page stays in sync from one file.
-   Also owns: theme switching (persisted), mobile nav toggle, active-link
-   highlighting, and the "More" dropdown.
+   Also owns: theme switching, sound toggle wiring, language switching,
+   mobile nav toggle, active-link highlighting, and the "More" dropdown.
+
+   Translation lookup uses a global t(key) function defined in js/i18n.js
+   (loaded on every page). If i18n.js isn't present for some reason, this
+   file still works fine and just shows the English defaults below.
    ========================================================================== */
 
 const CAT_MARK_SVG = `
@@ -17,25 +21,25 @@ const CAT_MARK_SVG = `
 </svg>`;
 
 const NAV_PRIMARY = [
-  { href: 'index.html', label: 'Home' },
-  { href: 'articles.html', label: 'Articles' },
-  { href: 'olympiad.html', label: 'Olympiad Hub' },
-  { href: 'space-explorer.html', label: 'Space Explorer' },
-  { href: 'resources.html', label: 'Resources' },
-  { href: 'about.html', label: 'About' },
+  { href: 'index.html', key: 'home', label: 'Home' },
+  { href: 'articles.html', key: 'articles', label: 'Articles' },
+  { href: 'olympiad.html', key: 'olympiad', label: 'Olympiad Hub' },
+  { href: 'space-explorer.html', key: 'spaceExplorer', label: 'Space Explorer' },
+  { href: 'resources.html', key: 'resources', label: 'Resources' },
+  { href: 'about.html', key: 'about', label: 'About' },
 ];
 
 const NAV_MORE = [
-  { href: 'problem-of-week.html', label: 'Problem of the Week' },
-  { href: 'news.html', label: 'News' },
-  { href: 'calculators.html', label: 'Calculators' },
-  { href: 'formulas.html', label: 'Formula Library' },
-  { href: 'simulations.html', label: 'Simulations' },
-  { href: 'timeline.html', label: 'Timeline' },
-  { href: 'map.html', label: 'Discovery Map' },
-  { href: 'scientists.html', label: 'Great Scientists' },
-  { href: 'iphyc.html', label: 'IPhyC' },
-  { href: 'contact.html', label: 'Contact' },
+  { href: 'problem-of-week.html', key: 'problem', label: 'Problem of the Week' },
+  { href: 'news.html', key: 'news', label: 'News' },
+  { href: 'calculators.html', key: 'calculators', label: 'Calculators' },
+  { href: 'formulas.html', key: 'formulas', label: 'Formula Library' },
+  { href: 'simulations.html', key: 'simulations', label: 'Simulations' },
+  { href: 'timeline.html', key: 'timeline', label: 'Timeline' },
+  { href: 'map.html', key: 'map', label: 'Discovery Map' },
+  { href: 'scientists.html', key: 'scientists', label: 'Great Scientists' },
+  { href: 'iphyc.html', key: 'iphyc', label: 'IPhyC' },
+  { href: 'contact.html', key: 'contact', label: 'Contact' },
 ];
 
 const THEMES = [
@@ -44,6 +48,21 @@ const THEMES = [
   { id: 'deep-purple', label: 'Deep Purple' },
   { id: 'solar-gold', label: 'Solar Gold' },
 ];
+
+const LANGUAGES = [
+  { id: 'en', label: 'EN' },
+  { id: 'tr', label: 'TR' },
+  { id: 'fr', label: 'FR' },
+];
+
+function tr(key, fallback) {
+  // wraps the global t() from i18n.js if available, else falls back to English
+  if (typeof t === 'function') {
+    const val = t(key);
+    if (val) return val;
+  }
+  return fallback;
+}
 
 function currentPage() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
@@ -56,11 +75,11 @@ function renderHeader() {
   const page = currentPage();
 
   const primaryLinks = NAV_PRIMARY.map(l =>
-    `<a href="${l.href}" class="${l.href === page ? 'active' : ''}">${l.label}</a>`
+    `<a href="${l.href}" class="${l.href === page ? 'active' : ''}">${tr('nav.' + l.key, l.label)}</a>`
   ).join('');
 
   const moreLinks = NAV_MORE.map(l =>
-    `<a href="${l.href}" class="${l.href === page ? 'active' : ''}">${l.label}</a>`
+    `<a href="${l.href}" class="${l.href === page ? 'active' : ''}">${tr('nav.' + l.key, l.label)}</a>`
   ).join('');
 
   el.innerHTML = `
@@ -69,14 +88,18 @@ function renderHeader() {
       <nav class="nav-links" id="nav-links">
         ${primaryLinks}
         <div class="nav-item-more" id="more-toggle">
-          <a href="#" id="more-trigger">More &#9662;</a>
+          <a href="#" id="more-trigger">${tr('nav.more', 'More')} &#9662;</a>
           <div class="more-menu">${moreLinks}</div>
         </div>
       </nav>
       <div class="nav-controls">
-        <select id="theme-toggle" aria-label="Theme">
-          ${THEMES.map(t => `<option value="${t.id}">${t.label}</option>`).join('')}
+        <select id="lang-toggle" aria-label="Language">
+          ${LANGUAGES.map(l => `<option value="${l.id}">${l.label}</option>`).join('')}
         </select>
+        <select id="theme-toggle" aria-label="Theme">
+          ${THEMES.map(th => `<option value="${th.id}">${th.label}</option>`).join('')}
+        </select>
+        <button id="sound-toggle" aria-label="Toggle sound" style="background:none; border:1px solid rgba(243,237,224,0.18); border-radius:var(--radius-sm); padding:6px 10px; cursor:pointer; font-size:0.85rem;">&#128263;</button>
         <button id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
       </div>
     </div>
@@ -103,6 +126,18 @@ function renderHeader() {
     applyTheme(e.target.value);
     localStorage.setItem('calico-theme', e.target.value);
   });
+
+  const langSelect = document.getElementById('lang-toggle');
+  const savedLang = localStorage.getItem('calico-lang') || 'en';
+  langSelect.value = savedLang;
+  document.documentElement.lang = savedLang;
+  langSelect.addEventListener('change', (e) => {
+    localStorage.setItem('calico-lang', e.target.value);
+    document.documentElement.lang = e.target.value;
+    renderHeader();
+    renderFooter();
+    if (typeof applyPageTranslations === 'function') applyPageTranslations();
+  });
 }
 
 function applyTheme(id) {
@@ -120,41 +155,41 @@ function renderFooter() {
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="brand" style="margin-bottom:10px;">${CAT_MARK_SVG}<span>Calico Physics</span></div>
-        <p>Physics and mathematics explained the way a curious cat would explore them - patiently, playfully, one idea at a time.</p>
+        <p>${tr('footer.tagline', 'Physics and mathematics explained the way a curious cat would explore them - patiently, playfully, one idea at a time.')}</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
-          <h4>Learn</h4>
-          <a href="articles.html">Articles</a>
-          <a href="formulas.html">Formula Library</a>
-          <a href="calculators.html">Calculators</a>
-          <a href="simulations.html">Simulations</a>
-          <a href="timeline.html">Timeline</a>
-          <a href="scientists.html">Great Scientists</a>
+          <h4>${tr('footer.learn', 'Learn')}</h4>
+          <a href="articles.html">${tr('nav.articles', 'Articles')}</a>
+          <a href="formulas.html">${tr('nav.formulas', 'Formula Library')}</a>
+          <a href="calculators.html">${tr('nav.calculators', 'Calculators')}</a>
+          <a href="simulations.html">${tr('nav.simulations', 'Simulations')}</a>
+          <a href="timeline.html">${tr('nav.timeline', 'Timeline')}</a>
+          <a href="scientists.html">${tr('nav.scientists', 'Great Scientists')}</a>
         </div>
         <div class="footer-col">
-          <h4>Explore</h4>
-          <a href="space-explorer.html">Space Explorer</a>
-          <a href="news.html">News</a>
-          <a href="map.html">Discovery Map</a>
-          <a href="resources.html">Resources</a>
+          <h4>${tr('footer.explore', 'Explore')}</h4>
+          <a href="space-explorer.html">${tr('nav.spaceExplorer', 'Space Explorer')}</a>
+          <a href="news.html">${tr('nav.news', 'News')}</a>
+          <a href="map.html">${tr('nav.map', 'Discovery Map')}</a>
+          <a href="resources.html">${tr('nav.resources', 'Resources')}</a>
         </div>
         <div class="footer-col">
-          <h4>Compete</h4>
-          <a href="olympiad.html">Olympiad Hub</a>
-          <a href="problem-of-week.html">Problem of the Week</a>
-          <a href="iphyc.html">IPhyC</a>
+          <h4>${tr('footer.compete', 'Compete')}</h4>
+          <a href="olympiad.html">${tr('nav.olympiad', 'Olympiad Hub')}</a>
+          <a href="problem-of-week.html">${tr('nav.problem', 'Problem of the Week')}</a>
+          <a href="iphyc.html">${tr('nav.iphyc', 'IPhyC')}</a>
         </div>
         <div class="footer-col">
-          <h4>Connect</h4>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <h4>${tr('footer.connect', 'Connect')}</h4>
+          <a href="about.html">${tr('nav.about', 'About')}</a>
+          <a href="contact.html">${tr('nav.contact', 'Contact')}</a>
         </div>
       </div>
     </div>
     <div class="container footer-bottom">
       <span>&copy; ${new Date().getFullYear()} Calico Physics</span>
-      <span>Built with curiosity, not textbooks.</span>
+      <span>${tr('footer.builtWith', 'Built with curiosity, not textbooks.')}</span>
     </div>
   `;
 }
@@ -162,4 +197,5 @@ function renderFooter() {
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
+  if (typeof applyPageTranslations === 'function') applyPageTranslations();
 });

@@ -40,19 +40,84 @@
     <div class="section-head">
       <span class="eyebrow">Archive</span>
       <h2>Past problems</h2>
-      <p>The full archive with searchable difficulty and topic filters is coming soon.</p>
+      <p>Six earlier problems, same format: try it, then check the hint or solution.</p>
     </div>
-    <div class="placeholder-block">
-      <p>Problems #1&ndash;6 will be listed here once the archive is wired up.</p>
+
+    <div class="problem-card" style="margin-bottom:20px;">
+      <span class="eyebrow">Problem #6</span>
+      <p class="problem-body">A 2 kg block slides down a frictionless 30&deg; incline that is 5 m long. Find its speed at the bottom.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-6">Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-6">Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-6">Use energy conservation: the height dropped is 5&nbsp;sin(30&deg;), and all the lost potential energy becomes kinetic energy (mass cancels out).</div>
+      <div class="reveal-box" id="solution-6">Height dropped h = 5 sin(30&deg;) = 2.5 m. mgh = &frac12;mv&sup2; &rarr; v = &radic;(2gh) = &radic;(2 &times; 9.8 &times; 2.5) &asymp; 7.0 m/s.</div>
+    </div>
+
+    <div class="problem-card" style="margin-bottom:20px;">
+      <span class="eyebrow">Problem #5</span>
+      <p class="problem-body">Two resistors, 6&Omega; and 12&Omega;, are connected in parallel across a 9V battery. Find the total current drawn from the battery.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-5">Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-5">Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-5">Find the equivalent resistance of the parallel combination first, then apply Ohm's law.</div>
+      <div class="reveal-box" id="solution-5">1/R_eq = 1/6 + 1/12 = 3/12 &rarr; R_eq = 4&Omega;. Total current I = V/R = 9/4 = 2.25 A.</div>
+    </div>
+
+    <div class="problem-card" style="margin-bottom:20px;">
+      <span class="eyebrow">Problem #4</span>
+      <p class="problem-body">A wave has a frequency of 500 Hz and travels at 340 m/s through air. Find its wavelength.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-4">Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-4">Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-4">Use v = f&lambda;, rearranged to solve for &lambda;.</div>
+      <div class="reveal-box" id="solution-4">&lambda; = v/f = 340/500 = 0.68 m.</div>
+    </div>
+
+    <div class="problem-card" style="margin-bottom:20px;">
+      <span class="eyebrow">Problem #3</span>
+      <p class="problem-body">A car accelerates uniformly from rest to 20 m/s in 8 seconds. How far does it travel in that time?</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-3">Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-3">Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-3">Average velocity for uniform acceleration from rest is half the final velocity.</div>
+      <div class="reveal-box" id="solution-3">v_avg = (0 + 20)/2 = 10 m/s. Distance = v_avg &times; t = 10 &times; 8 = 80 m.</div>
+    </div>
+
+    <div class="problem-card" style="margin-bottom:20px;">
+      <span class="eyebrow">Problem #2</span>
+      <p class="problem-body">What is the escape velocity from a planet with the same mass as Earth but half its radius?</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-2">Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-2">Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-2">Escape velocity v = &radic;(2GM/r). Halving r changes v by a factor of &radic;2.</div>
+      <div class="reveal-box" id="solution-2">Earth's escape velocity is about 11.2 km/s. Halving the radius multiplies it by &radic;2, giving roughly 15.8 km/s.</div>
+    </div>
+
+    <div class="problem-card">
+      <span class="eyebrow">Problem #1</span>
+      <p class="problem-body">A 3 kg object experiences a net force of 12 N. What is its acceleration?</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-1">Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-1">Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-1">Newton's Second Law: F = ma.</div>
+      <div class="reveal-box" id="solution-1">a = F/m = 12/3 = 4 m/s&sup2;.</div>
     </div>
   </section>
 </main>
 
 <div id="site-footer"></div>
 
+<script src="js/i18n.js"></script>
 <script src="js/layout.js"></script>
 <script src="js/background.js"></script>
 <script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
 <script src="js/reveal.js"></script>
 </body>
 </html>

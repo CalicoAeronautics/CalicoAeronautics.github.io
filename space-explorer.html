@@ -23,17 +23,43 @@
   </section>
 
   <section style="padding-top:0;">
-    <div class="placeholder-block">
-      <p><strong>Coming later:</strong> NASA APOD integration, ISS tracker, asteroid tracker, and a JWST image gallery.</p>
+    <div class="section-head">
+      <span class="eyebrow">Live from NASA</span>
+      <h2>Right Now in Space</h2>
+      <p>Fetched live from NASA's public APIs each time you load this page.</p>
+    </div>
+    <div class="nasa-grid">
+      <div class="nasa-panel" id="apod-panel">
+        <p class="loading">Loading today's astronomy picture&hellip;</p>
+      </div>
+
+      <div class="nasa-panel" id="iss-panel">
+        <h3>Where's the ISS Right Now?</h3>
+        <div class="iss-globe"><div class="iss-dot" id="iss-dot"></div></div>
+        <p class="loading" id="iss-coords">Loading position&hellip;</p>
+      </div>
+
+      <div class="nasa-panel">
+        <h3>Near-Earth Asteroids Today</h3>
+        <ul class="neo-list" id="neo-list"><li class="loading">Loading&hellip;</li></ul>
+      </div>
+
+      <div class="nasa-panel">
+        <h3>JWST Image Gallery</h3>
+        <div class="jwst-grid" id="jwst-grid"></div>
+      </div>
     </div>
   </section>
 </main>
 
 <div id="site-footer"></div>
 
+<script src="js/i18n.js"></script>
 <script src="js/layout.js"></script>
 <script src="js/background.js"></script>
 <script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
 <script src="js/space-explorer.js"></script>
+<script src="js/nasa.js"></script>
 </body>
 </html>

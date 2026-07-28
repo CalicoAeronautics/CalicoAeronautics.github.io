@@ -536,6 +536,81 @@ h1, h2, h3, h4{
 .planet-facts .fact .v{ font-size: 1rem; margin-top: 4px; }
 .moon-list{ display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
 
+/* ---------- NASA live panels ---------- */
+.nasa-grid{
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+}
+.nasa-panel{
+  background: linear-gradient(160deg, var(--void-soft), var(--void));
+  border: 1px solid rgba(243,237,224,0.08);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.nasa-panel img{ border-radius: var(--radius-sm); margin: 12px 0; width: 100%; }
+.nasa-panel .loading{ color: var(--cream-dim); font-family: var(--font-mono); font-size: 0.85rem; }
+.iss-globe{
+  position: relative;
+  height: 160px;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(circle at 30% 30%, rgba(139,143,199,0.12), transparent 60%), var(--void);
+  border: 1px solid rgba(243,237,224,0.08);
+  margin: 12px 0;
+  overflow: hidden;
+}
+.iss-dot{
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px 4px rgba(226,155,63,0.5);
+  transform: translate(-50%, -50%);
+}
+.neo-list{ list-style: none; padding: 0; margin: 12px 0 0; }
+.neo-list li{
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(243,237,224,0.06);
+}
+.neo-list li strong{ color: var(--cream); }
+.jwst-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+.jwst-grid img{ margin: 0; aspect-ratio: 1; object-fit: cover; }
+
+/* ---------- countdown ---------- */
+.countdown{
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.countdown .unit{
+  background: rgba(226,155,63,0.08);
+  border: 1px solid rgba(226,155,63,0.22);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  text-align: center;
+  min-width: 74px;
+}
+.countdown .unit .num{
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--amber-soft);
+  display: block;
+}
+.countdown .unit .lbl{
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+}
+
 .nav-controls{ display:flex; align-items:center; gap:10px; }
 
 #theme-toggle{
