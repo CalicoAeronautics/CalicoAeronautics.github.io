@@ -1,37 +1,5 @@
 [
-  {
-    "title": "Webb Telescope Reveals Sharper Detail in the Pillars of Creation",
-    "category": "Astronomy",
-    "date": "2026-06-10",
-    "summary": "New infrared imaging from the James Webb Space Telescope shows finer structure inside the Pillars of Creation than earlier Hubble images could resolve, including previously hidden young stars.",
-    "link": "#"
-  },
-  {
-    "title": "IceCube Detects High-Energy Neutrinos Traced to a Distant Galaxy",
-    "category": "Astrophysics",
-    "date": "2026-06-03",
-    "summary": "The IceCube Neutrino Observatory, buried in Antarctic ice, continues to trace ultra-high-energy neutrinos back to their source galaxies, helping map the most extreme particle accelerators in the universe.",
-    "link": "#"
-  },
-  {
-    "title": "Researchers Push Quantum Entanglement to Larger Physical Scales",
-    "category": "Physics",
-    "date": "2026-05-27",
-    "summary": "Experimental groups continue to demonstrate entanglement between progressively larger mechanical and photonic systems, narrowing the gap between quantum behavior and the everyday scale.",
-    "link": "#"
-  },
-  {
-    "title": "New Measurements Add to the Ongoing Hubble Constant Debate",
-    "category": "Cosmology",
-    "date": "2026-05-19",
-    "summary": "Independent measurement techniques still disagree on exactly how fast the universe is expanding, a persistent puzzle known as the Hubble tension.",
-    "link": "#"
-  },
-  {
-    "title": "Mathematicians Report Progress on a Long-Standing Prime Number Conjecture",
-    "category": "Mathematics",
-    "date": "2026-05-08",
-    "summary": "A new paper narrows the bounds on gaps between consecutive prime numbers, building on decades of incremental work toward the twin prime conjecture.",
-    "link": "#"
-  }
+  { "title": "Intro to Calculus", "topic": "Mathematics", "videoId": "" },
+  { "title": "How Special Relativity Works", "topic": "Physics", "videoId": "" },
+  { "title": "Why the Night Sky Is Dark", "topic": "Astronomy", "videoId": "" }
 ]
