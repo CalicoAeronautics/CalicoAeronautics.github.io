@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Great Scientists &mdash; Calico Physics</title>
+<title>Great Scientists - Calico Physics</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,38 +12,28 @@
 
 <main class="container">
   <section class="page-hero">
-    <span class="eyebrow">&#129489;&#8205;&#128640; Biographies</span>
+    <span class="eyebrow">&#129489;&#8205;&#128640; The people behind the equations</span>
     <h1>Great Scientists</h1>
-    <p>Biography, major discoveries, quotes, and recommended books for each.</p>
+    <p>Click a card for biography, major discoveries, a quote, and where to read more.</p>
   </section>
 
   <section style="padding-top:0;">
-    <div class="placeholder-block">
-      <svg class="cat-figure" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="24" cy="26" rx="16" ry="14" fill="var(--cream)"/>
-        <path d="M9 22a15 14 0 0 1 8-10 10 8 0 0 0-3 10z" fill="var(--amber)"/>
-        <path d="M39 24a15 14 0 0 0-7-11 10 9 0 0 1 2 11z" fill="var(--charcoal)"/>
-        <circle cx="18" cy="25" r="2" fill="var(--void)"/>
-        <circle cx="30" cy="25" r="2" fill="var(--void)"/>
-      </svg>
-      <p>This section is scaffolded and next in line to be built out.</p>
-      <ul class="feature-list">
-        <li>Einstein</li>
-        <li>Feynman</li>
-        <li>Dirac</li>
-        <li>Curie</li>
-        <li>Newton</li>
-        <li>Maxwell</li>
-        <li>Hawking</li>
-      </ul>
-    </div>
+    <div class="grid" id="scientists-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px,1fr));"></div>
   </section>
 </main>
 
 <div id="site-footer"></div>
 
+<div class="modal-overlay" id="scientist-modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
 <script src="js/layout.js"></script>
 <script src="js/background.js"></script>
 <script src="js/cat.js"></script>
+<script src="js/scientists.js"></script>
 </body>
 </html>

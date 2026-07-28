@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timeline &mdash; Calico Physics</title>
+<title>Timeline - Calico Physics</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,29 +12,50 @@
 
 <main class="container">
   <section class="page-hero">
-    <span class="eyebrow">&#128202; History</span>
+    <span class="eyebrow">History, in order</span>
     <h1>Timeline of Physics</h1>
-    <p>From Ancient Greece to today, animated while you scroll.</p>
+    <p>Scroll down. Each idea builds on the one before it.</p>
   </section>
 
   <section style="padding-top:0;">
-    <div class="placeholder-block">
-      <svg class="cat-figure" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="24" cy="26" rx="16" ry="14" fill="var(--cream)"/>
-        <path d="M9 22a15 14 0 0 1 8-10 10 8 0 0 0-3 10z" fill="var(--amber)"/>
-        <path d="M39 24a15 14 0 0 0-7-11 10 9 0 0 1 2 11z" fill="var(--charcoal)"/>
-        <circle cx="18" cy="25" r="2" fill="var(--void)"/>
-        <circle cx="30" cy="25" r="2" fill="var(--void)"/>
-      </svg>
-      <p>This section is scaffolded and next in line to be built out.</p>
-      <ul class="feature-list">
-        <li>Ancient Greece</li>
-        <li>Newton</li>
-        <li>Maxwell</li>
-        <li>Einstein</li>
-        <li>Quantum Mechanics</li>
-        <li>Today</li>
-      </ul>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="era">c. 600-300 BCE</div>
+        <h3>Ancient Greece</h3>
+        <p>Thales, Pythagoras, and Aristotle lay the first systematic groundwork for observing and reasoning about the natural world, mixing early physics with philosophy.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="era">1687</div>
+        <h3>Newton</h3>
+        <p>Isaac Newton publishes the Principia, unifying motion on Earth and in the heavens under the same three laws and a single law of gravitation.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="era">1860s-1870s</div>
+        <h3>Maxwell</h3>
+        <p>James Clerk Maxwell unifies electricity, magnetism, and light into one set of equations, predicting electromagnetic waves before they're ever observed.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="era">1905-1915</div>
+        <h3>Einstein</h3>
+        <p>Albert Einstein publishes Special Relativity, then General Relativity, replacing Newton's gravity with curved spacetime and reshaping our idea of space and time itself.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="era">1900-1930s</div>
+        <h3>Quantum Mechanics</h3>
+        <p>Planck, Bohr, Heisenberg, Schr&ouml;dinger, and Dirac build a new framework for the atomic scale, where probability, not certainty, governs the rules.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="era">Today</div>
+        <h3>Today</h3>
+        <p>Physicists chase gravitational waves, dark matter, quantum computers, and a still-elusive theory that unifies gravity with the quantum world.</p>
+      </div>
+
     </div>
   </section>
 </main>
@@ -44,5 +65,6 @@
 <script src="js/layout.js"></script>
 <script src="js/background.js"></script>
 <script src="js/cat.js"></script>
+<script src="js/timeline.js"></script>
 </body>
 </html>

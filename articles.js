@@ -49,7 +49,7 @@ function renderArticleList() {
 
   grid.innerHTML = filtered.length
     ? filtered.map(cardTemplate).join('')
-    : `<p style="color:var(--cream-dim);">No articles match yet &mdash; try a different search or tag.</p>`;
+    : `<p style="color:var(--cream-dim);">No articles match yet - try a different search or tag.</p>`;
 }
 
 function renderTagCloud() {

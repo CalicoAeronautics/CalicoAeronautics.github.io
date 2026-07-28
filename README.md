@@ -9,7 +9,7 @@ A static physics/math education site. Plain HTML/CSS/JS, no build step, deploys 
 3. In the repo: **Settings &rarr; Pages &rarr; Source** &rarr; select the `main` branch, folder `/ (root)`.
 4. Your site will be live at `https://<your-username>.github.io/calico-physics/` within a minute or two.
 
-No Node, no npm, no build command needed &mdash; GitHub Pages serves these files as-is.
+No Node, no npm, no build command needed - GitHub Pages serves these files as-is.
 
 ## Publishing a new article (no coding)
 
@@ -29,9 +29,9 @@ No Node, no npm, no build command needed &mdash; GitHub Pages serves these files
      "file": "articles/your-slug.md"
    }
    ```
-3. Commit and push both files. The card appears automatically on the Articles page &mdash; searchable and filterable by tag, no other changes needed.
+3. Commit and push both files. The card appears automatically on the Articles page - searchable and filterable by tag, no other changes needed.
 
-`category` should be one of: `Physics`, `Mathematics`, `Astronomy`, `Engineering`, `Olympiads`, `Space Exploration` (or add a new one &mdash; the site adapts automatically).
+`category` should be one of: `Physics`, `Mathematics`, `Astronomy`, `Engineering`, `Olympiads`, `Space Exploration` (or add a new one - the site adapts automatically).
 
 ## Project structure
 
@@ -70,20 +70,23 @@ articles/*.md            Article content (plain Markdown)
 
 Four themes are built in and switchable from the nav dropdown (persisted via `localStorage`):
 Dark Space (default), Nebula Blue, Deep Purple, Solar Gold. All four are defined as CSS custom-property
-overrides in `css/style.css` &mdash; add a new theme by adding one more `[data-theme="..."]` block and
+overrides in `css/style.css` - add a new theme by adding one more `[data-theme="..."]` block and
 one more `<option>` in `js/layout.js`.
 
 ## What's built vs. placeholder
 
 **Fully built:** homepage, about, articles (search + tags + markdown rendering), problem of the week,
-olympiad hub, contact, 404, shared nav/footer/theme system, starfield background, wandering cat easter egg.
+olympiad hub, contact, 404, shared nav/footer/theme system, starfield background, wandering cat easter egg,
+calculators (7 working), formula library (5 equations), great scientists (7 bios + modal), news (manifest-driven),
+resources, timeline (scroll-animated), simulations (8 interactive canvases), discovery map (interactive pins),
+space explorer (click-through planets + moons), IPhyC.
 
-**Scaffolded as placeholders** (consistent layout/theme, ready to fill in next): resources, space explorer,
-news, calculators, formulas, simulations, timeline, map, scientists, iphyc. Each lists exactly what it will
-contain so nothing from the original vision gets lost.
+**All sections from the original vision are now built.** Anything you want deepened further (more articles,
+more scientists, more news items, real API integrations for Space Explorer) is just a matter of adding data,
+not new code.
 
 ## Notes
 
 - No dependencies except one CDN script (`marked.js`) for Markdown rendering on `article.html`, and Google Fonts.
-- Everything else is vanilla JS &mdash; no framework, no build tooling.
+- Everything else is vanilla JS - no framework, no build tooling.
 - Mobile nav collapses under 860px; reduced-motion preference disables the starfield drift, shooting stars, and wandering cat animation.

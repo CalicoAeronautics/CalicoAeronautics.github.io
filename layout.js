@@ -120,7 +120,7 @@ function renderFooter() {
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="brand" style="margin-bottom:10px;">${CAT_MARK_SVG}<span>Calico Physics</span></div>
-        <p>Physics and mathematics explained the way a curious cat would explore them &mdash; patiently, playfully, one idea at a time.</p>
+        <p>Physics and mathematics explained the way a curious cat would explore them - patiently, playfully, one idea at a time.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">

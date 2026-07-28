@@ -6,7 +6,7 @@ Call something "imaginary" and people assume it isn't real. But *i*, defined by 
 
 ## A rotation, not a trick
 
-Multiplying a real number by -1 flips it 180&deg; on the number line. Multiplying by *i* rotates it 90&deg; instead &mdash; onto a second, perpendicular axis. Do it twice (multiply by *i* twice) and you've rotated 180&deg;, landing back on -1. That's the whole "trick": *i* isn't a broken square root, it's a rotation.
+Multiplying a real number by -1 flips it 180&deg; on the number line. Multiplying by *i* rotates it 90&deg; instead - onto a second, perpendicular axis. Do it twice (multiply by *i* twice) and you've rotated 180&deg;, landing back on -1. That's the whole "trick": *i* isn't a broken square root, it's a rotation.
 
 ## Where it's actually used
 
@@ -14,4 +14,4 @@ Multiplying a real number by -1 flips it 180&deg; on the number line. Multiplyin
 - Quantum mechanics is written almost entirely in complex numbers
 - Signal processing (audio, images) relies on complex exponentials (Fourier transforms)
 
-*(Placeholder article &mdash; interactive complex-plane visualization coming soon.)*
+*(Placeholder article - interactive complex-plane visualization coming soon.)*
