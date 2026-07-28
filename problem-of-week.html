@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problem of the Week &mdash; Calico Physics</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <section class="page-hero">
+    <span class="eyebrow">Updated weekly</span>
+    <h1>Problem of the Week</h1>
+    <p>One good problem, once a week. Try it before you look at the hint.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="problem-card">
+      <span class="eyebrow">Problem #7</span>
+      <p class="problem-body">A projectile is fired from ground level at an angle of 40&deg; above the horizontal with an initial speed of 25&nbsp;m/s. Ignoring air resistance, find the maximum height reached and the total time of flight. (Use g&nbsp;=&nbsp;9.8&nbsp;m/s&sup2;.)</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" data-reveal-target="hint-7">&#128161; Hint</button>
+        <button class="btn btn-ghost" data-reveal-target="solution-7">&#128196; Solution</button>
+      </div>
+      <div class="reveal-box" id="hint-7">
+        Split the initial velocity into horizontal and vertical components first. Maximum height only depends on the vertical component &mdash; the horizontal component never affects how high it goes.
+      </div>
+      <div class="reveal-box" id="solution-7">
+        v&#8320;y = 25&nbsp;sin(40&deg;) &asymp; 16.07&nbsp;m/s.<br>
+        Max height h = v&#8320;y&sup2; / (2g) &asymp; 13.2&nbsp;m.<br>
+        Time of flight t = 2v&#8320;y / g &asymp; 3.28&nbsp;s.
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <span class="eyebrow">Archive</span>
+      <h2>Past problems</h2>
+      <p>The full archive with searchable difficulty and topic filters is coming soon.</p>
+    </div>
+    <div class="placeholder-block">
+      <p>Problems #1&ndash;6 will be listed here once the archive is wired up.</p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script src="js/background.js"></script>
+<script src="js/cat.js"></script>
+<script src="js/problem.js"></script>
+</body>
+</html>
