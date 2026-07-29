@@ -184,6 +184,10 @@ function renderFooter() {
           <h4>${tr('footer.connect', 'Connect')}</h4>
           <a href="about.html">${tr('nav.about', 'About')}</a>
           <a href="contact.html">${tr('nav.contact', 'Contact')}</a>
+          <a href="https://www.instagram.com/calicophysics" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@calicophysics" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://youtube.com/@calicophysics" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://medium.com/@CalicoPhysics" target="_blank" rel="noopener">Medium</a>
         </div>
       </div>
     </div>
