@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Periodic Table - Calico Physics</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <section class="page-hero">
+    <span class="eyebrow">Interactive reference</span>
+    <h1>Periodic Table</h1>
+    <p>Tap any element for its atomic number, category, and standard atomic weight.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="periodic-grid" id="periodic-grid"></div>
+    <div class="pt-legend">
+      <span><span class="swatch" style="background:rgba(226,155,63,0.4);"></span>Alkali metal</span>
+      <span><span class="swatch" style="background:rgba(240,185,104,0.35);"></span>Alkaline earth</span>
+      <span><span class="swatch" style="background:rgba(139,143,199,0.4);"></span>Transition metal</span>
+      <span><span class="swatch" style="background:rgba(139,143,199,0.25);"></span>Post-transition</span>
+      <span><span class="swatch" style="background:rgba(111,214,214,0.35);"></span>Metalloid</span>
+      <span><span class="swatch" style="background:rgba(95,168,211,0.35);"></span>Nonmetal</span>
+      <span><span class="swatch" style="background:rgba(226,143,208,0.35);"></span>Halogen</span>
+      <span><span class="swatch" style="background:rgba(242,193,78,0.4);"></span>Noble gas</span>
+      <span><span class="swatch" style="background:rgba(200,150,220,0.3);"></span>Lanthanide</span>
+      <span><span class="swatch" style="background:rgba(220,120,120,0.3);"></span>Actinide</span>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<div class="modal-overlay" id="pt-modal">
+  <div class="modal-box">
+    <button class="modal-close" id="pt-modal-close" aria-label="Close">&times;</button>
+    <div id="pt-modal-body"></div>
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/background.js"></script>
+<script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/periodic-table.js"></script>
+</body>
+</html>

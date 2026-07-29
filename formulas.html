@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Formula Library - Calico Physics</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 </head>
 <body>
 
@@ -14,7 +16,7 @@
   <section class="page-hero">
     <span class="eyebrow">&#128209; Reference</span>
     <h1>Formula Library</h1>
-    <p>Five equations that shaped physics. Each one includes what it means, what every symbol stands for, where it comes from, and where it's actually used.</p>
+    <p>Five flagship equations explained in depth below, plus a 100-formula quick reference covering mechanics through relativity.</p>
   </section>
 
   <section style="padding-top:0; max-width:820px;">
@@ -171,6 +173,15 @@
     </div>
 
   </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <span class="eyebrow">Quick Reference</span>
+      <h2>100 Formulas</h2>
+      <p>Mechanics through cosmology. Formula, variable legend, no derivation - for when you just need the equation.</p>
+    </div>
+    <div class="grid" id="quickref-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px,1fr));"></div>
+  </section>
 </main>
 
 <div id="site-footer"></div>
@@ -181,5 +192,6 @@
 <script src="js/cat.js"></script>
 <script src="js/sound.js"></script>
 <script src="js/reveal.js"></script>
+<script src="js/formula-quickref.js"></script>
 </body>
 </html>
