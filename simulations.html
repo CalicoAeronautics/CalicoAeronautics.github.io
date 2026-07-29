@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulations - Calico Physics</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <section class="page-hero">
+    <span class="eyebrow">Move a slider, watch physics happen</span>
+    <h1>Interactive Simulations</h1>
+    <p>Eight small simulations, all running live in your browser. Nothing to install.</p>
+  </section>
+
+  <section style="padding-top:0; max-width:820px;">
+
+    <div class="sim-card">
+      <span class="cat-tag">Mechanics</span>
+      <h3>Projectile Motion</h3>
+      <canvas id="sim-projectile" width="560" height="260"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="pm-sim-speed">Speed <span class="val" id="pm-sim-speed-val">25</span> m/s</label>
+          <input type="range" id="pm-sim-speed" min="5" max="50" value="25">
+        </div>
+        <div class="sim-control">
+          <label for="pm-sim-angle">Angle <span class="val" id="pm-sim-angle-val">40</span>&deg;</label>
+          <input type="range" id="pm-sim-angle" min="5" max="85" value="40">
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Mechanics</span>
+      <h3>Pendulum</h3>
+      <canvas id="sim-pendulum" width="560" height="280"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="pd-sim-length">Length <span class="val" id="pd-sim-length-val">120</span> px</label>
+          <input type="range" id="pd-sim-length" min="60" max="220" value="120">
+        </div>
+      </div>
+      <div class="sim-actions"><button class="btn btn-ghost" id="pd-sim-reset" type="button">Reset swing</button></div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Waves</span>
+      <h3>Wave Interference</h3>
+      <canvas id="sim-waves" width="560" height="260"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="wv-sim-wavelength">Wavelength <span class="val" id="wv-sim-wavelength-val">26</span> px</label>
+          <input type="range" id="wv-sim-wavelength" min="10" max="60" value="26">
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Electromagnetism</span>
+      <h3>Electric Fields</h3>
+      <canvas id="sim-efield" width="560" height="260"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="ef-sim-q1">Charge 1 <span class="val" id="ef-sim-q1-val">1</span></label>
+          <input type="range" id="ef-sim-q1" min="-3" max="3" step="0.5" value="1">
+        </div>
+        <div class="sim-control">
+          <label for="ef-sim-q2">Charge 2 <span class="val" id="ef-sim-q2-val">-1</span></label>
+          <input type="range" id="ef-sim-q2" min="-3" max="3" step="0.5" value="-1">
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Electromagnetism</span>
+      <h3>Magnetic Fields</h3>
+      <canvas id="sim-bfield" width="560" height="260"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="bf-sim-current">Current <span class="val" id="bf-sim-current-val">5</span> A</label>
+          <input type="range" id="bf-sim-current" min="-10" max="10" value="5">
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Orbital Mechanics</span>
+      <h3>Planetary Motion</h3>
+      <canvas id="sim-orbit" width="560" height="300"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="or-sim-ecc">Eccentricity <span class="val" id="or-sim-ecc-val">0.3</span></label>
+          <input type="range" id="or-sim-ecc" min="0" max="0.8" step="0.05" value="0.3">
+        </div>
+        <div class="sim-control">
+          <label for="or-sim-speed">Speed <span class="val" id="or-sim-speed-val">1</span>&times;</label>
+          <input type="range" id="or-sim-speed" min="0.2" max="4" step="0.2" value="1">
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Relativity</span>
+      <h3>Special Relativity: Length Contraction</h3>
+      <canvas id="sim-relativity" width="560" height="220"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="rl-sim-velocity">Velocity <span class="val" id="rl-sim-velocity-val">0</span>c</label>
+          <input type="range" id="rl-sim-velocity" min="0" max="0.99" step="0.01" value="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-card">
+      <span class="cat-tag">Astrophysics</span>
+      <h3>Black Hole</h3>
+      <canvas id="sim-blackhole" width="560" height="300"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label for="bh-sim-mass">Mass <span class="val" id="bh-sim-mass-val">5</span> M&#8857;</label>
+          <input type="range" id="bh-sim-mass" min="1" max="40" value="5">
+        </div>
+      </div>
+      <p class="calc-desc" style="margin-top:10px;">Illustrative, not to physical scale - the event horizon grows with mass.</p>
+    </div>
+
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/background.js"></script>
+<script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/simulations.js"></script>
+</body>
+</html>
