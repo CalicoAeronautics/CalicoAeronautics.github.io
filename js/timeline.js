@@ -1,9 +1,150 @@
 /* ==========================================================================
-   Timeline: each .timeline-item fades/slides in the first time it enters
-   the viewport. Respects prefers-reduced-motion (shows everything at once).
+   Full history-of-physics timeline, data-driven. Era/year/discovery/figures
+   supplied directly - this file only renders and animates it.
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+const TIMELINE_DATA = [
+["Ancient","c. 600 BCE","Natural causes over supernatural","Thales"],
+["Ancient","c. 460-370 BCE","Atomic theory (atomos)","Democritus"],
+["Ancient","c. 384-322 BCE","Aristotelian physics (geocentric, 4 elements)","Aristotle"],
+["Ancient","c. 250 BCE","Buoyancy principle, lever law","Archimedes"],
+["Ancient","240 BCE","Earth's circumference measured","Eratosthenes"],
+["Ancient","c. 190-120 BCE","Star mapping, precession of equinoxes","Hipparchus"],
+["Ancient","c. 100-170 CE","Ptolemaic geocentric model","Ptolemy"],
+["Medieval","c. 780-850 CE","Optics, refraction studies","Al-Kindi"],
+["Medieval","c. 965-1040 CE","Light refraction, camera obscura","Al-Haytham"],
+["Medieval","c. 1200","Theory of impetus (proto-inertia)","Buridan"],
+["Renaissance","1543","Heliocentric model published","Copernicus"],
+["Renaissance","1589","Leaning Tower experiment (falling bodies)","Galileo"],
+["Renaissance","1609","Laws of planetary motion (1st & 2nd)","Kepler"],
+["Renaissance","1619","Laws of planetary motion (3rd)","Kepler"],
+["Renaissance","1638","Kinematics, acceleration studies","Galileo"],
+["Enlightenment","1643","Barometer invented (atmospheric pressure)","Torricelli"],
+["Enlightenment","1651","Work on planetary motion","Borelli"],
+["Enlightenment","1660","Boyle's Law (gas pressure-volume)","Boyle"],
+["Enlightenment","1665","Wave theory of light proposed","Hooke"],
+["Enlightenment","1684","Differential calculus notation","Leibniz"],
+["Enlightenment","1687","Newton's Laws, Universal Gravitation","Newton"],
+["Enlightenment","1690","Huygens' Principle (wave theory)","Huygens"],
+["Enlightenment","1714","Mercury thermometer","Fahrenheit"],
+["Enlightenment","1738","Bernoulli's Principle (fluid dynamics)","Bernoulli"],
+["Enlightenment","1742","Celsius temperature scale","Celsius"],
+["Enlightenment","1745","Leyden jar (early capacitor)","Musschenbroek"],
+["Enlightenment","1752","Lightning is electricity (kite experiment)","Franklin"],
+["Enlightenment","1760","Blackbody radiation (emissivity)","Lambert"],
+["Enlightenment","1781","Uranus discovered","Herschel"],
+["Enlightenment","1785","Coulomb's Law (electrostatic force)","Coulomb"],
+["Enlightenment","1787","Charles's Law (gas volume-temperature)","Charles"],
+["Enlightenment","1798","Cavendish experiment (G measured)","Cavendish"],
+["19th Century","1800","Infrared radiation discovered","Herschel"],
+["19th Century","1800","Voltaic pile (first battery)","Volta"],
+["19th Century","1801","Wave interference (double-slit)","Young"],
+["19th Century","1808","Atomic theory (Dalton's model)","Dalton"],
+["19th Century","1819","Oersted discovers electromagnetism","Oersted"],
+["19th Century","1820","Biot-Savart Law (magnetic fields)","Biot, Savart"],
+["19th Century","1820","Ampere's Law (magnetic force)","Ampere"],
+["19th Century","1824","Carnot cycle (thermodynamics)","Carnot"],
+["19th Century","1826","Ohm's Law (V=IR)","Ohm"],
+["19th Century","1831","Faraday's Law of Induction","Faraday"],
+["19th Century","1834","Lenz's Law (induction direction)","Lenz"],
+["19th Century","1842","Doppler Effect","Doppler"],
+["19th Century","1843","Joule's equivalent (heat = work)","Joule"],
+["19th Century","1845","Faraday effect (light + magnetic field)","Faraday"],
+["19th Century","1848","Absolute zero / Kelvin scale","Kelvin"],
+["19th Century","1850","Second Law of Thermodynamics","Clausius"],
+["19th Century","1851","Foucault pendulum (Earth's rotation)","Foucault"],
+["19th Century","1859","Maxwell-Boltzmann distribution","Maxwell, Boltzmann"],
+["19th Century","1861","Maxwell's Equations (electromagnetism)","Maxwell"],
+["19th Century","1865","Speed of light derived","Maxwell"],
+["19th Century","1871","Periodic table (chemistry-physics link)","Mendeleev"],
+["19th Century","1873","Van der Waals forces","Van der Waals"],
+["19th Century","1877","Boltzmann's entropy formula (S = k log W)","Boltzmann"],
+["19th Century","1879","Stefan-Boltzmann Law (blackbody)","Stefan, Boltzmann"],
+["19th Century","1880","Piezoelectric effect discovered","Curie brothers"],
+["19th Century","1887","Michelson-Morley experiment (no aether)","Michelson, Morley"],
+["19th Century","1888","Electromagnetic waves experimentally proven","Hertz"],
+["19th Century","1893","Wien's Displacement Law","Wien"],
+["19th Century","1895","X-rays discovered","R\u00f6ntgen"],
+["19th Century","1896","Radioactivity discovered","Becquerel"],
+["19th Century","1897","Electron discovered","J.J. Thomson"],
+["19th Century","1900","Quantum theory (E = hf)","Planck"],
+["Modern","1905","Special Relativity (E=mc\u00b2, time dilation)","Einstein"],
+["Modern","1905","Photoelectric Effect explained","Einstein"],
+["Modern","1905","Brownian motion explained","Einstein"],
+["Modern","1911","Atomic nucleus discovered","Rutherford"],
+["Modern","1913","Bohr model of the atom","Bohr"],
+["Modern","1915","General Relativity (gravity = spacetime curvature)","Einstein"],
+["Modern","1919","Light bent by gravity (experimental proof)","Eddington"],
+["Modern","1923","Compton Effect (light as particle)","Compton"],
+["Modern","1924","de Broglie's matter-wave hypothesis","de Broglie"],
+["Modern","1925","Pauli Exclusion Principle","Pauli"],
+["Modern","1925","Matrix mechanics (Quantum)","Heisenberg"],
+["Modern","1926","Schr\u00f6dinger Equation (Wave mechanics)","Schr\u00f6dinger"],
+["Modern","1927","Uncertainty Principle","Heisenberg"],
+["Modern","1927","Copenhagen Interpretation (Quantum)","Bohr, Heisenberg"],
+["Modern","1928","Dirac Equation (Relativistic Quantum)","Dirac"],
+["Modern","1930","Neutrino hypothesized","Pauli"],
+["Modern","1931","Quantum Electrodynamics groundwork","Dirac"],
+["Modern","1932","Neutron discovered","Chadwick"],
+["Modern","1932","Positron discovered (anti-matter)","Anderson"],
+["Modern","1933","Meissner Effect (superconductivity)","Meissner, Ochsenfeld"],
+["Modern","1934","Nuclear fission (theoretical)","Fermi"],
+["Modern","1935","Einstein-Rosen bridge (wormholes)","Einstein, Rosen"],
+["Modern","1935","EPR Paradox (quantum entanglement)","Einstein, Podolsky, Rosen"],
+["Modern","1938","Nuclear fission (experimental)","Hahn, Strassmann"],
+["Modern","1940","Plutonium discovered","Seaborg"],
+["Modern","1941","Landau superfluidity theory","Landau"],
+["Modern","1942","First nuclear reactor (Chicago Pile-1)","Fermi team"],
+["Modern","1945","First nuclear bomb detonated","Manhattan Project"],
+["Modern","1947","Transistor invented","Bardeen, Brattain, Shockley"],
+["Modern","1948","Quantum Electrodynamics (QED)","Feynman, Schwinger, Tomonaga"],
+["Modern","1954","Maser invented (laser precursor)","Townes"],
+["Modern","1956","Neutrino detected","Reines, Cowan"],
+["Modern","1957","BCS Theory of Superconductivity","Bardeen, Cooper, Schrieffer"],
+["Modern","1960","Laser built","Maiman"],
+["Modern","1964","Higgs mechanism proposed","Higgs, Englert"],
+["Modern","1964","Quark theory proposed","Gell-Mann, Zweig"],
+["Modern","1965","Cosmic Microwave Background discovered","Penzias, Wilson"],
+["Modern","1967","Pulsars discovered","Bell Burnell, Hewish"],
+["Modern","1967","Weinberg-Salam model (Electroweak force)","Weinberg, Salam"],
+["Modern","1971","Quantum Chromodynamics (strong force)","Gross, Wilczek, Politzer"],
+["Modern","1974","J/\u03c8 particle discovered (charm quark)","Richter, Ting"],
+["Modern","1983","W and Z bosons discovered","Rubbia, Van der Meer"],
+["Modern","1985","Fullerenes discovered (physics-chemistry)","Kroto, Curl, Smalley"],
+["Modern","1986","High-temp superconductors discovered","Bednorz, M\u00fcller"],
+["Modern","1995","Bose-Einstein Condensate created","Cornell, Wieman, Ketterle"],
+["Modern","1995","Top quark discovered","Fermilab team"],
+["Modern","1998","Dark energy (accelerating expansion)","Perlmutter, Riess, Schmidt"],
+["Modern","2000","Tau neutrino discovered","DONUT collaboration"],
+["Modern","2003","WMAP maps cosmic microwave background","NASA team"],
+["Modern","2010","First graphene transistor","Various teams"],
+["Modern","2012","Higgs boson discovered","CERN (ATLAS & CMS)"],
+["Modern","2015","Gravitational waves detected","LIGO team"],
+["Modern","2019","First image of a black hole","Event Horizon Telescope"],
+["Modern","2020","Room-temp superconductor (high pressure)","Dias, Salamat"],
+["Modern","2021","Muon g-2 anomaly (new physics hinted)","Fermilab"],
+["Modern","2022","Nuclear fusion ignition achieved","NIF (Lawrence Livermore)"],
+["Modern","2023","Dark matter mapping advanced","Various teams"],
+];
+
+function renderTimeline() {
+  const el = document.getElementById('timeline-list');
+  if (!el) return;
+  let lastEra = null;
+  el.innerHTML = TIMELINE_DATA.map(([era, year, discovery, figures]) => {
+    const eraMarker = era !== lastEra ? `<div class="timeline-era-marker">${era}</div>` : '';
+    lastEra = era;
+    return `${eraMarker}
+      <div class="timeline-item">
+        <div class="era">${year}</div>
+        <h3>${discovery}</h3>
+        <p>${figures}</p>
+      </div>`;
+  }).join('');
+  observeTimelineItems();
+}
+
+function observeTimelineItems() {
   const items = document.querySelectorAll('.timeline-item');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -19,7 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   items.forEach(i => observer.observe(i));
-});
+}
+
+document.addEventListener('DOMContentLoaded', renderTimeline);

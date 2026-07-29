@@ -38,6 +38,9 @@ const NAV_MORE = [
   { href: 'timeline.html', key: 'timeline', label: 'Timeline' },
   { href: 'map.html', key: 'map', label: 'Discovery Map' },
   { href: 'scientists.html', key: 'scientists', label: 'Great Scientists' },
+  { href: 'periodic-table.html', key: 'periodicTable', label: 'Periodic Table' },
+  { href: 'si-units.html', key: 'siUnits', label: 'SI Units' },
+  { href: 'quizzes.html', key: 'quizzes', label: 'Quizzes & Flashcards' },
   { href: 'iphyc.html', key: 'iphyc', label: 'IPhyC' },
   { href: 'contact.html', key: 'contact', label: 'Contact' },
 ];
