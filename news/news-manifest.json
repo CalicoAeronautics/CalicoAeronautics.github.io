@@ -2,36 +2,43 @@
   {
     "title": "Webb Telescope Reveals Sharper Detail in the Pillars of Creation",
     "category": "Astronomy",
-    "date": "2026-06-10",
-    "summary": "New infrared imaging from the James Webb Space Telescope shows finer structure inside the Pillars of Creation than earlier Hubble images could resolve, including previously hidden young stars.",
-    "link": "#"
+    "date": "2022-10-19",
+    "summary": "New near-infrared imaging from the James Webb Space Telescope shows finer structure inside the Pillars of Creation than earlier Hubble images could resolve, including newly forming stars hidden inside the dust.",
+    "link": "https://science.nasa.gov/asset/webb/pillars-of-creation-nircam-image/"
   },
   {
-    "title": "IceCube Detects High-Energy Neutrinos Traced to a Distant Galaxy",
+    "title": "LIGO Detects the Most Massive Black Hole Merger Ever Observed",
     "category": "Astrophysics",
-    "date": "2026-06-03",
-    "summary": "The IceCube Neutrino Observatory, buried in Antarctic ice, continues to trace ultra-high-energy neutrinos back to their source galaxies, helping map the most extreme particle accelerators in the universe.",
-    "link": "#"
+    "date": "2025-07-14",
+    "summary": "The LIGO-Virgo-KAGRA collaboration detected gravitational waves from a black hole merger that produced a final black hole roughly 225 times the mass of the Sun, the heaviest ever recorded this way.",
+    "link": "https://www.caltech.edu/about/news/ligo-detects-most-massive-black-hole-merger-to-date"
   },
   {
-    "title": "Researchers Push Quantum Entanglement to Larger Physical Scales",
-    "category": "Physics",
-    "date": "2026-05-27",
-    "summary": "Experimental groups continue to demonstrate entanglement between progressively larger mechanical and photonic systems, narrowing the gap between quantum behavior and the everyday scale.",
-    "link": "#"
-  },
-  {
-    "title": "New Measurements Add to the Ongoing Hubble Constant Debate",
-    "category": "Cosmology",
-    "date": "2026-05-19",
-    "summary": "Independent measurement techniques still disagree on exactly how fast the universe is expanding, a persistent puzzle known as the Hubble tension.",
-    "link": "#"
-  },
-  {
-    "title": "Mathematicians Report Progress on a Long-Standing Prime Number Conjecture",
+    "title": "Mathematicians Find a New Way to Count Prime Numbers",
     "category": "Mathematics",
-    "date": "2026-05-08",
-    "summary": "A new paper narrows the bounds on gaps between consecutive prime numbers, building on decades of incremental work toward the twin prime conjecture.",
-    "link": "#"
+    "date": "2024-12-11",
+    "summary": "Researchers proved a decades-old conjecture about primes expressible as a sum of a square and four times a square, using a technique borrowed from an unrelated area of number theory.",
+    "link": "https://www.quantamagazine.org/mathematicians-uncover-a-new-way-to-count-prime-numbers-20241211/"
+  },
+  {
+    "title": "A Step Toward the Riemann Hypothesis, Math's Biggest Open Problem",
+    "category": "Mathematics",
+    "date": "2024-07-29",
+    "summary": "Two mathematicians ruled out a class of possible exceptions to the Riemann Hypothesis, the first real progress in decades on the century-old problem underlying the distribution of prime numbers.",
+    "link": "https://www.science.org/content/article/sensational-breakthrough-marks-step-toward-revealing-hidden-structure-prime-numbers"
+  },
+  {
+    "title": "NIH-Funded Team Shrinks CRISPR for More Precise Delivery in the Body",
+    "category": "Biology",
+    "date": "2026-04-14",
+    "summary": "A smaller, engineered CRISPR enzyme variant could make gene-editing therapies safer and easier to deliver directly into the body, rather than only in cells modified outside it.",
+    "link": "https://www.nih.gov/news-events/news-releases/nih-funded-breakthrough-shrinks-crispr-precision-delivery-body"
+  },
+  {
+    "title": "Google's Willow Chip Marks a Milestone in Quantum Error Correction",
+    "category": "Physics",
+    "date": "2024-12-09",
+    "summary": "Google's new 105-qubit Willow processor demonstrated that adding more qubits can reduce errors instead of increasing them, a long-sought threshold for building reliable, large-scale quantum computers.",
+    "link": "https://blog.google/innovation-and-ai/technology/research/google-willow-quantum-chip/"
   }
 ]
