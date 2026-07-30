@@ -17,7 +17,7 @@ async function loadNews() {
         <div class="meta">
           <span>${new Date(n.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
-        <a href="${n.link}" class="btn btn-ghost" style="margin-top:14px;">Read more</a>
+        <a href="${n.link}" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:14px;">Read more</a>
       </div>
     `).join('');
   } catch (e) {

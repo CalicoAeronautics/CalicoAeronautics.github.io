@@ -20,12 +20,12 @@ const TRANSLATIONS = {
     },
     footer: {
       learn: 'Öğren', explore: 'Keşfet', compete: 'Yarış', connect: 'Bağlan',
-      tagline: 'Fizik ve matematiği meraklı bir kedinin bakış açısıyla anlatıyoruz - sabırla, eğlenerek, bir seferde bir fikir.',
+      tagline: 'Fiziği anlatan bir kalico kedi: Schr\u00f6dinger\u2019in Kalikosu, göründüğünden daha güçlü.',
       builtWith: 'Meraktan inşa edildi, ders kitaplarından değil.',
     },
     home: {
       eyebrow: 'Muhtemelen tensörleri açıklayan Schr\u00f6dinger\u2019in kalikosu',
-      tagline: 'Fizik ve matematik imkansız ders kitaplarının arkasına gizlenmemeli. Bir kalico kedi, bir tahta dolusu merak ve hiç kapı bekçiliği yok.',
+      tagline: 'Matematik ve fizik zordur, ama kalico kedi hepsini paylaşmak istiyor.',
       exploreBtn: 'Fiziği Keşfet',
       readBtn: 'Makaleleri Oku',
       sectionEyebrow: 'Buradan başla',
@@ -49,12 +49,12 @@ const TRANSLATIONS = {
     },
     footer: {
       learn: 'Apprendre', explore: 'Explorer', compete: 'Concourir', connect: 'Contact',
-      tagline: 'La physique et les math\u00e9matiques expliqu\u00e9es comme un chat curieux les explorerait - patiemment, avec l\u00e9g\u00e8ret\u00e9, une id\u00e9e \u00e0 la fois.',
+      tagline: 'Un chat calico qui explique la physique : le Calico de Schr\u00f6dinger, plus solide qu\u2019il n\u2019y para\u00eet.',
       builtWith: 'Construit avec curiosit\u00e9, pas avec des manuels.',
     },
     home: {
       eyebrow: 'Le chat calico de Schr\u00f6dinger, probablement en train d\u2019expliquer les tenseurs',
-      tagline: 'La physique et les math\u00e9matiques ne devraient pas \u00eatre cach\u00e9es derri\u00e8re des manuels impossibles. Un chat calico, une bonne dose de curiosit\u00e9, et aucune barri\u00e8re \u00e0 l\u2019entr\u00e9e.',
+      tagline: 'Les maths et la physique sont difficiles, mais le chat calico veut tout partager.',
       exploreBtn: 'Explorer la Physique',
       readBtn: 'Lire les Articles',
       sectionEyebrow: 'Commencer ici',

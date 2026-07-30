@@ -158,7 +158,7 @@ function renderFooter() {
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="brand" style="margin-bottom:10px;">${CAT_MARK_SVG}<span>Calico Physics</span></div>
-        <p>${tr('footer.tagline', 'Physics and mathematics explained the way a curious cat would explore them - patiently, playfully, one idea at a time.')}</p>
+        <p>${tr('footer.tagline', 'A calico cat explaining physics: Schr\u00f6dinger\u2019s Calico, tougher than it looks.')}</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
@@ -187,10 +187,6 @@ function renderFooter() {
           <h4>${tr('footer.connect', 'Connect')}</h4>
           <a href="about.html">${tr('nav.about', 'About')}</a>
           <a href="contact.html">${tr('nav.contact', 'Contact')}</a>
-          <a href="https://www.instagram.com/calicophysics" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.tiktok.com/@calicophysics" target="_blank" rel="noopener">TikTok</a>
-          <a href="https://youtube.com/@calicophysics" target="_blank" rel="noopener">YouTube</a>
-          <a href="https://medium.com/@CalicoPhysics" target="_blank" rel="noopener">Medium</a>
         </div>
       </div>
     </div>
