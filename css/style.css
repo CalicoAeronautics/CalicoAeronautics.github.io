@@ -738,6 +738,71 @@ h1, h2, h3, h4{
 }
 .timeline-era-marker:first-child{ margin-top: 0; }
 
+/* ---------- simulations v2 ---------- */
+.sim-card canvas.draggable{ cursor: grab; }
+.sim-card canvas.draggable:active{ cursor: grabbing; }
+.sim-readout{
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  background: rgba(243,237,224,0.03);
+  border: 1px solid rgba(243,237,224,0.08);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 10px;
+  line-height: 1.8;
+}
+.sim-readout strong{ color: var(--cream); }
+.vector-legend{
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--cream-dim);
+  margin-top: 8px;
+}
+.vector-legend span{ display: inline-flex; align-items: center; gap: 5px; }
+.vector-legend .swatch{ width: 16px; height: 3px; display: inline-block; border-radius: 2px; }
+.mini-panels{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 18px;
+  margin-top: 6px;
+}
+.mini-panel{
+  background: rgba(243,237,224,0.03);
+  border: 1px solid rgba(243,237,224,0.08);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+.mini-panel h4{
+  font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--amber-soft); margin: 0 0 8px;
+}
+.mini-panel canvas{ width: 100%; height: auto; border-radius: 6px; background: var(--void); }
+
+/* ---------- discovery map v2 ---------- */
+.view-toggle{ display: flex; gap: 10px; margin-bottom: 16px; }
+.view-toggle button{
+  background: var(--void-soft);
+  border: 1px solid rgba(243,237,224,0.15);
+  color: var(--cream-dim);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.view-toggle button.active{ background: var(--amber); color: var(--void); border-color: var(--amber); font-weight: 600; }
+#leaflet-map{
+  height: 460px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(243,237,224,0.1);
+}
+#discovery-list-view{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{ background: var(--void-soft); color: var(--cream); }
+
 .nav-controls{ display:flex; align-items:center; gap:10px; }
 
 #theme-toggle{
