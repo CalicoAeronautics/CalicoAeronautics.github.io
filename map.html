@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Discovery Map - Calico Physics</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -12,13 +14,17 @@
 
 <main class="container">
   <section class="page-hero">
-    <span class="eyebrow">Geography of ideas</span>
     <h1>Where Discoveries Happened</h1>
-    <p>Click a pin to see who worked there and what they're known for.</p>
+    <p>31 real discoveries across 20+ cities. Click a marker (or a card in list view) for the details.</p>
   </section>
 
   <section style="padding-top:0;">
-    <div class="map-panel" id="map-panel"></div>
+    <div class="view-toggle">
+      <button id="view-map-btn" type="button">Map View</button>
+      <button id="view-list-btn" type="button">List View</button>
+    </div>
+    <div id="leaflet-map"></div>
+    <div id="discovery-list-view" style="display:none;"></div>
   </section>
 </main>
 

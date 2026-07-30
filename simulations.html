@@ -12,121 +12,184 @@
 
 <main class="container">
   <section class="page-hero">
-    <span class="eyebrow">Move a slider, watch physics happen</span>
     <h1>Interactive Simulations</h1>
-    <p>Eight small simulations, all running live in your browser. Nothing to install.</p>
+    <p>Every simulation here numerically integrates its own equations of motion frame by frame - no canned animations. Blue arrows are velocity, amber/other colors are forces.</p>
   </section>
 
   <section style="padding-top:0; max-width:820px;">
 
-    <div class="sim-card">
-      <span class="cat-tag">Mechanics</span>
-      <h3>Projectile Motion</h3>
-      <canvas id="sim-projectile" width="560" height="260"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="pm-sim-speed">Speed <span class="val" id="pm-sim-speed-val">25</span> m/s</label>
-          <input type="range" id="pm-sim-speed" min="5" max="50" value="25">
-        </div>
-        <div class="sim-control">
-          <label for="pm-sim-angle">Angle <span class="val" id="pm-sim-angle-val">40</span>&deg;</label>
-          <input type="range" id="pm-sim-angle" min="5" max="85" value="40">
-        </div>
-      </div>
-    </div>
-
-    <div class="sim-card">
-      <span class="cat-tag">Mechanics</span>
-      <h3>Pendulum</h3>
-      <canvas id="sim-pendulum" width="560" height="280"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="pd-sim-length">Length <span class="val" id="pd-sim-length-val">120</span> px</label>
-          <input type="range" id="pd-sim-length" min="60" max="220" value="120">
-        </div>
-      </div>
-      <div class="sim-actions"><button class="btn btn-ghost" id="pd-sim-reset" type="button">Reset swing</button></div>
-    </div>
-
-    <div class="sim-card">
-      <span class="cat-tag">Waves</span>
-      <h3>Wave Interference</h3>
-      <canvas id="sim-waves" width="560" height="260"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="wv-sim-wavelength">Wavelength <span class="val" id="wv-sim-wavelength-val">26</span> px</label>
-          <input type="range" id="wv-sim-wavelength" min="10" max="60" value="26">
-        </div>
-      </div>
-    </div>
-
-    <div class="sim-card">
-      <span class="cat-tag">Electromagnetism</span>
-      <h3>Electric Fields</h3>
-      <canvas id="sim-efield" width="560" height="260"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="ef-sim-q1">Charge 1 <span class="val" id="ef-sim-q1-val">1</span></label>
-          <input type="range" id="ef-sim-q1" min="-3" max="3" step="0.5" value="1">
-        </div>
-        <div class="sim-control">
-          <label for="ef-sim-q2">Charge 2 <span class="val" id="ef-sim-q2-val">-1</span></label>
-          <input type="range" id="ef-sim-q2" min="-3" max="3" step="0.5" value="-1">
-        </div>
-      </div>
-    </div>
-
-    <div class="sim-card">
-      <span class="cat-tag">Electromagnetism</span>
-      <h3>Magnetic Fields</h3>
-      <canvas id="sim-bfield" width="560" height="260"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="bf-sim-current">Current <span class="val" id="bf-sim-current-val">5</span> A</label>
-          <input type="range" id="bf-sim-current" min="-10" max="10" value="5">
-        </div>
-      </div>
-    </div>
-
+    <!-- 1. Gravity & Orbital Mechanics -->
     <div class="sim-card">
       <span class="cat-tag">Orbital Mechanics</span>
-      <h3>Planetary Motion</h3>
-      <canvas id="sim-orbit" width="560" height="300"></canvas>
+      <h3>Gravity &amp; Orbital Mechanics</h3>
+      <p class="calc-desc">Newton's law of gravitation, integrated live. Change the star's mass or the planet's launch conditions and watch the orbit reshape itself in real time.</p>
+      <canvas id="sim-gravity" width="560" height="360"></canvas>
+      <div class="vector-legend">
+        <span><span class="swatch" style="background:#5FA8D3;"></span>velocity</span>
+        <span><span class="swatch" style="background:#E29B3F;"></span>gravitational force</span>
+      </div>
       <div class="sim-controls">
-        <div class="sim-control">
-          <label for="or-sim-ecc">Eccentricity <span class="val" id="or-sim-ecc-val">0.3</span></label>
-          <input type="range" id="or-sim-ecc" min="0" max="0.8" step="0.05" value="0.3">
+        <div class="sim-control"><label for="gr-mass">Star mass <span class="val" id="gr-mass-val">800</span></label><input type="range" id="gr-mass" min="200" max="2000" value="800"></div>
+        <div class="sim-control"><label for="gr-speed">Launch speed <span class="val" id="gr-speed-val">95</span></label><input type="range" id="gr-speed" min="20" max="200" value="95"></div>
+        <div class="sim-control"><label for="gr-radius">Launch radius <span class="val" id="gr-radius-val">150</span></label><input type="range" id="gr-radius" min="60" max="220" value="150"></div>
+      </div>
+      <div class="sim-actions"><button class="btn btn-ghost" id="gr-reset" type="button">Reset Orbit</button></div>
+      <div class="sim-readout" id="gravity-readout"></div>
+    </div>
+
+    <!-- 2. Projectile Motion with Drag -->
+    <div class="sim-card">
+      <span class="cat-tag">Mechanics</span>
+      <h3>Projectile Motion (with Air Resistance)</h3>
+      <p class="calc-desc">Solid line: real trajectory with quadratic drag. Dashed line: idealized path with no drag, for comparison.</p>
+      <canvas id="sim-projectile" width="560" height="280"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="pm-speed">Speed <span class="val" id="pm-speed-val">30</span> m/s</label><input type="range" id="pm-speed" min="10" max="60" value="30"></div>
+        <div class="sim-control"><label for="pm-angle">Angle <span class="val" id="pm-angle-val">45</span>&deg;</label><input type="range" id="pm-angle" min="5" max="85" value="45"></div>
+        <div class="sim-control"><label for="pm-drag">Drag coefficient <span class="val" id="pm-drag-val">0.02</span></label><input type="range" id="pm-drag" min="0" max="0.1" step="0.005" value="0.02"></div>
+      </div>
+      <div class="sim-actions"><button class="btn btn-primary" id="pm-launch" type="button">Launch</button></div>
+    </div>
+
+    <!-- 3. Spring-Mass SHM -->
+    <div class="sim-card">
+      <span class="cat-tag">Mechanics</span>
+      <h3>Spring-Mass System (Damped SHM)</h3>
+      <p class="calc-desc">Drag the mass to stretch the spring, then let go.</p>
+      <canvas id="sim-spring" width="560" height="180"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="sp-k">Spring constant k <span class="val" id="sp-k-val">6</span></label><input type="range" id="sp-k" min="1" max="20" value="6"></div>
+        <div class="sim-control"><label for="sp-damping">Damping <span class="val" id="sp-damping-val">0.3</span></label><input type="range" id="sp-damping" min="0" max="2" step="0.1" value="0.3"></div>
+      </div>
+      <div class="sim-readout" id="spring-readout"></div>
+    </div>
+
+    <!-- 4. Pendulum -->
+    <div class="sim-card">
+      <span class="cat-tag">Mechanics</span>
+      <h3>Pendulum (Damped &amp; Driven)</h3>
+      <p class="calc-desc">Full nonlinear pendulum equation - not the small-angle approximation. Add a driving force to see resonance and chaotic-looking motion at large amplitudes.</p>
+      <canvas id="sim-pendulum" width="560" height="300"></canvas>
+      <div class="vector-legend">
+        <span><span class="swatch" style="background:#5FA8D3;"></span>gravity</span>
+        <span><span class="swatch" style="background:#F2C14E;"></span>restoring force</span>
+      </div>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="pd-length">Length <span class="val" id="pd-length-val">130</span></label><input type="range" id="pd-length" min="60" max="220" value="130"></div>
+        <div class="sim-control"><label for="pd-damping">Damping <span class="val" id="pd-damping-val">0.5</span></label><input type="range" id="pd-damping" min="0" max="2" step="0.1" value="0.5"></div>
+        <div class="sim-control"><label for="pd-drive-amp">Drive amplitude <span class="val" id="pd-drive-amp-val">0</span></label><input type="range" id="pd-drive-amp" min="0" max="15" step="0.5" value="0"></div>
+        <div class="sim-control"><label for="pd-drive-freq">Drive frequency <span class="val" id="pd-drive-freq-val">1</span></label><input type="range" id="pd-drive-freq" min="0.2" max="4" step="0.1" value="1"></div>
+      </div>
+      <div class="sim-actions"><button class="btn btn-ghost" id="pd-reset" type="button">Reset</button></div>
+    </div>
+
+    <!-- 5. Electric Field & Coulomb Force -->
+    <div class="sim-card">
+      <span class="cat-tag">Electromagnetism</span>
+      <h3>Electric Field &amp; Coulomb Force</h3>
+      <p class="calc-desc">Drag the charges around. Field lines (amber) and the Coulomb force between charges (teal) update live.</p>
+      <canvas id="sim-efield" width="560" height="300"></canvas>
+      <div class="sim-actions">
+        <button class="btn btn-ghost" id="ef-add-pos" type="button">+ Add Positive</button>
+        <button class="btn btn-ghost" id="ef-add-neg" type="button">+ Add Negative</button>
+        <button class="btn btn-ghost" id="ef-clear" type="button">Reset</button>
+      </div>
+      <div class="sim-readout" id="efield-readout"></div>
+    </div>
+
+    <!-- 6. Wave Interference -->
+    <div class="sim-card">
+      <span class="cat-tag">Waves</span>
+      <h3>Wave Interference (Double-Slit)</h3>
+      <p class="calc-desc">Two coherent point sources create the classic interference pattern. The strip below shows the intensity pattern you'd see on a screen.</p>
+      <canvas id="sim-waves" width="560" height="280"></canvas>
+      <canvas id="sim-waves-screen" width="560" height="70" style="margin-top:8px;"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="wv-wavelength">Wavelength <span class="val" id="wv-wavelength-val">24</span></label><input type="range" id="wv-wavelength" min="10" max="50" value="24"></div>
+        <div class="sim-control"><label for="wv-slitsep">Slit separation <span class="val" id="wv-slitsep-val">70</span></label><input type="range" id="wv-slitsep" min="30" max="150" value="70"></div>
+      </div>
+    </div>
+
+    <!-- 7. Collision Physics -->
+    <div class="sim-card">
+      <span class="cat-tag">Mechanics</span>
+      <h3>Collision Physics (Elastic &amp; Inelastic)</h3>
+      <p class="calc-desc">Slide the restitution to 1 for a perfectly elastic collision, or toward 0 for increasingly inelastic (energy-losing) impacts.</p>
+      <canvas id="sim-collision" width="560" height="300"></canvas>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="cl-restitution">Restitution (0=inelastic, 1=elastic) <span class="val" id="cl-restitution-val">1</span></label><input type="range" id="cl-restitution" min="0" max="1" step="0.05" value="1"></div>
+      </div>
+      <div class="sim-actions"><button class="btn btn-ghost" id="cl-reset" type="button">Reset</button></div>
+      <div class="sim-readout" id="collision-readout"></div>
+    </div>
+
+    <!-- 8. Fluid Dynamics -->
+    <div class="sim-card">
+      <span class="cat-tag">Fluid Dynamics</span>
+      <h3>Fluid Dynamics: Bernoulli, Buoyancy &amp; Viscosity</h3>
+      <div class="mini-panels">
+        <div class="mini-panel">
+          <h4>Bernoulli / Venturi</h4>
+          <canvas id="sim-bernoulli" width="240" height="140"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="bn-flow">Flow rate <span class="val" id="bn-flow-val">40</span></label><input type="range" id="bn-flow" min="10" max="80" value="40"></div>
+          <div class="sim-readout" id="bernoulli-readout"></div>
         </div>
-        <div class="sim-control">
-          <label for="or-sim-speed">Speed <span class="val" id="or-sim-speed-val">1</span>&times;</label>
-          <input type="range" id="or-sim-speed" min="0.2" max="4" step="0.2" value="1">
+        <div class="mini-panel">
+          <h4>Buoyancy</h4>
+          <canvas id="sim-buoyancy" width="240" height="140"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="bu-density">Object density <span class="val" id="bu-density-val">0.6</span></label><input type="range" id="bu-density" min="0.1" max="2" step="0.1" value="0.6"></div>
+        </div>
+        <div class="mini-panel">
+          <h4>Viscosity (Stokes' Law)</h4>
+          <canvas id="sim-viscosity" width="240" height="140"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="vi-viscosity">Viscosity <span class="val" id="vi-viscosity-val">1</span></label><input type="range" id="vi-viscosity" min="0.2" max="4" step="0.1" value="1"></div>
+          <div class="sim-control"><label for="vi-radius">Sphere radius <span class="val" id="vi-radius-val">8</span></label><input type="range" id="vi-radius" min="3" max="16" value="8"></div>
+          <div class="sim-readout" id="viscosity-readout"></div>
         </div>
       </div>
     </div>
 
+    <!-- 9. Heat Transfer -->
     <div class="sim-card">
-      <span class="cat-tag">Relativity</span>
-      <h3>Special Relativity: Length Contraction</h3>
-      <canvas id="sim-relativity" width="560" height="220"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="rl-sim-velocity">Velocity <span class="val" id="rl-sim-velocity-val">0</span>c</label>
-          <input type="range" id="rl-sim-velocity" min="0" max="0.99" step="0.01" value="0">
+      <span class="cat-tag">Thermodynamics</span>
+      <h3>Heat Transfer: Conduction, Convection &amp; Radiation</h3>
+      <div class="mini-panels">
+        <div class="mini-panel">
+          <h4>Conduction (1D heat equation)</h4>
+          <canvas id="sim-conduction" width="240" height="90"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="ht-alpha">Thermal diffusivity <span class="val" id="ht-alpha-val">0.4</span></label><input type="range" id="ht-alpha" min="0.05" max="1" step="0.05" value="0.4"></div>
+        </div>
+        <div class="mini-panel">
+          <h4>Convection</h4>
+          <canvas id="sim-convection" width="240" height="140"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="cv-speed">Circulation speed <span class="val" id="cv-speed-val">1</span></label><input type="range" id="cv-speed" min="0.2" max="3" step="0.1" value="1"></div>
+        </div>
+        <div class="mini-panel">
+          <h4>Radiation (Stefan-Boltzmann)</h4>
+          <canvas id="sim-radiation" width="240" height="140"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="rd-temp">Temperature (K) <span class="val" id="rd-temp-val">800</span></label><input type="range" id="rd-temp" min="300" max="3000" value="800"></div>
+          <div class="sim-readout" id="radiation-readout"></div>
         </div>
       </div>
     </div>
 
+    <!-- 10. Electromagnetic Fields -->
     <div class="sim-card">
-      <span class="cat-tag">Astrophysics</span>
-      <h3>Black Hole</h3>
-      <canvas id="sim-blackhole" width="560" height="300"></canvas>
-      <div class="sim-controls">
-        <div class="sim-control">
-          <label for="bh-sim-mass">Mass <span class="val" id="bh-sim-mass-val">5</span> M&#8857;</label>
-          <input type="range" id="bh-sim-mass" min="1" max="40" value="5">
+      <span class="cat-tag">Electromagnetism</span>
+      <h3>Electromagnetic Fields: Dipoles &amp; Faraday's Law</h3>
+      <div class="mini-panels">
+        <div class="mini-panel">
+          <h4>Magnetic Dipole Field Lines</h4>
+          <canvas id="sim-dipole" width="240" height="200"></canvas>
+          <div class="sim-control" style="margin-top:10px;"><label for="dp-strength">Magnet strength <span class="val" id="dp-strength-val">1</span></label><input type="range" id="dp-strength" min="0.3" max="3" step="0.1" value="1"></div>
+        </div>
+        <div class="mini-panel">
+          <h4>Faraday's Law (Induction)</h4>
+          <canvas id="sim-faraday" width="240" height="200"></canvas>
+          <div class="sim-actions" style="margin-top:10px;"><button class="btn btn-ghost" id="fd-toggle" type="button">Play / Pause Magnet</button></div>
+          <div class="sim-readout" id="faraday-readout"></div>
         </div>
       </div>
-      <p class="calc-desc" style="margin-top:10px;">Illustrative, not to physical scale - the event horizon grows with mass.</p>
     </div>
 
   </section>
