@@ -141,28 +141,6 @@ function renderTimeline() {
         <p>${figures}</p>
       </div>`;
   }).join('');
-  observeTimelineItems();
-}
-
-function observeTimelineItems() {
-  const items = document.querySelectorAll('.timeline-item');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    items.forEach(i => i.classList.add('in-view'));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-  items.forEach(i => observer.observe(i));
 }
 
 document.addEventListener('DOMContentLoaded', renderTimeline);
