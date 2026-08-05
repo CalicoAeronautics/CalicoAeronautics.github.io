@@ -13,95 +13,89 @@
 
 <main>
   <section class="hero">
-    <svg class="cat-figure" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 16 L14 6 L19 15 Z" fill="var(--charcoal)"/>
-      <path d="M38 16 L34 6 L29 15 Z" fill="var(--amber)"/>
-      <ellipse cx="24" cy="26" rx="16" ry="14" fill="var(--cream)"/>
-      <path d="M9 22a15 14 0 0 1 8-10 10 8 0 0 0-3 10z" fill="var(--amber)"/>
-      <path d="M39 24a15 14 0 0 0-7-11 10 9 0 0 1 2 11z" fill="var(--charcoal)"/>
-      <circle cx="18" cy="25" r="2.4" fill="var(--void)"/>
-      <circle cx="30" cy="25" r="2.4" fill="var(--void)"/>
-      <path d="M22 30q2 2 4 0" stroke="var(--void)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-    </svg>
-    <h1>CALICO&nbsp;PHYSICS</h1>
-    <p class="tagline" data-i18n="home.tagline" data-i18n-default="Maths and physics are tough, but the calico cat wants to share all of it.">Maths and physics are tough, but the calico cat wants to share all of it.</p>
-    <div class="hero-actions">
-      <a href="articles.html" class="btn btn-primary" data-i18n="home.exploreBtn" data-i18n-default="Explore Physics">Explore Physics</a>
-      <a href="articles.html" class="btn btn-ghost" data-i18n="home.readBtn" data-i18n-default="Read Articles">Read Articles</a>
+    <div class="hero-main">
+      <svg class="cat-figure" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 16 L14 6 L19 15 Z" fill="var(--charcoal)"/>
+        <path d="M38 16 L34 6 L29 15 Z" fill="var(--amber)"/>
+        <ellipse cx="24" cy="26" rx="16" ry="14" fill="var(--cream)"/>
+        <path d="M9 22a15 14 0 0 1 8-10 10 8 0 0 0-3 10z" fill="var(--amber)"/>
+        <path d="M39 24a15 14 0 0 0-7-11 10 9 0 0 1 2 11z" fill="var(--charcoal)"/>
+        <circle cx="18" cy="25" r="2.4" fill="var(--void)"/>
+        <circle cx="30" cy="25" r="2.4" fill="var(--void)"/>
+        <path d="M22 30q2 2 4 0" stroke="var(--void)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <h1>CALICO&nbsp;PHYSICS</h1>
+      <p class="tagline" data-i18n="home.tagline" data-i18n-default="Maths and physics are tough, but the calico cat wants to share all of it.">Maths and physics are tough, but the calico cat wants to share all of it.</p>
+      <div class="hero-actions">
+        <a href="articles.html" class="btn btn-primary" data-i18n="home.exploreBtn" data-i18n-default="Explore Physics">Explore Physics</a>
+        <a href="articles.html" class="btn btn-ghost" data-i18n="home.readBtn" data-i18n-default="Read Articles">Read Articles</a>
+      </div>
     </div>
-    <div class="scroll-cue">&darr;</div>
+    <div class="hero-side">
+      <div><strong>105</strong>formulas, derived and explained</div>
+      <div><strong>10</strong>real physics simulations, live</div>
+      <div><strong>31</strong>discoveries mapped across 20+ cities</div>
+      <div><strong>50</strong>scientists, with real photos and sources</div>
+    </div>
   </section>
 
   <section class="container">
     <div class="section-head">
       <h2 data-i18n="home.sectionHeading" data-i18n-default="A universe organized by curiosity, not chapters">A universe organized by curiosity, not chapters</h2>
-      <p data-i18n="home.sectionSub" data-i18n-default="Six ways into the same set of ideas - pick whichever door looks interesting today.">Six ways into the same set of ideas - pick whichever door looks interesting today.</p>
+      <p data-i18n="home.sectionSub" data-i18n-default="Six ways into the same set of ideas - pick whichever door looks interesting today.">Twelve doors into the same set of ideas. Pick whichever one looks interesting today.</p>
     </div>
-    <div class="grid">
-      <a class="card" href="articles.html">
-        <span class="cat-tag">Read</span>
-        <h3>Articles</h3>
-        <p class="excerpt">Relativity, quantum mechanics, calculus, and everything between - explained without jargon walls.</p>
+    <div class="index-list">
+      <a class="index-row" href="articles.html">
+        <span class="index-num">01</span>
+        <span class="index-body"><strong>Articles</strong><span>Relativity, quantum mechanics, calculus, and everything between, explained without jargon walls.</span></span>
       </a>
-      <a class="card" href="problem-of-week.html">
-        <span class="cat-tag">Solve</span>
-        <h3>Problem of the Week</h3>
-        <p class="excerpt">A new challenge every week, with hints before you peek at the solution.</p>
+      <a class="index-row" href="problem-of-week.html">
+        <span class="index-num">02</span>
+        <span class="index-body"><strong>Problem of the Week</strong><span>A new challenge every week, with hints before you peek at the solution.</span></span>
       </a>
-      <a class="card" href="olympiad.html">
-        <span class="cat-tag">Compete</span>
-        <h3>Olympiad Hub</h3>
-        <p class="excerpt">Past papers, formula sheets, and preparation plans for Physics, Chemistry, Math &amp; Astronomy olympiads.</p>
+      <a class="index-row" href="olympiad.html">
+        <span class="index-num">03</span>
+        <span class="index-body"><strong>Olympiad Hub</strong><span>Past papers, formula sheets, and preparation plans for Physics, Chemistry, Math, and Astronomy olympiads.</span></span>
       </a>
-      <a class="card" href="space-explorer.html">
-        <span class="cat-tag">Explore</span>
-        <h3>Space Explorer</h3>
-        <p class="excerpt">Zoom from the solar system down to a single moon - interactively.</p>
+      <a class="index-row" href="space-explorer.html">
+        <span class="index-num">04</span>
+        <span class="index-body"><strong>Space Explorer</strong><span>Real photos and full fact sheets for every planet, zoomed all the way down to individual moons.</span></span>
       </a>
-      <a class="card" href="scientists.html">
-        <span class="cat-tag">Meet</span>
-        <h3>Great Scientists</h3>
-        <p class="excerpt">Einstein, Feynman, Curie, and the people behind the equations.</p>
+      <a class="index-row" href="scientists.html">
+        <span class="index-num">05</span>
+        <span class="index-body"><strong>Great Scientists</strong><span>50 biographies with real photos, discoveries, and sourced quotes.</span></span>
       </a>
-      <a class="card" href="calculators.html">
-        <span class="cat-tag">Compute</span>
-        <h3>Calculators</h3>
-        <p class="excerpt">Escape velocity, orbital period, relativity, and more - plug in numbers, get real answers.</p>
+      <a class="index-row" href="calculators.html">
+        <span class="index-num">06</span>
+        <span class="index-body"><strong>Calculators</strong><span>27 calculators, from escape velocity to RC time constants. Plug in numbers, get real answers.</span></span>
       </a>
-      <a class="card" href="formulas.html">
-        <span class="cat-tag">Reference</span>
-        <h3>Formula Library</h3>
-        <p class="excerpt">Newton, Maxwell, Schr&ouml;dinger, Einstein - explained, derived, and applied.</p>
+      <a class="index-row" href="formulas.html">
+        <span class="index-num">07</span>
+        <span class="index-body"><strong>Formula Library</strong><span>105 formulas rendered in real LaTeX, five explained in full depth with derivations.</span></span>
       </a>
-      <a class="card" href="news.html">
-        <span class="cat-tag">Read</span>
-        <h3>News</h3>
-        <p class="excerpt">Short, weekly summaries of science news - never full copied articles.</p>
+      <a class="index-row" href="news.html">
+        <span class="index-num">08</span>
+        <span class="index-body"><strong>News</strong><span>Short summaries of real science news, linking out to the original source every time.</span></span>
       </a>
-      <a class="card" href="resources.html">
-        <span class="cat-tag">Study</span>
-        <h3>Resources</h3>
-        <p class="excerpt">Books, free university courses, formula sheets, and notebooks in one place.</p>
+      <a class="index-row" href="resources.html">
+        <span class="index-num">09</span>
+        <span class="index-body"><strong>Resources</strong><span>Books, free university courses, video lessons, and a Python notebook covering the whole syllabus.</span></span>
       </a>
-      <a class="card" href="timeline.html">
-        <span class="cat-tag">History</span>
-        <h3>Timeline</h3>
-        <p class="excerpt">From Ancient Greece to today, the ideas that built modern physics.</p>
+      <a class="index-row" href="timeline.html">
+        <span class="index-num">10</span>
+        <span class="index-body"><strong>Timeline</strong><span>Over 120 milestones from Ancient Greece to today, in order.</span></span>
       </a>
-      <a class="card" href="simulations.html">
-        <span class="cat-tag">Play</span>
-        <h3>Interactive Simulations</h3>
-        <p class="excerpt">Move a slider, watch a pendulum swing or a field bend - physics you can touch.</p>
+      <a class="index-row" href="simulations.html">
+        <span class="index-num">11</span>
+        <span class="index-body"><strong>Interactive Simulations</strong><span>Ten real simulations with vector forces and live physics, not canned animations.</span></span>
       </a>
-      <a class="card" href="map.html">
-        <span class="cat-tag">Explore</span>
-        <h3>Discovery Map</h3>
-        <p class="excerpt">Click a country, meet the scientists who worked there.</p>
+      <a class="index-row" href="map.html">
+        <span class="index-num">12</span>
+        <span class="index-body"><strong>Discovery Map</strong><span>A real map of 31 discoveries across 20+ cities, toggleable between map and list view.</span></span>
       </a>
-      <a class="card" href="iphyc.html">
-        <span class="cat-tag">Compete</span>
-        <h3>IPhyC</h3>
-        <p class="excerpt">Announcements, resources, and original write-ups for the competition.</p>
+      <a class="index-row" href="iphyc.html">
+        <span class="index-num">13</span>
+        <span class="index-body"><strong>IPhyC</strong><span>Announcements, resources, and original write-ups for the competition.</span></span>
       </a>
     </div>
   </section>
