@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Database - Calico Aeronautics</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <section class="page-hero">
+    <h1>Star Database</h1>
+    <p>The brightest and nearest stars, plus a real interactive Hertzsprung-Russell diagram.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <h2>Hertzsprung-Russell Diagram</h2>
+      <p>Temperature vs. luminosity for 15 well-known stars. Hover any point for details.</p>
+    </div>
+    <div class="sim-card">
+      <canvas id="hr-diagram" width="600" height="380"></canvas>
+      <div class="sim-readout" id="hr-label">Hover over a point</div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <h2>10 Brightest Stars (as seen from Earth)</h2>
+    </div>
+    <div class="mission-list" id="brightest-stars"></div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <h2>10 Nearest Stars</h2>
+    </div>
+    <div class="mission-list" id="nearest-stars"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/background.js"></script>
+<script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/star-database.js"></script>
+</body>
+</html>

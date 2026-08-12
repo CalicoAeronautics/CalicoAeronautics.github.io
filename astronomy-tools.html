@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astronomy Tools - Calico Aeronautics</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <section class="page-hero">
+    <h1>Astronomy Tools</h1>
+    <p>Calculators built specifically for astrophysics. For general physics calculators, see the main Calculators page.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px,1fr));">
+
+      <div class="calc-card">
+        <span class="cat-tag">Units</span>
+        <h3>Light-Year Converter</h3>
+        <p class="calc-desc">Convert between meters, AU, light-years, and parsecs.</p>
+        <div class="calc-form">
+          <div class="calc-field">
+            <label for="ly-unit">Input unit</label>
+            <select id="ly-unit">
+              <option value="ly">Light-years</option>
+              <option value="au">AU</option>
+              <option value="pc">Parsecs</option>
+              <option value="km">Kilometers</option>
+            </select>
+          </div>
+          <div class="calc-field"><label for="ly-value">Value</label><input type="number" id="ly-value" placeholder="1"></div>
+        </div>
+        <button class="btn btn-primary" id="ly-calc" type="button">Convert</button>
+        <div class="calc-result" id="ly-result"></div>
+      </div>
+
+      <div class="calc-card">
+        <span class="cat-tag">Cosmology</span>
+        <h3>Redshift Calculator</h3>
+        <span class="formula-line">z = (&lambda;_obs - &lambda;_emit) / &lambda;_emit</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="rs-emit">Emitted wavelength (nm)</label><input type="number" id="rs-emit" placeholder="656.3"></div>
+          <div class="calc-field"><label for="rs-obs">Observed wavelength (nm)</label><input type="number" id="rs-obs" placeholder="700"></div>
+        </div>
+        <button class="btn btn-primary" id="rs-calc" type="button">Calculate</button>
+        <div class="calc-result" id="rs-result"></div>
+      </div>
+
+      <div class="calc-card">
+        <span class="cat-tag">Equipment</span>
+        <h3>Telescope Magnification</h3>
+        <span class="formula-line">M = f_telescope / f_eyepiece</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="tm-focal-scope">Telescope focal length (mm)</label><input type="number" id="tm-focal-scope" placeholder="1000"></div>
+          <div class="calc-field"><label for="tm-focal-eyepiece">Eyepiece focal length (mm)</label><input type="number" id="tm-focal-eyepiece" placeholder="10"></div>
+        </div>
+        <button class="btn btn-primary" id="tm-calc" type="button">Calculate</button>
+        <div class="calc-result" id="tm-result"></div>
+      </div>
+
+      <div class="calc-card">
+        <span class="cat-tag">Observation</span>
+        <h3>Angular Size Calculator</h3>
+        <p class="calc-desc">How large an object appears in the sky, given its true size and distance.</p>
+        <div class="calc-form">
+          <div class="calc-field"><label for="as-diameter">Object diameter</label><input type="number" id="as-diameter" placeholder="3474"></div>
+          <div class="calc-field"><label for="as-distance">Distance (same units)</label><input type="number" id="as-distance" placeholder="384400"></div>
+        </div>
+        <button class="btn btn-primary" id="as-calc" type="button">Calculate</button>
+        <div class="calc-result" id="as-result"></div>
+      </div>
+
+      <div class="calc-card">
+        <span class="cat-tag">Distance</span>
+        <h3>Star Distance (Parallax)</h3>
+        <span class="formula-line">d (pc) = 1 / p (arcsec)</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="pd-parallax">Parallax angle (arcsec)</label><input type="number" id="pd-parallax" step="0.001" placeholder="0.772"></div>
+        </div>
+        <button class="btn btn-primary" id="pd-calc" type="button">Calculate</button>
+        <div class="calc-result" id="pd-result"></div>
+      </div>
+
+      <div class="calc-card">
+        <span class="cat-tag">Fun</span>
+        <h3>Planet Weight Calculator</h3>
+        <p class="calc-desc">What you'd weigh on another world.</p>
+        <div class="calc-form">
+          <div class="calc-field"><label for="pw-mass">Your mass (kg)</label><input type="number" id="pw-mass" placeholder="70"></div>
+          <div class="calc-field">
+            <label for="pw-body">World</label>
+            <select id="pw-body">
+              <option value="mercury">Mercury</option><option value="venus">Venus</option>
+              <option value="mars">Mars</option><option value="jupiter">Jupiter</option>
+              <option value="saturn">Saturn</option><option value="uranus">Uranus</option>
+              <option value="neptune">Neptune</option><option value="moon">The Moon</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="pw-calc" type="button">Calculate</button>
+        <div class="calc-result" id="pw-result"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="placeholder-block" style="text-align:left; padding:24px;">
+      <p style="margin:0;">For escape velocity and orbital period calculators, see the <a href="calculators.html" style="color:var(--amber-soft);">main Calculators page</a>.</p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/background.js"></script>
+<script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/astro-tools.js"></script>
+</body>
+</html>

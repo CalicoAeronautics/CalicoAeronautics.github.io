@@ -1,4 +1,4 @@
-# Calico Physics
+# Calico Aeronautics
 
 A static physics/math education site. Plain HTML/CSS/JS, no build step, deploys directly to GitHub Pages.
 

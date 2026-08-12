@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculators - Calico Physics</title>
+<title>Calculators - Calico Aeronautics</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,183 +12,199 @@
 
 <main class="container">
   <section class="page-hero">
-    <h1>Physics Calculators</h1>
-    <p>Seven calculators, no sign-up, nothing leaves your browser. Enter values and hit calculate.</p>
+    <h1>Calculators</h1>
+    <p>23 calculators - the numbers that decide whether an aircraft flies, plus the core mechanics and thermodynamics underneath them. Nothing electromagnetic, quantum, or unrelated to flight.</p>
   </section>
 
   <section style="padding-top:0;">
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(340px,1fr));">
 
-      <!-- Escape Velocity -->
+      <!-- Lift -->
       <div class="calc-card">
-        <span class="cat-tag">Orbital Mechanics</span>
-        <h3>Escape Velocity</h3>
-        <p class="calc-desc">The minimum speed needed to break free of a body's gravity, ignoring drag.</p>
-        <span class="formula-line">v = &radic;(2GM / r)</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Lift</h3>
+        <span class="formula-line">L = &frac12;&rho;v&sup2;SC_L</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="ev-mass">Mass M (kg)</label>
-            <input type="number" id="ev-mass" placeholder="5.972e24 (Earth)">
-          </div>
-          <div class="calc-field">
-            <label for="ev-radius">Radius r (m)</label>
-            <input type="number" id="ev-radius" placeholder="6.371e6 (Earth)">
-          </div>
+          <div class="calc-field"><label for="lf-rho">Air density &rho; (kg/m&sup3;)</label><input type="number" id="lf-rho" placeholder="1.225"></div>
+          <div class="calc-field"><label for="lf-v">Airspeed (m/s)</label><input type="number" id="lf-v" placeholder="60"></div>
+          <div class="calc-field"><label for="lf-s">Wing area (m&sup2;)</label><input type="number" id="lf-s" placeholder="16"></div>
+          <div class="calc-field"><label for="lf-cl">Lift coefficient C_L</label><input type="number" id="lf-cl" step="0.01" placeholder="0.5"></div>
         </div>
-        <button class="btn btn-primary" id="ev-calc" type="button">Calculate</button>
-        <div class="calc-result" id="ev-result"></div>
+        <button class="btn btn-primary" id="lf-calc" type="button">Calculate</button>
+        <div class="calc-result" id="lf-result"></div>
       </div>
 
-      <!-- Orbital Period -->
+      <!-- Drag -->
       <div class="calc-card">
-        <span class="cat-tag">Orbital Mechanics</span>
-        <h3>Orbital Period</h3>
-        <p class="calc-desc">Time for one full circular orbit around a central mass.</p>
-        <span class="formula-line">T = 2&pi;&radic;(r&sup3; / GM)</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Drag</h3>
+        <span class="formula-line">D = &frac12;&rho;v&sup2;SC_D</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="op-mass">Central mass M (kg)</label>
-            <input type="number" id="op-mass" placeholder="1.989e30 (Sun)">
-          </div>
-          <div class="calc-field">
-            <label for="op-radius">Orbital radius r (m)</label>
-            <input type="number" id="op-radius" placeholder="1.496e11 (1 AU)">
-          </div>
+          <div class="calc-field"><label for="dg-rho">Air density &rho; (kg/m&sup3;)</label><input type="number" id="dg-rho" placeholder="1.225"></div>
+          <div class="calc-field"><label for="dg-v">Airspeed (m/s)</label><input type="number" id="dg-v" placeholder="60"></div>
+          <div class="calc-field"><label for="dg-s">Wing area (m&sup2;)</label><input type="number" id="dg-s" placeholder="16"></div>
+          <div class="calc-field"><label for="dg-cd">Drag coefficient C_D</label><input type="number" id="dg-cd" step="0.01" placeholder="0.03"></div>
         </div>
-        <button class="btn btn-primary" id="op-calc" type="button">Calculate</button>
-        <div class="calc-result" id="op-result"></div>
+        <button class="btn btn-primary" id="dg-calc" type="button">Calculate</button>
+        <div class="calc-result" id="dg-result"></div>
       </div>
 
-      <!-- Time Dilation -->
+      <!-- Stall speed -->
       <div class="calc-card">
-        <span class="cat-tag">Relativity</span>
-        <h3>Time Dilation</h3>
-        <p class="calc-desc">How a moving clock's elapsed time compares to a stationary observer's.</p>
-        <span class="formula-line">t' = t / &radic;(1 &minus; v&sup2;/c&sup2;)</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Stall Speed</h3>
+        <span class="formula-line">V_stall = &radic;(2W / &rho;SC_Lmax)</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="td-time">Proper time t (s)</label>
-            <input type="number" id="td-time" placeholder="1">
-          </div>
-          <div class="calc-field">
-            <label for="td-velocity">Speed (as a fraction of c, 0&ndash;0.999)</label>
-            <input type="number" id="td-velocity" step="0.001" placeholder="0.8">
-          </div>
+          <div class="calc-field"><label for="ss-w">Weight (N)</label><input type="number" id="ss-w" placeholder="9800"></div>
+          <div class="calc-field"><label for="ss-rho">Air density &rho; (kg/m&sup3;)</label><input type="number" id="ss-rho" placeholder="1.225"></div>
+          <div class="calc-field"><label for="ss-s">Wing area (m&sup2;)</label><input type="number" id="ss-s" placeholder="16"></div>
+          <div class="calc-field"><label for="ss-clmax">Max lift coefficient</label><input type="number" id="ss-clmax" step="0.1" placeholder="1.5"></div>
         </div>
-        <button class="btn btn-primary" id="td-calc" type="button">Calculate</button>
-        <div class="calc-result" id="td-result"></div>
+        <button class="btn btn-primary" id="ss-calc" type="button">Calculate</button>
+        <div class="calc-result" id="ss-result"></div>
       </div>
 
-      <!-- Projectile Motion -->
+      <!-- Mach number -->
       <div class="calc-card">
-        <span class="cat-tag">Mechanics</span>
-        <h3>Projectile Motion</h3>
-        <p class="calc-desc">Max height, flight time, and range for a launch with no air resistance.</p>
-        <span class="formula-line">h = v&#8320;y&sup2;/2g &middot; t = 2v&#8320;y/g &middot; R = v&#8320;x&middot;t</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Mach Number</h3>
+        <span class="formula-line">M = v/a, a = &radic;(&gamma;RT)</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="pm-speed">Initial speed (m/s)</label>
-            <input type="number" id="pm-speed" placeholder="25">
-          </div>
-          <div class="calc-field">
-            <label for="pm-angle">Launch angle (&deg;)</label>
-            <input type="number" id="pm-angle" placeholder="40">
-          </div>
-          <div class="calc-field">
-            <label for="pm-gravity">Gravity g (m/s&sup2;)</label>
-            <input type="number" id="pm-gravity" placeholder="9.8">
-          </div>
+          <div class="calc-field"><label for="mc-v">Airspeed (m/s)</label><input type="number" id="mc-v" placeholder="250"></div>
+          <div class="calc-field"><label for="mc-t">Temperature (K)</label><input type="number" id="mc-t" placeholder="288"></div>
         </div>
-        <button class="btn btn-primary" id="pm-calc" type="button">Calculate</button>
-        <div class="calc-result" id="pm-result"></div>
+        <button class="btn btn-primary" id="mc-calc" type="button">Calculate</button>
+        <div class="calc-result" id="mc-result"></div>
       </div>
 
-      <!-- Ideal Gas Law -->
+      <!-- Reynolds number -->
       <div class="calc-card">
-        <span class="cat-tag">Thermodynamics</span>
-        <h3>Ideal Gas Law</h3>
-        <p class="calc-desc">Solve for pressure, volume, moles, or temperature - fill in the other three.</p>
-        <span class="formula-line">PV = nRT</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Reynolds Number</h3>
+        <span class="formula-line">Re = &rho;vL/&mu;</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="ig-target">Solve for</label>
-            <select id="ig-target">
-              <option value="P">Pressure (atm)</option>
-              <option value="V">Volume (L)</option>
-              <option value="n">Moles (mol)</option>
-              <option value="T">Temperature (K)</option>
-            </select>
-          </div>
-          <div class="calc-field">
-            <label for="ig-pressure">Pressure P (atm)</label>
-            <input type="number" id="ig-pressure" placeholder="1">
-          </div>
-          <div class="calc-field">
-            <label for="ig-volume">Volume V (L)</label>
-            <input type="number" id="ig-volume" placeholder="22.4">
-          </div>
-          <div class="calc-field">
-            <label for="ig-moles">Moles n (mol)</label>
-            <input type="number" id="ig-moles" placeholder="1">
-          </div>
-          <div class="calc-field">
-            <label for="ig-temp">Temperature T (K)</label>
-            <input type="number" id="ig-temp" placeholder="273.15">
-          </div>
+          <div class="calc-field"><label for="ren-rho">Density &rho; (kg/m&sup3;)</label><input type="number" id="ren-rho" placeholder="1.225"></div>
+          <div class="calc-field"><label for="ren-v">Velocity (m/s)</label><input type="number" id="ren-v" placeholder="60"></div>
+          <div class="calc-field"><label for="ren-l">Characteristic length (m)</label><input type="number" id="ren-l" placeholder="1.5"></div>
+          <div class="calc-field"><label for="ren-mu">Viscosity &mu; (Pa&middot;s)</label><input type="number" id="ren-mu" placeholder="0.0000181"></div>
         </div>
-        <button class="btn btn-primary" id="ig-calc" type="button">Calculate</button>
-        <div class="calc-result" id="ig-result"></div>
+        <button class="btn btn-primary" id="ren-calc" type="button">Calculate</button>
+        <div class="calc-result" id="ren-result"></div>
       </div>
 
-      <!-- Blackbody Radiation -->
+      <!-- Glide ratio -->
       <div class="calc-card">
-        <span class="cat-tag">Thermal Radiation</span>
-        <h3>Blackbody Radiation</h3>
-        <p class="calc-desc">Radiant emittance (Stefan-Boltzmann) and peak wavelength (Wien's law).</p>
-        <span class="formula-line">j = &sigma;T&#8308; &middot; &lambda;_max = b/T</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Glide Ratio &amp; Sink Rate</h3>
+        <span class="formula-line">sink rate = v / (L/D)</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="bb-temp">Temperature T (K)</label>
-            <input type="number" id="bb-temp" placeholder="5778 (Sun's surface)">
-          </div>
-          <div class="calc-field">
-            <label for="bb-area">Surface area (m&sup2;, optional)</label>
-            <input type="number" id="bb-area" placeholder="optional">
-          </div>
+          <div class="calc-field"><label for="gl-ld">L/D ratio</label><input type="number" id="gl-ld" placeholder="15"></div>
+          <div class="calc-field"><label for="gl-v">Airspeed (m/s)</label><input type="number" id="gl-v" placeholder="25"></div>
         </div>
-        <button class="btn btn-primary" id="bb-calc" type="button">Calculate</button>
-        <div class="calc-result" id="bb-result"></div>
+        <button class="btn btn-primary" id="gl-calc" type="button">Calculate</button>
+        <div class="calc-result" id="gl-result"></div>
       </div>
 
-      <!-- Rocket Equation -->
+      <!-- Load factor -->
       <div class="calc-card">
-        <span class="cat-tag">Astronautics</span>
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Load Factor from Bank Angle</h3>
+        <span class="formula-line">n = 1 / cos(bank angle)</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="nf-bank">Bank angle (&deg;)</label><input type="number" id="nf-bank" placeholder="45"></div>
+        </div>
+        <button class="btn btn-primary" id="nf-calc" type="button">Calculate</button>
+        <div class="calc-result" id="nf-result"></div>
+      </div>
+
+      <!-- Wing geometry -->
+      <div class="calc-card">
+        <span class="cat-tag">Aeronautics</span>
+        <h3>Wing Loading &amp; Aspect Ratio</h3>
+        <span class="formula-line">W/S, AR = b&sup2;/S</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="wg-w">Weight (N)</label><input type="number" id="wg-w" placeholder="9800"></div>
+          <div class="calc-field"><label for="wg-s">Wing area (m&sup2;)</label><input type="number" id="wg-s" placeholder="16"></div>
+          <div class="calc-field"><label for="wg-b">Wingspan (m)</label><input type="number" id="wg-b" placeholder="10.9"></div>
+        </div>
+        <button class="btn btn-primary" id="wg-calc" type="button">Calculate</button>
+        <div class="calc-result" id="wg-result"></div>
+      </div>
+
+      <!-- Rocket equation -->
+      <div class="calc-card">
+        <span class="cat-tag">Aerospace</span>
         <h3>Rocket Equation</h3>
         <p class="calc-desc">The Tsiolkovsky rocket equation: how much &Delta;v a given mass ratio buys you.</p>
         <span class="formula-line">&Delta;v = I_sp &middot; g&#8320; &middot; ln(m&#8320;/m_f)</span>
         <div class="calc-form">
-          <div class="calc-field">
-            <label for="re-isp">Specific impulse I_sp (s)</label>
-            <input type="number" id="re-isp" placeholder="311 (Merlin engine)">
-          </div>
-          <div class="calc-field">
-            <label for="re-m0">Initial mass m&#8320; (kg)</label>
-            <input type="number" id="re-m0" placeholder="549054">
-          </div>
-          <div class="calc-field">
-            <label for="re-mf">Final mass m_f (kg)</label>
-            <input type="number" id="re-mf" placeholder="22200">
-          </div>
+          <div class="calc-field"><label for="re-isp">Specific impulse I_sp (s)</label><input type="number" id="re-isp" placeholder="311 (Merlin engine)"></div>
+          <div class="calc-field"><label for="re-m0">Initial mass m&#8320; (kg)</label><input type="number" id="re-m0" placeholder="549054"></div>
+          <div class="calc-field"><label for="re-mf">Final mass m_f (kg)</label><input type="number" id="re-mf" placeholder="22200"></div>
         </div>
         <button class="btn btn-primary" id="re-calc" type="button">Calculate</button>
         <div class="calc-result" id="re-result"></div>
       </div>
 
-      <!-- Quadratic Kinematics -->
+      <!-- Escape velocity -->
       <div class="calc-card">
-        <span class="cat-tag">Math / Mechanics</span>
+        <span class="cat-tag">Aerospace</span>
+        <h3>Escape Velocity</h3>
+        <span class="formula-line">v = &radic;(2GM / r)</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="ev-mass">Mass M (kg)</label><input type="number" id="ev-mass" placeholder="5.972e24 (Earth)"></div>
+          <div class="calc-field"><label for="ev-radius">Radius r (m)</label><input type="number" id="ev-radius" placeholder="6.371e6 (Earth)"></div>
+        </div>
+        <button class="btn btn-primary" id="ev-calc" type="button">Calculate</button>
+        <div class="calc-result" id="ev-result"></div>
+      </div>
+
+      <!-- Orbital period -->
+      <div class="calc-card">
+        <span class="cat-tag">Aerospace</span>
+        <h3>Orbital Period</h3>
+        <span class="formula-line">T = 2&pi;&radic;(r&sup3; / GM)</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="op-mass">Central mass M (kg)</label><input type="number" id="op-mass" placeholder="5.972e24 (Earth)"></div>
+          <div class="calc-field"><label for="op-radius">Orbital radius r (m)</label><input type="number" id="op-radius" placeholder="6.771e6 (LEO)"></div>
+        </div>
+        <button class="btn btn-primary" id="op-calc" type="button">Calculate</button>
+        <div class="calc-result" id="op-result"></div>
+      </div>
+
+      <!-- Gravitational force -->
+      <div class="calc-card">
+        <span class="cat-tag">Mechanics</span>
+        <h3>Gravitational Force</h3>
+        <span class="formula-line">F = Gm&#8321;m&#8322;/r&sup2;</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="gf-m1">Mass 1 (kg)</label><input type="number" id="gf-m1" placeholder="5.972e24"></div>
+          <div class="calc-field"><label for="gf-m2">Mass 2 (kg)</label><input type="number" id="gf-m2" placeholder="7.348e22"></div>
+          <div class="calc-field"><label for="gf-r">Separation (m)</label><input type="number" id="gf-r" placeholder="3.84e8"></div>
+        </div>
+        <button class="btn btn-primary" id="gf-calc" type="button">Calculate</button>
+        <div class="calc-result" id="gf-result"></div>
+      </div>
+
+      <!-- Projectile motion -->
+      <div class="calc-card">
+        <span class="cat-tag">Mechanics</span>
+        <h3>Projectile Motion</h3>
+        <span class="formula-line">h = v&#8320;y&sup2;/2g &middot; t = 2v&#8320;y/g &middot; R = v&#8320;x&middot;t</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="pm-speed">Initial speed (m/s)</label><input type="number" id="pm-speed" placeholder="25"></div>
+          <div class="calc-field"><label for="pm-angle">Launch angle (&deg;)</label><input type="number" id="pm-angle" placeholder="40"></div>
+          <div class="calc-field"><label for="pm-gravity">Gravity g (m/s&sup2;)</label><input type="number" id="pm-gravity" placeholder="9.8"></div>
+        </div>
+        <button class="btn btn-primary" id="pm-calc" type="button">Calculate</button>
+        <div class="calc-result" id="pm-result"></div>
+      </div>
+
+      <!-- Quadratic kinematics -->
+      <div class="calc-card">
+        <span class="cat-tag">Mechanics</span>
         <h3>Quadratic Kinematics (Time of Flight)</h3>
-        <p class="calc-desc">Solve at&sup2; + bt + c = 0 for t - useful whenever a kinematics equation reduces to a quadratic.</p>
+        <p class="calc-desc">Solve at&sup2; + bt + c = 0 for t.</p>
         <span class="formula-line">at&sup2; + bt + c = 0</span>
         <div class="calc-form">
           <div class="calc-field"><label for="qf-a">a</label><input type="number" id="qf-a" placeholder="-4.9"></div>
@@ -199,11 +215,10 @@
         <div class="calc-result" id="qf-result"></div>
       </div>
 
-      <!-- Trig functions -->
+      <!-- Trig -->
       <div class="calc-card">
         <span class="cat-tag">Math</span>
         <h3>Sine / Cosine / Tangent</h3>
-        <p class="calc-desc">All three trig ratios for any angle at once.</p>
         <span class="formula-line">sin&theta;, cos&theta;, tan&theta;</span>
         <div class="calc-form">
           <div class="calc-field"><label for="tg-angle">Angle (&deg;)</label><input type="number" id="tg-angle" placeholder="30"></div>
@@ -216,7 +231,6 @@
       <div class="calc-card">
         <span class="cat-tag">Math</span>
         <h3>Inverse Trig (Critical Angle etc.)</h3>
-        <p class="calc-desc">Find the angle from a ratio - e.g. solving for a critical angle.</p>
         <span class="formula-line">&theta; = f&#8315;&sup1;(x)</span>
         <div class="calc-form">
           <div class="calc-field">
@@ -233,11 +247,10 @@
         <div class="calc-result" id="itg-result"></div>
       </div>
 
-      <!-- Square root utility -->
+      <!-- Square root -->
       <div class="calc-card">
         <span class="cat-tag">Math</span>
         <h3>Square Root</h3>
-        <p class="calc-desc">Quick utility for orbital speed, pendulum period, and any formula with a &radic; in it.</p>
         <span class="formula-line">&radic;x</span>
         <div class="calc-form">
           <div class="calc-field"><label for="sq-value">x</label><input type="number" id="sq-value" placeholder="144"></div>
@@ -246,166 +259,64 @@
         <div class="calc-result" id="sq-result"></div>
       </div>
 
-      <!-- Gravitational Force -->
+      <!-- Doppler -->
       <div class="calc-card">
-        <span class="cat-tag">Mechanics</span>
-        <h3>Gravitational Force</h3>
-        <p class="calc-desc">Force between two masses.</p>
-        <span class="formula-line">F = Gm&#8321;m&#8322;/r&sup2;</span>
+        <span class="cat-tag">Waves</span>
+        <h3>Doppler Effect (Sound, Moving Source/Observer)</h3>
+        <p class="calc-desc">Explains the pitch shift of an aircraft's engine noise as it passes overhead.</p>
+        <span class="formula-line">f' = f(v+v&#8338;)/(v-v&#8339;)</span>
         <div class="calc-form">
-          <div class="calc-field"><label for="gf-m1">Mass 1 (kg)</label><input type="number" id="gf-m1" placeholder="5.972e24"></div>
-          <div class="calc-field"><label for="gf-m2">Mass 2 (kg)</label><input type="number" id="gf-m2" placeholder="7.348e22"></div>
-          <div class="calc-field"><label for="gf-r">Separation (m)</label><input type="number" id="gf-r" placeholder="3.84e8"></div>
+          <div class="calc-field"><label for="dp2-f">Source frequency (Hz)</label><input type="number" id="dp2-f" placeholder="440"></div>
+          <div class="calc-field"><label for="dp2-v">Sound speed (m/s)</label><input type="number" id="dp2-v" placeholder="343"></div>
+          <div class="calc-field"><label for="dp2-vo">Observer speed (+ toward)</label><input type="number" id="dp2-vo" placeholder="0"></div>
+          <div class="calc-field"><label for="dp2-vs">Source speed (+ toward)</label><input type="number" id="dp2-vs" placeholder="20"></div>
         </div>
-        <button class="btn btn-primary" id="gf-calc" type="button">Calculate</button>
-        <div class="calc-result" id="gf-result"></div>
+        <button class="btn btn-primary" id="dp2-calc" type="button">Calculate</button>
+        <div class="calc-result" id="dp2-result"></div>
       </div>
 
-      <!-- Coulomb Force -->
+      <!-- Decibel -->
       <div class="calc-card">
-        <span class="cat-tag">Electromagnetism</span>
-        <h3>Coulomb Force</h3>
-        <p class="calc-desc">Force between two point charges.</p>
-        <span class="formula-line">F = kq&#8321;q&#8322;/r&sup2;</span>
+        <span class="cat-tag">Waves</span>
+        <h3>Decibel Intensity Level</h3>
+        <p class="calc-desc">How aircraft and airport noise limits are actually measured.</p>
+        <span class="formula-line">&beta; = 10log&#8321;&#8320;(I/I&#8320;)</span>
         <div class="calc-form">
-          <div class="calc-field"><label for="cf-q1">Charge 1 (C)</label><input type="number" id="cf-q1" placeholder="1e-6"></div>
-          <div class="calc-field"><label for="cf-q2">Charge 2 (C)</label><input type="number" id="cf-q2" placeholder="-2e-6"></div>
-          <div class="calc-field"><label for="cf-r">Separation (m)</label><input type="number" id="cf-r" placeholder="0.05"></div>
+          <div class="calc-field"><label for="db-i">Intensity I (W/m&sup2;)</label><input type="number" id="db-i" placeholder="0.001"></div>
         </div>
-        <button class="btn btn-primary" id="cf-calc" type="button">Calculate</button>
-        <div class="calc-result" id="cf-result"></div>
+        <button class="btn btn-primary" id="db-calc" type="button">Calculate</button>
+        <div class="calc-result" id="db-result"></div>
       </div>
 
-      <!-- Electric Field Magnitude -->
+      <!-- Ideal gas atm -->
       <div class="calc-card">
-        <span class="cat-tag">Electromagnetism</span>
-        <h3>Electric Field Magnitude</h3>
-        <p class="calc-desc">Field from a single point charge.</p>
-        <span class="formula-line">E = kQ/r&sup2;</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="efc-q">Charge Q (C)</label><input type="number" id="efc-q" placeholder="3e-6"></div>
-          <div class="calc-field"><label for="efc-r">Distance (m)</label><input type="number" id="efc-r" placeholder="0.1"></div>
-        </div>
-        <button class="btn btn-primary" id="efc-calc" type="button">Calculate</button>
-        <div class="calc-result" id="efc-result"></div>
-      </div>
-
-      <!-- Magnetic Force on Charge -->
-      <div class="calc-card">
-        <span class="cat-tag">Electromagnetism</span>
-        <h3>Magnetic Force on a Moving Charge</h3>
-        <span class="formula-line">F = qvB sin&theta;</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="mfc-q">Charge (C)</label><input type="number" id="mfc-q" placeholder="1.6e-19"></div>
-          <div class="calc-field"><label for="mfc-v">Speed (m/s)</label><input type="number" id="mfc-v" placeholder="2e6"></div>
-          <div class="calc-field"><label for="mfc-b">Field B (T)</label><input type="number" id="mfc-b" placeholder="0.5"></div>
-          <div class="calc-field"><label for="mfc-theta">Angle (&deg;)</label><input type="number" id="mfc-theta" placeholder="90"></div>
-        </div>
-        <button class="btn btn-primary" id="mfc-calc" type="button">Calculate</button>
-        <div class="calc-result" id="mfc-result"></div>
-      </div>
-
-      <!-- Magnetic Force on Wire -->
-      <div class="calc-card">
-        <span class="cat-tag">Electromagnetism</span>
-        <h3>Magnetic Force on a Current-Carrying Wire</h3>
-        <span class="formula-line">F = BIL sin&theta;</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="mfw-b">Field B (T)</label><input type="number" id="mfw-b" placeholder="0.3"></div>
-          <div class="calc-field"><label for="mfw-i">Current (A)</label><input type="number" id="mfw-i" placeholder="5"></div>
-          <div class="calc-field"><label for="mfw-l">Length (m)</label><input type="number" id="mfw-l" placeholder="0.2"></div>
-          <div class="calc-field"><label for="mfw-theta">Angle (&deg;)</label><input type="number" id="mfw-theta" placeholder="90"></div>
-        </div>
-        <button class="btn btn-primary" id="mfw-calc" type="button">Calculate</button>
-        <div class="calc-result" id="mfw-result"></div>
-      </div>
-
-      <!-- Snell's Law -->
-      <div class="calc-card">
-        <span class="cat-tag">Optics</span>
-        <h3>Snell's Law</h3>
-        <span class="formula-line">n&#8321;sin&theta;&#8321; = n&#8322;sin&theta;&#8322;</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="sn-n1">n&#8321;</label><input type="number" id="sn-n1" placeholder="1.0"></div>
-          <div class="calc-field"><label for="sn-theta1">&theta;&#8321; (&deg;)</label><input type="number" id="sn-theta1" placeholder="30"></div>
-          <div class="calc-field"><label for="sn-n2">n&#8322;</label><input type="number" id="sn-n2" placeholder="1.5"></div>
-        </div>
-        <button class="btn btn-primary" id="sn-calc" type="button">Calculate</button>
-        <div class="calc-result" id="sn-result"></div>
-      </div>
-
-      <!-- Thin Lens Equation -->
-      <div class="calc-card">
-        <span class="cat-tag">Optics</span>
-        <h3>Thin Lens Equation</h3>
-        <span class="formula-line">1/f = 1/d&#8342; + 1/d&#7522;</span>
+        <span class="cat-tag">Thermodynamics</span>
+        <h3>Ideal Gas Law</h3>
+        <p class="calc-desc">Describes the atmosphere an aircraft flies through.</p>
+        <span class="formula-line">PV = nRT</span>
         <div class="calc-form">
           <div class="calc-field">
-            <label for="ln-target">Solve for</label>
-            <select id="ln-target">
-              <option value="di">Image distance (d\u1d62)</option>
-              <option value="f">Focal length (f)</option>
-              <option value="do">Object distance (d\u2092)</option>
+            <label for="ig-target">Solve for</label>
+            <select id="ig-target">
+              <option value="P">Pressure (atm)</option>
+              <option value="V">Volume (L)</option>
+              <option value="n">Moles (mol)</option>
+              <option value="T">Temperature (K)</option>
             </select>
           </div>
-          <div class="calc-field"><label for="ln-f">f</label><input type="number" id="ln-f" placeholder="10"></div>
-          <div class="calc-field"><label for="ln-do">d&#8342; (object)</label><input type="number" id="ln-do" placeholder="30"></div>
-          <div class="calc-field"><label for="ln-di">d&#7522; (image)</label><input type="number" id="ln-di" placeholder=""></div>
+          <div class="calc-field"><label for="ig-pressure">Pressure P (atm)</label><input type="number" id="ig-pressure" placeholder="1"></div>
+          <div class="calc-field"><label for="ig-volume">Volume V (L)</label><input type="number" id="ig-volume" placeholder="22.4"></div>
+          <div class="calc-field"><label for="ig-moles">Moles n (mol)</label><input type="number" id="ig-moles" placeholder="1"></div>
+          <div class="calc-field"><label for="ig-temp">Temperature T (K)</label><input type="number" id="ig-temp" placeholder="273.15"></div>
         </div>
-        <button class="btn btn-primary" id="ln-calc" type="button">Calculate</button>
-        <div class="calc-result" id="ln-result"></div>
+        <button class="btn btn-primary" id="ig-calc" type="button">Calculate</button>
+        <div class="calc-result" id="ig-result"></div>
       </div>
 
-      <!-- Magnification -->
-      <div class="calc-card">
-        <span class="cat-tag">Optics</span>
-        <h3>Mirror / Lens Magnification</h3>
-        <span class="formula-line">m = -d&#7522;/d&#8342;</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="mg2-do">Object distance</label><input type="number" id="mg2-do" placeholder="30"></div>
-          <div class="calc-field"><label for="mg2-di">Image distance</label><input type="number" id="mg2-di" placeholder="15"></div>
-          <div class="calc-field"><label for="mg2-ho">Object height (optional)</label><input type="number" id="mg2-ho" placeholder="optional"></div>
-        </div>
-        <button class="btn btn-primary" id="mg2-calc" type="button">Calculate</button>
-        <div class="calc-result" id="mg2-result"></div>
-      </div>
-
-      <!-- Specific Heat mixed units -->
-      <div class="calc-card">
-        <span class="cat-tag">Thermodynamics</span>
-        <h3>Specific Heat (cal &harr; J)</h3>
-        <span class="formula-line">Q = mc&Delta;T</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="sh2-m">Mass (kg)</label><input type="number" id="sh2-m" placeholder="0.5"></div>
-          <div class="calc-field">
-            <label for="sh2-unit">c unit</label>
-            <select id="sh2-unit"><option value="j">J/(kg&middot;K)</option><option value="cal">cal/(kg&middot;K)</option></select>
-          </div>
-          <div class="calc-field"><label for="sh2-c">Specific heat c</label><input type="number" id="sh2-c" placeholder="4186"></div>
-          <div class="calc-field"><label for="sh2-dt">&Delta;T (K)</label><input type="number" id="sh2-dt" placeholder="20"></div>
-        </div>
-        <button class="btn btn-primary" id="sh2-calc" type="button">Calculate</button>
-        <div class="calc-result" id="sh2-result"></div>
-      </div>
-
-      <!-- Latent Heat -->
-      <div class="calc-card">
-        <span class="cat-tag">Thermodynamics</span>
-        <h3>Latent Heat</h3>
-        <span class="formula-line">Q = mL</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="lh-m">Mass (kg)</label><input type="number" id="lh-m" placeholder="0.1"></div>
-          <div class="calc-field"><label for="lh-l">Latent heat L (J/kg)</label><input type="number" id="lh-l" placeholder="334000"></div>
-        </div>
-        <button class="btn btn-primary" id="lh-calc" type="button">Calculate</button>
-        <div class="calc-result" id="lh-result"></div>
-      </div>
-
-      <!-- Ideal Gas SI units -->
+      <!-- Ideal gas SI -->
       <div class="calc-card">
         <span class="cat-tag">Thermodynamics</span>
         <h3>Ideal Gas Law (SI Units)</h3>
-        <p class="calc-desc">Same law as before, but in Pa / m&sup3; instead of atm / L.</p>
         <span class="formula-line">PV = nRT</span>
         <div class="calc-form">
           <div class="calc-field">
@@ -424,76 +335,36 @@
         <div class="calc-result" id="ig2-result"></div>
       </div>
 
-      <!-- Doppler general -->
+      <!-- Specific heat -->
       <div class="calc-card">
-        <span class="cat-tag">Waves</span>
-        <h3>Doppler Effect (Sound, Moving Source/Observer)</h3>
-        <span class="formula-line">f' = f(v+v&#8338;)/(v-v&#8339;)</span>
+        <span class="cat-tag">Thermodynamics</span>
+        <h3>Specific Heat (cal &harr; J)</h3>
+        <span class="formula-line">Q = mc&Delta;T</span>
         <div class="calc-form">
-          <div class="calc-field"><label for="dp2-f">Source frequency (Hz)</label><input type="number" id="dp2-f" placeholder="440"></div>
-          <div class="calc-field"><label for="dp2-v">Sound speed (m/s)</label><input type="number" id="dp2-v" placeholder="343"></div>
-          <div class="calc-field"><label for="dp2-vo">Observer speed (+ toward)</label><input type="number" id="dp2-vo" placeholder="0"></div>
-          <div class="calc-field"><label for="dp2-vs">Source speed (+ toward)</label><input type="number" id="dp2-vs" placeholder="20"></div>
-        </div>
-        <button class="btn btn-primary" id="dp2-calc" type="button">Calculate</button>
-        <div class="calc-result" id="dp2-result"></div>
-      </div>
-
-      <!-- RC Circuit -->
-      <div class="calc-card">
-        <span class="cat-tag">Electromagnetism</span>
-        <h3>RC Circuit Time Constant</h3>
-        <span class="formula-line">&tau; = RC, V(t) = V&#8320;e&#8315;&#7511;/&#7439;&#7514;</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="rc-r">Resistance (&Omega;)</label><input type="number" id="rc-r" placeholder="1000"></div>
-          <div class="calc-field"><label for="rc-c">Capacitance (F)</label><input type="number" id="rc-c" placeholder="0.000001"></div>
-          <div class="calc-field"><label for="rc-v0">V&#8320; (optional)</label><input type="number" id="rc-v0" placeholder="5"></div>
-          <div class="calc-field"><label for="rc-t">t (s, optional)</label><input type="number" id="rc-t" placeholder="0.002"></div>
-        </div>
-        <button class="btn btn-primary" id="rc-calc" type="button">Calculate</button>
-        <div class="calc-result" id="rc-result"></div>
-      </div>
-
-      <!-- Half-Life -->
-      <div class="calc-card">
-        <span class="cat-tag">Nuclear</span>
-        <h3>Half-Life Decay</h3>
-        <span class="formula-line">N = N&#8320;(&frac12;)^(t/t&#8531;&#8342;&#8342;)</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="hl-n0">Initial amount N&#8320;</label><input type="number" id="hl-n0" placeholder="100"></div>
-          <div class="calc-field"><label for="hl-half">Half-life</label><input type="number" id="hl-half" placeholder="5730"></div>
-          <div class="calc-field"><label for="hl-t">Elapsed time</label><input type="number" id="hl-t" placeholder="11460"></div>
-        </div>
-        <button class="btn btn-primary" id="hl-calc" type="button">Calculate</button>
-        <div class="calc-result" id="hl-result"></div>
-      </div>
-
-      <!-- Decibel -->
-      <div class="calc-card">
-        <span class="cat-tag">Waves</span>
-        <h3>Decibel Intensity Level</h3>
-        <span class="formula-line">&beta; = 10log&#8321;&#8320;(I/I&#8320;)</span>
-        <div class="calc-form">
-          <div class="calc-field"><label for="db-i">Intensity I (W/m&sup2;)</label><input type="number" id="db-i" placeholder="0.001"></div>
-        </div>
-        <button class="btn btn-primary" id="db-calc" type="button">Calculate</button>
-        <div class="calc-result" id="db-result"></div>
-      </div>
-
-      <!-- Photon Energy -->
-      <div class="calc-card">
-        <span class="cat-tag">Quantum</span>
-        <h3>Photon Energy</h3>
-        <span class="formula-line">E = hf</span>
-        <div class="calc-form">
+          <div class="calc-field"><label for="sh2-m">Mass (kg)</label><input type="number" id="sh2-m" placeholder="0.5"></div>
           <div class="calc-field">
-            <label for="ph-mode">Input type</label>
-            <select id="ph-mode"><option value="freq">Frequency (Hz)</option><option value="wave">Wavelength (m)</option></select>
+            <label for="sh2-unit">c unit</label>
+            <select id="sh2-unit"><option value="j">J/(kg&middot;K)</option><option value="cal">cal/(kg&middot;K)</option></select>
           </div>
-          <div class="calc-field"><label for="ph-value">Value</label><input type="number" id="ph-value" placeholder="5e14"></div>
+          <div class="calc-field"><label for="sh2-c">Specific heat c</label><input type="number" id="sh2-c" placeholder="4186"></div>
+          <div class="calc-field"><label for="sh2-dt">&Delta;T (K)</label><input type="number" id="sh2-dt" placeholder="20"></div>
         </div>
-        <button class="btn btn-primary" id="ph-calc" type="button">Calculate</button>
-        <div class="calc-result" id="ph-result"></div>
+        <button class="btn btn-primary" id="sh2-calc" type="button">Calculate</button>
+        <div class="calc-result" id="sh2-result"></div>
+      </div>
+
+      <!-- Latent heat -->
+      <div class="calc-card">
+        <span class="cat-tag">Thermodynamics</span>
+        <h3>Latent Heat</h3>
+        <p class="calc-desc">Relevant to airframe icing.</p>
+        <span class="formula-line">Q = mL</span>
+        <div class="calc-form">
+          <div class="calc-field"><label for="lh-m">Mass (kg)</label><input type="number" id="lh-m" placeholder="0.1"></div>
+          <div class="calc-field"><label for="lh-l">Latent heat L (J/kg)</label><input type="number" id="lh-l" placeholder="334000"></div>
+        </div>
+        <button class="btn btn-primary" id="lh-calc" type="button">Calculate</button>
+        <div class="calc-result" id="lh-result"></div>
       </div>
 
     </div>

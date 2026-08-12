@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulations - Calico Physics</title>
+<title>Simulations - Calico Aeronautics</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -190,6 +190,48 @@
           <div class="sim-readout" id="faraday-readout"></div>
         </div>
       </div>
+    </div>
+
+    <!-- 11. Moon Phases -->
+    <div class="sim-card">
+      <span class="cat-tag">Astronomy</span>
+      <h3>Moon Phases</h3>
+      <p class="calc-desc">The phase you see depends entirely on the Moon's position relative to the Sun and Earth. Drag the slider to move the Moon around its orbit.</p>
+      <div class="mini-panels">
+        <div class="mini-panel">
+          <h4>Orbital View</h4>
+          <canvas id="sim-moon-orbit" width="240" height="200"></canvas>
+        </div>
+        <div class="mini-panel">
+          <h4>View from Earth: <span id="moon-phase-name">New Moon</span></h4>
+          <canvas id="sim-moon-phase" width="240" height="200"></canvas>
+        </div>
+      </div>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="mp-angle">Orbital angle <span class="val" id="mp-angle-val">0</span>&deg;</label><input type="range" id="mp-angle" min="0" max="359" value="0"></div>
+      </div>
+    </div>
+
+    <!-- 12. Exoplanet Transit -->
+    <div class="sim-card">
+      <span class="cat-tag">Astronomy</span>
+      <h3>Exoplanet Transit</h3>
+      <p class="calc-desc">This is how most exoplanets are actually found: watch a star's brightness for a periodic dip as a planet crosses in front of it.</p>
+      <div class="mini-panels">
+        <div class="mini-panel">
+          <h4>Star &amp; Planet</h4>
+          <canvas id="sim-transit-star" width="240" height="140"></canvas>
+        </div>
+        <div class="mini-panel">
+          <h4>Light Curve</h4>
+          <canvas id="sim-transit-curve" width="240" height="140"></canvas>
+        </div>
+      </div>
+      <div class="sim-controls">
+        <div class="sim-control"><label for="tr-radius">Planet size <span class="val" id="tr-radius-val">0.12</span></label><input type="range" id="tr-radius" min="0.03" max="0.3" step="0.01" value="0.12"></div>
+        <div class="sim-control"><label for="tr-speed">Orbital speed <span class="val" id="tr-speed-val">1</span></label><input type="range" id="tr-speed" min="0.2" max="3" step="0.1" value="1"></div>
+      </div>
+      <div class="sim-readout" id="transit-readout"></div>
     </div>
 
   </section>
