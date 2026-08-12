@@ -9,8 +9,9 @@ async function loadNews() {
   try {
     const res = await fetch('news/news-manifest.json');
     const items = await res.json();
-    grid.innerHTML = items.map(n => `
+    grid.innerHTML = items.map((n, i) => `
       <div class="card">
+        <img id="news-img-${i}" alt="${n.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:14px;">
         <span class="cat-tag">${n.category}</span>
         <h3>${n.title}</h3>
         <p class="excerpt">${n.summary}</p>
@@ -20,6 +21,18 @@ async function loadNews() {
         <a href="${n.link}" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:14px;">Read more</a>
       </div>
     `).join('');
+
+    items.forEach(async (n, i) => {
+      if (!n.wikiImage) return;
+      try {
+        const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(n.wikiImage)}`);
+        if (!r.ok) return;
+        const data = await r.json();
+        const url = data.thumbnail && data.thumbnail.source;
+        const el = document.getElementById(`news-img-${i}`);
+        if (url && el) el.src = url;
+      } catch (e) { /* leave placeholder */ }
+    });
   } catch (e) {
     grid.innerHTML = '<p style="color:var(--cream-dim);">News couldn\u2019t be loaded right now.</p>';
   }

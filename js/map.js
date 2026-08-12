@@ -68,6 +68,7 @@ function renderListView() {
   if (!el) return;
   el.innerHTML = DISCOVERIES.map((d, i) => `
     <div class="card" data-idx="${i}" style="cursor:pointer;">
+      <img id="disc-img-${i}" alt="${d.city}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:14px;">
       <span class="cat-tag">${d.year}</span>
       <h3 style="font-size:1.05rem;">${d.discovery}</h3>
       <p class="excerpt">${d.person} &middot; ${d.city}</p>
@@ -76,16 +77,36 @@ function renderListView() {
   el.querySelectorAll('[data-idx]').forEach(card => {
     card.addEventListener('click', () => openDiscoveryModal(parseInt(card.dataset.idx)));
   });
+  loadDiscoveryImages();
+}
+
+async function loadDiscoveryImages() {
+  DISCOVERIES.forEach(async (d, i) => {
+    const el = document.getElementById(`disc-img-${i}`);
+    const modalEl = document.getElementById(`disc-modal-img-${i}`);
+    if (!el && !modalEl) return;
+    try {
+      const cityQuery = d.city.split(',')[0].split('(')[0].trim();
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cityQuery)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      const url = data.thumbnail && data.thumbnail.source;
+      if (url && el) el.src = url;
+      if (url && modalEl) modalEl.src = url;
+    } catch (e) { /* leave placeholder */ }
+  });
 }
 
 function openDiscoveryModal(i) {
   const d = DISCOVERIES[i];
   document.getElementById('map-modal-body').innerHTML = `
+    <img id="disc-modal-img-${i}" alt="${d.city}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:16px;">
     <span class="cat-tag">${d.year}</span>
     <h3 style="font-size:1.4rem; margin-top:8px;">${d.discovery}</h3>
     <p style="color:var(--cream-dim); margin-top:10px;">${d.person} &middot; ${d.city}</p>
   `;
   document.getElementById('map-modal').classList.add('open');
+  loadDiscoveryImages();
 }
 
 function setView(mode) {

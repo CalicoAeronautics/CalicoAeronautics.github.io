@@ -1,14 +1,13 @@
 /* ==========================================================================
-   Physics calculators. Each function reads its own form, computes, and
-   writes into its own result box. No shared state between calculators.
+   Calculators: core mechanics/thermo calculators plus the calculators that
+   actually matter for flight - lift, drag, stall speed, Mach number,
+   Reynolds number, glide performance, load factor, wing geometry.
+   Nothing electromagnetic, quantum, relativistic, or optical - trimmed to
+   what's relevant to aeronautics and aerospace.
    ========================================================================== */
 
-const G = 6.6743e-11;      // gravitational constant, m^3 kg^-1 s^-2
-const C = 2.99792458e8;    // speed of light, m/s
-const SIGMA = 5.670374e-8; // Stefan-Boltzmann constant, W m^-2 K^-4
-const WIEN_B = 2.8977719e-3; // Wien's displacement constant, m*K
-const R_GAS = 0.0820573;   // ideal gas constant, L*atm / (mol*K)
-const g0 = 9.80665;        // standard gravity, m/s^2
+const G = 6.6743e-11;
+const g0 = 9.80665;
 
 function showResult(id, html, isError = false) {
   const box = document.getElementById(id);
@@ -16,158 +15,86 @@ function showResult(id, html, isError = false) {
   box.classList.add('shown');
   box.classList.toggle('result-error', isError);
 }
-
-function num(id) {
-  const v = parseFloat(document.getElementById(id).value);
-  return v;
-}
-
+function num(id) { return parseFloat(document.getElementById(id).value); }
 function fmt(x, digits = 4) {
   if (!isFinite(x)) return 'undefined';
   if (Math.abs(x) >= 1e5 || (Math.abs(x) < 1e-3 && x !== 0)) return x.toExponential(3);
   return Number(x.toPrecision(digits)).toString();
 }
 
-/* ---- 1. Escape velocity: v = sqrt(2GM/r) ---- */
+/* ---- Escape velocity ---- */
 function calcEscapeVelocity() {
-  const M = num('ev-mass');
-  const r = num('ev-radius');
+  const M = num('ev-mass'), r = num('ev-radius');
   if (!(M > 0) || !(r > 0)) return showResult('ev-result', 'Enter a positive mass and radius.', true);
   const v = Math.sqrt((2 * G * M) / r);
   showResult('ev-result', `Escape velocity: <strong>${fmt(v / 1000)} km/s</strong> (${fmt(v)} m/s)`);
 }
 
-/* ---- 2. Orbital period: T = 2*pi*sqrt(r^3 / GM) ---- */
+/* ---- Orbital period ---- */
 function calcOrbitalPeriod() {
-  const M = num('op-mass');
-  const r = num('op-radius');
+  const M = num('op-mass'), r = num('op-radius');
   if (!(M > 0) || !(r > 0)) return showResult('op-result', 'Enter a positive central mass and orbital radius.', true);
   const T = 2 * Math.PI * Math.sqrt(Math.pow(r, 3) / (G * M));
-  showResult('op-result',
-    `Orbital period: <strong>${fmt(T)} s</strong><br>` +
-    `= ${fmt(T / 3600)} hours &middot; ${fmt(T / 86400)} days`
-  );
+  showResult('op-result', `Orbital period: <strong>${fmt(T)} s</strong><br>= ${fmt(T / 3600)} hours &middot; ${fmt(T / 86400)} days`);
 }
 
-/* ---- 3. Time dilation: t' = t / sqrt(1 - v^2/c^2) ---- */
-function calcTimeDilation() {
-  const t = num('td-time');
-  const beta = num('td-velocity'); // fraction of c, 0-0.999999
-  if (!(t >= 0) || !(beta >= 0) || beta >= 1) {
-    return showResult('td-result', 'Enter a non-negative time and a velocity between 0 and 1 (as a fraction of c).', true);
-  }
-  const gamma = 1 / Math.sqrt(1 - beta * beta);
-  const tPrime = t * gamma;
-  showResult('td-result',
-    `Lorentz factor &gamma; = <strong>${fmt(gamma)}</strong><br>` +
-    `Dilated time: <strong>${fmt(tPrime)} s</strong> (proper time was ${fmt(t)} s)`
-  );
-}
-
-/* ---- 4. Projectile motion ---- */
+/* ---- Projectile motion ---- */
 function calcProjectile() {
-  const v0 = num('pm-speed');
-  const angleDeg = num('pm-angle');
-  const g = num('pm-gravity') || 9.8;
-  if (!(v0 > 0) || !(angleDeg >= 0 && angleDeg <= 90)) {
-    return showResult('pm-result', 'Enter a positive speed and an angle between 0 and 90 degrees.', true);
-  }
+  const v0 = num('pm-speed'), angleDeg = num('pm-angle'), g = num('pm-gravity') || 9.8;
+  if (!(v0 > 0) || !(angleDeg >= 0 && angleDeg <= 90)) return showResult('pm-result', 'Enter a positive speed and an angle between 0 and 90 degrees.', true);
   const theta = (angleDeg * Math.PI) / 180;
-  const vy = v0 * Math.sin(theta);
-  const vx = v0 * Math.cos(theta);
+  const vy = v0 * Math.sin(theta), vx = v0 * Math.cos(theta);
   const tFlight = (2 * vy) / g;
   const maxHeight = (vy * vy) / (2 * g);
   const range = vx * tFlight;
-  showResult('pm-result',
-    `Max height: <strong>${fmt(maxHeight)} m</strong><br>` +
-    `Time of flight: <strong>${fmt(tFlight)} s</strong><br>` +
-    `Range: <strong>${fmt(range)} m</strong>`
-  );
+  showResult('pm-result', `Max height: <strong>${fmt(maxHeight)} m</strong><br>Time of flight: <strong>${fmt(tFlight)} s</strong><br>Range: <strong>${fmt(range)} m</strong>`);
 }
 
-/* ---- 5. Ideal gas law: PV = nRT (solve for chosen variable) ---- */
+/* ---- Ideal gas law (atm/L) ---- */
 function calcIdealGas() {
+  const R_GAS = 0.0820573;
   const target = document.getElementById('ig-target').value;
-  const P = num('ig-pressure');   // atm
-  const V = num('ig-volume');     // L
-  const n = num('ig-moles');      // mol
-  const T = num('ig-temp');       // K
-
+  const P = num('ig-pressure'), V = num('ig-volume'), n = num('ig-moles'), T = num('ig-temp');
   try {
     let result, label, unit;
-    if (target === 'P') {
-      if (!(V > 0) || !(n > 0) || !(T > 0)) throw 0;
-      result = (n * R_GAS * T) / V; label = 'Pressure'; unit = 'atm';
-    } else if (target === 'V') {
-      if (!(P > 0) || !(n > 0) || !(T > 0)) throw 0;
-      result = (n * R_GAS * T) / P; label = 'Volume'; unit = 'L';
-    } else if (target === 'n') {
-      if (!(P > 0) || !(V > 0) || !(T > 0)) throw 0;
-      result = (P * V) / (R_GAS * T); label = 'Moles'; unit = 'mol';
-    } else {
-      if (!(P > 0) || !(V > 0) || !(n > 0)) throw 0;
-      result = (P * V) / (n * R_GAS); label = 'Temperature'; unit = 'K';
-    }
+    if (target === 'P') { if (!(V > 0) || !(n > 0) || !(T > 0)) throw 0; result = (n * R_GAS * T) / V; label = 'Pressure'; unit = 'atm'; }
+    else if (target === 'V') { if (!(P > 0) || !(n > 0) || !(T > 0)) throw 0; result = (n * R_GAS * T) / P; label = 'Volume'; unit = 'L'; }
+    else if (target === 'n') { if (!(P > 0) || !(V > 0) || !(T > 0)) throw 0; result = (P * V) / (R_GAS * T); label = 'Moles'; unit = 'mol'; }
+    else { if (!(P > 0) || !(V > 0) || !(n > 0)) throw 0; result = (P * V) / (n * R_GAS); label = 'Temperature'; unit = 'K'; }
     showResult('ig-result', `${label}: <strong>${fmt(result)} ${unit}</strong>`);
   } catch (e) {
-    showResult('ig-result', 'Fill in the other three fields with positive values (leave the one you\u2019re solving for blank or ignore it).', true);
+    showResult('ig-result', 'Fill in the other three fields with positive values.', true);
   }
 }
 
-/* ---- 6. Blackbody radiation: Stefan-Boltzmann + Wien's law ---- */
-function calcBlackbody() {
-  const T = num('bb-temp');
-  const area = num('bb-area'); // optional, m^2
-  if (!(T > 0)) return showResult('bb-result', 'Enter a positive temperature in kelvin.', true);
-  const flux = SIGMA * Math.pow(T, 4);
-  const peakWavelength = (WIEN_B / T) * 1e9; // nm
-  let html =
-    `Radiant emittance: <strong>${fmt(flux)} W/m&sup2;</strong><br>` +
-    `Peak wavelength (Wien's law): <strong>${fmt(peakWavelength)} nm</strong>`;
-  if (area > 0) {
-    html += `<br>Total radiated power: <strong>${fmt(flux * area)} W</strong>`;
-  }
-  showResult('bb-result', html);
-}
-
-/* ---- 7. Rocket equation (Tsiolkovsky): dv = Isp * g0 * ln(m0/mf) ---- */
+/* ---- Rocket equation ---- */
 function calcRocket() {
-  const isp = num('re-isp');
-  const m0 = num('re-m0');
-  const mf = num('re-mf');
-  if (!(isp > 0) || !(m0 > 0) || !(mf > 0) || mf >= m0) {
-    return showResult('re-result', 'Enter a positive specific impulse, and a final mass smaller than the initial mass.', true);
-  }
+  const isp = num('re-isp'), m0 = num('re-m0'), mf = num('re-mf');
+  if (!(isp > 0) || !(m0 > 0) || !(mf > 0) || mf >= m0) return showResult('re-result', 'Enter a positive specific impulse, and a final mass smaller than the initial mass.', true);
   const ve = isp * g0;
   const dv = ve * Math.log(m0 / mf);
-  showResult('re-result',
-    `Exhaust velocity: <strong>${fmt(ve)} m/s</strong><br>` +
-    `&Delta;v: <strong>${fmt(dv)} m/s</strong> (${fmt(dv / 1000)} km/s)`
-  );
+  showResult('re-result', `Exhaust velocity: <strong>${fmt(ve)} m/s</strong><br>&Delta;v: <strong>${fmt(dv)} m/s</strong> (${fmt(dv / 1000)} km/s)`);
 }
 
-/* ---- 8. Quadratic Kinematics (time of flight): solve at^2+bt+c=0 ---- */
+/* ---- Quadratic kinematics ---- */
 function calcQuadratic() {
   const a = num('qf-a'), b = num('qf-b'), c = num('qf-c');
   if (!(a !== 0) || isNaN(b) || isNaN(c)) return showResult('qf-result', 'Enter a, b, and c (a cannot be 0).', true);
   const disc = b * b - 4 * a * c;
   if (disc < 0) return showResult('qf-result', 'No real solution (negative discriminant).', true);
-  const t1 = (-b + Math.sqrt(disc)) / (2 * a);
-  const t2 = (-b - Math.sqrt(disc)) / (2 * a);
+  const t1 = (-b + Math.sqrt(disc)) / (2 * a), t2 = (-b - Math.sqrt(disc)) / (2 * a);
   showResult('qf-result', `t = ${fmt(t1)} or t = ${fmt(t2)}<br>(use whichever is positive/physical)`);
 }
 
-/* ---- 9. Sine/Cosine/Tangent of any angle ---- */
+/* ---- Trig ---- */
 function calcTrig() {
   const deg = num('tg-angle');
   if (isNaN(deg)) return showResult('tg-result', 'Enter an angle in degrees.', true);
   const rad = (deg * Math.PI) / 180;
-  showResult('tg-result',
-    `sin = ${fmt(Math.sin(rad))} &middot; cos = ${fmt(Math.cos(rad))} &middot; tan = ${fmt(Math.tan(rad))}`
-  );
+  showResult('tg-result', `sin = ${fmt(Math.sin(rad))} &middot; cos = ${fmt(Math.cos(rad))} &middot; tan = ${fmt(Math.tan(rad))}`);
 }
 
-/* ---- 10. Inverse Sine/Cosine/Tangent ---- */
+/* ---- Inverse trig ---- */
 function calcInverseTrig() {
   const fn = document.getElementById('itg-fn').value;
   const val = num('itg-value');
@@ -179,14 +106,14 @@ function calcInverseTrig() {
   showResult('itg-result', `Angle = <strong>${fmt((rad * 180) / Math.PI)}&deg;</strong>`);
 }
 
-/* ---- 11. Square Root utility ---- */
+/* ---- Square root ---- */
 function calcSquareRoot() {
   const x = num('sq-value');
   if (!(x >= 0)) return showResult('sq-result', 'Enter a non-negative number.', true);
   showResult('sq-result', `&radic;${fmt(x)} = <strong>${fmt(Math.sqrt(x))}</strong>`);
 }
 
-/* ---- 12. Gravitational Force (two masses) ---- */
+/* ---- Gravitational force ---- */
 function calcGravForce() {
   const m1 = num('gf-m1'), m2 = num('gf-m2'), r = num('gf-r');
   if (!(m1 > 0) || !(m2 > 0) || !(r > 0)) return showResult('gf-result', 'Enter positive masses and separation.', true);
@@ -194,76 +121,7 @@ function calcGravForce() {
   showResult('gf-result', `F = <strong>${fmt(F)} N</strong>`);
 }
 
-/* ---- 13. Coulomb Force ---- */
-function calcCoulombForce() {
-  const K_COULOMB = 8.99e9;
-  const q1 = num('cf-q1'), q2 = num('cf-q2'), r = num('cf-r');
-  if (isNaN(q1) || isNaN(q2) || !(r > 0)) return showResult('cf-result', 'Enter both charges and a positive separation.', true);
-  const F = (K_COULOMB * q1 * q2) / (r * r);
-  showResult('cf-result', `F = <strong>${fmt(F)} N</strong> (${F >= 0 ? 'repulsive' : 'attractive'})`);
-}
-
-/* ---- 14. Electric Field Magnitude ---- */
-function calcEFieldMag() {
-  const K_COULOMB = 8.99e9;
-  const Q = num('efc-q'), r = num('efc-r');
-  if (isNaN(Q) || !(r > 0)) return showResult('efc-result', 'Enter a charge and a positive distance.', true);
-  const E = (K_COULOMB * Q) / (r * r);
-  showResult('efc-result', `E = <strong>${fmt(E)} N/C</strong>`);
-}
-
-/* ---- 15. Magnetic Force on a Moving Charge ---- */
-function calcMagForceCharge() {
-  const q = num('mfc-q'), v = num('mfc-v'), B = num('mfc-b'), theta = num('mfc-theta') || 90;
-  if (isNaN(q) || !(v >= 0) || isNaN(B)) return showResult('mfc-result', 'Enter charge, speed, and field.', true);
-  const F = Math.abs(q) * v * B * Math.sin((theta * Math.PI) / 180);
-  showResult('mfc-result', `F = <strong>${fmt(F)} N</strong>`);
-}
-
-/* ---- 16. Magnetic Force on a Current-Carrying Wire ---- */
-function calcMagForceWire() {
-  const B = num('mfw-b'), I = num('mfw-i'), L = num('mfw-l'), theta = num('mfw-theta') || 90;
-  if (isNaN(B) || isNaN(I) || !(L >= 0)) return showResult('mfw-result', 'Enter field, current, and length.', true);
-  const F = B * I * L * Math.sin((theta * Math.PI) / 180);
-  showResult('mfw-result', `F = <strong>${fmt(F)} N</strong>`);
-}
-
-/* ---- 17. Snell's Law (solve for refraction angle) ---- */
-function calcSnell() {
-  const n1 = num('sn-n1'), theta1 = num('sn-theta1'), n2 = num('sn-n2');
-  if (!(n1 > 0) || !(n2 > 0) || isNaN(theta1)) return showResult('sn-result', 'Enter both indices and the incidence angle.', true);
-  const sinTheta2 = (n1 * Math.sin((theta1 * Math.PI) / 180)) / n2;
-  if (Math.abs(sinTheta2) > 1) return showResult('sn-result', 'Total internal reflection - no refracted ray (sin > 1).', true);
-  const theta2 = (Math.asin(sinTheta2) * 180) / Math.PI;
-  showResult('sn-result', `&theta;\u2082 = <strong>${fmt(theta2)}&deg;</strong>`);
-}
-
-/* ---- 18. Thin Lens Equation (solve for f, do, or di) ---- */
-function calcThinLens() {
-  const target = document.getElementById('ln-target').value;
-  const f = num('ln-f'), do_ = num('ln-do'), di = num('ln-di');
-  try {
-    let result, label;
-    if (target === 'f') { if (!(do_ > 0) || !(di !== 0)) throw 0; result = 1 / (1 / do_ + 1 / di); label = 'Focal length f'; }
-    else if (target === 'do') { if (!(f > 0) || !(di !== 0)) throw 0; result = 1 / (1 / f - 1 / di); label = 'Object distance d\u2092'; }
-    else { if (!(f > 0) || !(do_ > 0)) throw 0; result = 1 / (1 / f - 1 / do_); label = 'Image distance d\u1d62'; }
-    showResult('ln-result', `${label} = <strong>${fmt(result)}</strong> (same length unit as your inputs)`);
-  } catch (e) {
-    showResult('ln-result', 'Fill in the other two values with valid (non-zero) numbers.', true);
-  }
-}
-
-/* ---- 19. Mirror/Lens Magnification ---- */
-function calcMagnification() {
-  const do_ = num('mg2-do'), di = num('mg2-di'), ho = num('mg2-ho');
-  if (!(do_ !== 0) || isNaN(di)) return showResult('mg2-result', 'Enter object and image distance.', true);
-  const m = -di / do_;
-  let html = `m = <strong>${fmt(m)}</strong> (${m < 0 ? 'inverted' : 'upright'}, ${Math.abs(m) > 1 ? 'enlarged' : 'reduced'})`;
-  if (!isNaN(ho)) html += `<br>Image height h\u1d62 = <strong>${fmt(m * ho)}</strong>`;
-  showResult('mg2-result', html);
-}
-
-/* ---- 20. Specific Heat with Mixed Units (cal <-> J) ---- */
+/* ---- Specific heat ---- */
 function calcSpecificHeatMixed() {
   const m = num('sh2-m'), c = num('sh2-c'), dT = num('sh2-dt');
   const unit = document.getElementById('sh2-unit').value;
@@ -275,14 +133,14 @@ function calcSpecificHeatMixed() {
   showResult('sh2-result', `Q = <strong>${fmt(Q_J)} J</strong> (${fmt(Q_cal)} cal)`);
 }
 
-/* ---- 21. Latent Heat ---- */
+/* ---- Latent heat ---- */
 function calcLatentHeat() {
   const m = num('lh-m'), L = num('lh-l');
   if (!(m > 0) || !(L > 0)) return showResult('lh-result', 'Enter a positive mass and latent heat.', true);
   showResult('lh-result', `Q = <strong>${fmt(m * L)} J</strong>`);
 }
 
-/* ---- 22. Ideal Gas Law in SI units (Pa, m^3, mol, K) ---- */
+/* ---- Ideal gas SI ---- */
 function calcIdealGasSI() {
   const R_SI = 8.314;
   const target = document.getElementById('ig2-target').value;
@@ -299,7 +157,7 @@ function calcIdealGasSI() {
   }
 }
 
-/* ---- 23. Doppler Effect (moving source or observer, signed) ---- */
+/* ---- Doppler (sound) ---- */
 function calcDopplerGeneral() {
   const f = num('dp2-f'), v = num('dp2-v'), vo = num('dp2-vo') || 0, vs = num('dp2-vs') || 0;
   if (!(f > 0) || !(v > 0)) return showResult('dp2-result', 'Enter a positive frequency and wave speed.', true);
@@ -307,28 +165,7 @@ function calcDopplerGeneral() {
   showResult('dp2-result', `f' = <strong>${fmt(fPrime)} Hz</strong><br><span style="color:var(--cream-dim); font-size:0.8rem;">Positive v\u2092/v\u209b = moving toward; negative = moving away.</span>`);
 }
 
-/* ---- 24. RC Circuit Time Constant ---- */
-function calcRCCircuit() {
-  const R = num('rc-r'), C = num('rc-c'), t = num('rc-t'), V0 = num('rc-v0');
-  if (!(R > 0) || !(C > 0)) return showResult('rc-result', 'Enter a positive resistance and capacitance.', true);
-  const tau = R * C;
-  let html = `&tau; = RC = <strong>${fmt(tau)} s</strong>`;
-  if (!isNaN(t) && !isNaN(V0)) {
-    const Vt = V0 * Math.exp(-t / tau);
-    html += `<br>V(t) = <strong>${fmt(Vt)} V</strong> at t = ${fmt(t)} s`;
-  }
-  showResult('rc-result', html);
-}
-
-/* ---- 25. Half-Life Decay ---- */
-function calcHalfLife() {
-  const N0 = num('hl-n0'), halfLife = num('hl-half'), t = num('hl-t');
-  if (!(N0 > 0) || !(halfLife > 0) || !(t >= 0)) return showResult('hl-result', 'Enter positive initial amount, half-life, and time.', true);
-  const N = N0 * Math.pow(0.5, t / halfLife);
-  showResult('hl-result', `Remaining: <strong>${fmt(N)}</strong> (${fmt((N / N0) * 100)}% of original)`);
-}
-
-/* ---- 26. Decibel Intensity Level ---- */
+/* ---- Decibel ---- */
 function calcDecibel() {
   const I0 = 1e-12;
   const I = num('db-i');
@@ -337,44 +174,94 @@ function calcDecibel() {
   showResult('db-result', `&beta; = <strong>${fmt(beta)} dB</strong>`);
 }
 
-/* ---- 27. Photon Energy ---- */
-function calcPhotonEnergy() {
-  const H_PLANCK = 6.63e-34;
-  const C_LIGHT = 3e8;
-  const mode = document.getElementById('ph-mode').value;
-  const val = num('ph-value');
-  if (isNaN(val) || val <= 0) return showResult('ph-result', 'Enter a positive frequency or wavelength.', true);
-  const f = mode === 'freq' ? val : C_LIGHT / val;
-  const E = H_PLANCK * f;
-  showResult('ph-result', `E = <strong>${fmt(E)} J</strong> (using f = ${fmt(f)} Hz)`);
+/* ---- Lift ---- */
+function calcLift() {
+  const rho = num('lf-rho'), v = num('lf-v'), S = num('lf-s'), CL = num('lf-cl');
+  if (!(rho > 0) || !(v >= 0) || !(S > 0) || isNaN(CL)) return showResult('lf-result', 'Enter positive density, airspeed, and wing area, plus a lift coefficient.', true);
+  const L = 0.5 * rho * v * v * S * CL;
+  showResult('lf-result', `Lift = <strong>${fmt(L)} N</strong> (${fmt(L / 9.8)} kg-force)`);
+}
+
+/* ---- Drag ---- */
+function calcDrag() {
+  const rho = num('dg-rho'), v = num('dg-v'), S = num('dg-s'), CD = num('dg-cd');
+  if (!(rho > 0) || !(v >= 0) || !(S > 0) || isNaN(CD)) return showResult('dg-result', 'Enter positive density, airspeed, and wing area, plus a drag coefficient.', true);
+  const D = 0.5 * rho * v * v * S * CD;
+  showResult('dg-result', `Drag = <strong>${fmt(D)} N</strong>`);
+}
+
+/* ---- Stall speed ---- */
+function calcStallSpeed() {
+  const W = num('ss-w'), rho = num('ss-rho'), S = num('ss-s'), CLmax = num('ss-clmax');
+  if (!(W > 0) || !(rho > 0) || !(S > 0) || !(CLmax > 0)) return showResult('ss-result', 'Enter positive weight, density, wing area, and max lift coefficient.', true);
+  const vStall = Math.sqrt((2 * W) / (rho * S * CLmax));
+  showResult('ss-result', `Stall speed = <strong>${fmt(vStall)} m/s</strong> (${fmt(vStall * 1.944)} kts, ${fmt(vStall * 3.6)} km/h)`);
+}
+
+/* ---- Mach number ---- */
+function calcMach() {
+  const v = num('mc-v'), T = num('mc-t');
+  if (!(v >= 0) || !(T > 0)) return showResult('mc-result', 'Enter a non-negative speed and a positive temperature in Kelvin.', true);
+  const a = Math.sqrt(1.4 * 287 * T);
+  const M = v / a;
+  showResult('mc-result', `Speed of sound = <strong>${fmt(a)} m/s</strong><br>Mach number = <strong>${fmt(M)}</strong>`);
+}
+
+/* ---- Reynolds number (prefix 'ren-' to avoid colliding with the Rocket Equation's 're-') ---- */
+function calcReynolds() {
+  const rho = num('ren-rho'), v = num('ren-v'), L = num('ren-l'), mu = num('ren-mu');
+  if (!(rho > 0) || !(v >= 0) || !(L > 0) || !(mu > 0)) return showResult('ren-result', 'Enter positive density, velocity, length, and viscosity.', true);
+  const Re = (rho * v * L) / mu;
+  showResult('ren-result', `Re = <strong>${fmt(Re)}</strong> ${Re > 500000 ? '(likely turbulent)' : '(likely laminar)'}`);
+}
+
+/* ---- Glide ratio & sink rate ---- */
+function calcGlide() {
+  const LD = num('gl-ld'), v = num('gl-v');
+  if (!(LD > 0) || !(v >= 0)) return showResult('gl-result', 'Enter a positive L/D ratio and airspeed.', true);
+  const sinkRate = v / LD;
+  showResult('gl-result', `Glide ratio = <strong>${fmt(LD)}:1</strong><br>Sink rate &asymp; <strong>${fmt(sinkRate)} m/s</strong> at that airspeed`);
+}
+
+/* ---- Load factor ---- */
+function calcLoadFactor() {
+  const bankDeg = num('nf-bank');
+  if (isNaN(bankDeg) || bankDeg < 0 || bankDeg >= 90) return showResult('nf-result', 'Enter a bank angle between 0 and 89 degrees.', true);
+  const n = 1 / Math.cos((bankDeg * Math.PI) / 180);
+  showResult('nf-result', `Load factor = <strong>${fmt(n)} g</strong>`);
+}
+
+/* ---- Wing geometry ---- */
+function calcWingGeometry() {
+  const W = num('wg-w'), S = num('wg-s'), b = num('wg-b');
+  if (!(W > 0) || !(S > 0) || !(b > 0)) return showResult('wg-result', 'Enter positive weight, wing area, and wingspan.', true);
+  const wingLoading = W / S;
+  const AR = (b * b) / S;
+  showResult('wg-result', `Wing loading = <strong>${fmt(wingLoading)} N/m\u00b2</strong><br>Aspect ratio = <strong>${fmt(AR)}</strong>`);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ev-calc')?.addEventListener('click', calcEscapeVelocity);
   document.getElementById('op-calc')?.addEventListener('click', calcOrbitalPeriod);
-  document.getElementById('td-calc')?.addEventListener('click', calcTimeDilation);
   document.getElementById('pm-calc')?.addEventListener('click', calcProjectile);
   document.getElementById('ig-calc')?.addEventListener('click', calcIdealGas);
-  document.getElementById('bb-calc')?.addEventListener('click', calcBlackbody);
   document.getElementById('re-calc')?.addEventListener('click', calcRocket);
   document.getElementById('qf-calc')?.addEventListener('click', calcQuadratic);
   document.getElementById('tg-calc')?.addEventListener('click', calcTrig);
   document.getElementById('itg-calc')?.addEventListener('click', calcInverseTrig);
   document.getElementById('sq-calc')?.addEventListener('click', calcSquareRoot);
   document.getElementById('gf-calc')?.addEventListener('click', calcGravForce);
-  document.getElementById('cf-calc')?.addEventListener('click', calcCoulombForce);
-  document.getElementById('efc-calc')?.addEventListener('click', calcEFieldMag);
-  document.getElementById('mfc-calc')?.addEventListener('click', calcMagForceCharge);
-  document.getElementById('mfw-calc')?.addEventListener('click', calcMagForceWire);
-  document.getElementById('sn-calc')?.addEventListener('click', calcSnell);
-  document.getElementById('ln-calc')?.addEventListener('click', calcThinLens);
-  document.getElementById('mg2-calc')?.addEventListener('click', calcMagnification);
   document.getElementById('sh2-calc')?.addEventListener('click', calcSpecificHeatMixed);
   document.getElementById('lh-calc')?.addEventListener('click', calcLatentHeat);
   document.getElementById('ig2-calc')?.addEventListener('click', calcIdealGasSI);
   document.getElementById('dp2-calc')?.addEventListener('click', calcDopplerGeneral);
-  document.getElementById('rc-calc')?.addEventListener('click', calcRCCircuit);
-  document.getElementById('hl-calc')?.addEventListener('click', calcHalfLife);
   document.getElementById('db-calc')?.addEventListener('click', calcDecibel);
-  document.getElementById('ph-calc')?.addEventListener('click', calcPhotonEnergy);
+  document.getElementById('lf-calc')?.addEventListener('click', calcLift);
+  document.getElementById('dg-calc')?.addEventListener('click', calcDrag);
+  document.getElementById('ss-calc')?.addEventListener('click', calcStallSpeed);
+  document.getElementById('mc-calc')?.addEventListener('click', calcMach);
+  document.getElementById('ren-calc')?.addEventListener('click', calcReynolds);
+  document.getElementById('gl-calc')?.addEventListener('click', calcGlide);
+  document.getElementById('nf-calc')?.addEventListener('click', calcLoadFactor);
+  document.getElementById('wg-calc')?.addEventListener('click', calcWingGeometry);
 });

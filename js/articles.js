@@ -13,9 +13,10 @@ async function loadManifest() {
   return ALL_ARTICLES;
 }
 
-function cardTemplate(a) {
+function cardTemplate(a, idx) {
   return `
     <a class="card" href="article.html?slug=${a.slug}" style="display:block;">
+      <img id="article-img-${idx}" alt="${a.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:14px;">
       <span class="cat-tag">${a.category}</span>
       <h3>${a.title}</h3>
       <p class="excerpt">${a.excerpt}</p>
@@ -28,6 +29,20 @@ function cardTemplate(a) {
       </div>
     </a>
   `;
+}
+
+async function loadArticleImages(list) {
+  list.forEach(async (a, i) => {
+    if (!a.wikiImage) return;
+    try {
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(a.wikiImage)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      const url = data.thumbnail && data.thumbnail.source;
+      const el = document.getElementById(`article-img-${i}`);
+      if (url && el) el.src = url;
+    } catch (e) { /* leave placeholder background if it fails */ }
+  });
 }
 
 function renderArticleList() {
@@ -50,6 +65,8 @@ function renderArticleList() {
   grid.innerHTML = filtered.length
     ? filtered.map(cardTemplate).join('')
     : `<p style="color:var(--cream-dim);">No articles match yet - try a different search or tag.</p>`;
+
+  loadArticleImages(filtered);
 }
 
 function renderTagCloud() {
@@ -91,7 +108,21 @@ async function initSingleArticlePage() {
     return;
   }
 
-  document.title = `${meta.title} \u2014 Calico Physics`;
+  document.title = `${meta.title} - Calico Aeronautics`;
+
+  const heroImg = document.getElementById('article-hero-img');
+  if (heroImg && meta.wikiImage) {
+    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(meta.wikiImage)}`)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        const url = data && data.thumbnail && data.thumbnail.source;
+        if (url) heroImg.src = url;
+        else heroImg.style.display = 'none';
+      })
+      .catch(() => { heroImg.style.display = 'none'; });
+  } else if (heroImg) {
+    heroImg.style.display = 'none';
+  }
 
   const res = await fetch(meta.file);
   const md = await res.text();

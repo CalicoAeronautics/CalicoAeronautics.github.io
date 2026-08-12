@@ -93,9 +93,30 @@ async function loadJWSTGallery() {
   }
 }
 
+/* ---- 5. Aurora forecast (NOAA Kp index, free, no key) ---- */
+async function loadAurora() {
+  const el = document.getElementById('aurora-readout');
+  if (!el) return;
+  try {
+    const res = await fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json');
+    if (!res.ok) throw new Error('Aurora request failed');
+    const data = await res.json();
+    const latest = data[data.length - 1];
+    const kp = parseFloat(latest[1]);
+    let level = 'Quiet';
+    if (kp >= 7) level = 'Strong storm - aurora visible far from the poles';
+    else if (kp >= 5) level = 'Minor to moderate storm - aurora possible at high latitudes';
+    else if (kp >= 4) level = 'Unsettled - slight chance at very high latitudes';
+    el.innerHTML = `Current Kp index: <strong>${kp}</strong><br>${level}`;
+  } catch (e) {
+    el.innerHTML = 'Couldn\u2019t load the aurora forecast right now.';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   loadAPOD();
   loadISS();
   loadAsteroids();
   loadJWSTGallery();
+  loadAurora();
 });

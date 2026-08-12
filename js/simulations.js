@@ -933,3 +933,153 @@ function clampDt(dt) { return Math.min(Math.max(dt, 0), 0.033); }
     requestAnimationFrame(step);
   }
 })();
+
+/* ==========================================================================
+   11. MOON PHASES - real Sun-Earth-Moon geometry drives the illuminated phase
+   ========================================================================== */
+(function moonPhaseSim() {
+  const orbitCanvas = document.getElementById('sim-moon-orbit');
+  const phaseCanvas = document.getElementById('sim-moon-phase');
+  if (!orbitCanvas || !phaseCanvas) return;
+  const octx = orbitCanvas.getContext('2d');
+  const pctx = phaseCanvas.getContext('2d');
+  const OW = orbitCanvas.width, OH = orbitCanvas.height;
+  const PW = phaseCanvas.width, PH = phaseCanvas.height;
+  let angle = 0; // moon's orbital angle, 0 = new moon (between Earth and Sun)
+
+  function draw() {
+    // Orbit diagram: Sun off to the left (implied direction), Earth at center, Moon orbiting
+    octx.clearRect(0, 0, OW, OH);
+    const cx = OW / 2, cy = OH / 2, r = Math.min(OW, OH) * 0.32;
+
+    octx.strokeStyle = 'rgba(243,237,224,0.15)';
+    octx.beginPath(); octx.arc(cx, cy, r, 0, Math.PI * 2); octx.stroke();
+
+    octx.fillStyle = 'rgba(243,237,224,0.4)';
+    octx.font = '10px monospace'; octx.textAlign = 'center';
+    octx.fillText('sunlight from the left \u2192', cx, 16);
+    for (let x = 10; x < OW - 10; x += 16) {
+      octx.strokeStyle = 'rgba(242,193,78,0.15)';
+      octx.beginPath(); octx.moveTo(x, 26); octx.lineTo(x + 8, 26); octx.stroke();
+    }
+
+    octx.fillStyle = '#5FA8D3';
+    octx.beginPath(); octx.arc(cx, cy, 14, 0, Math.PI * 2); octx.fill();
+
+    const mx = cx + r * Math.cos(angle), my = cy + r * Math.sin(angle);
+    // Moon: lit half always faces angle=180 (toward the left, the Sun's direction)
+    octx.save();
+    octx.beginPath(); octx.arc(mx, my, 8, 0, Math.PI * 2); octx.clip();
+    octx.fillStyle = '#2A2118'; octx.fillRect(mx - 10, my - 10, 20, 20);
+    octx.fillStyle = '#F3EDE0';
+    octx.beginPath(); octx.arc(mx - 8, my, 8, -Math.PI / 2, Math.PI / 2); octx.fill();
+    octx.restore();
+
+    requestAnimationFrame(() => {});
+  }
+
+  function drawPhase() {
+    pctx.clearRect(0, 0, PW, PH);
+    const cx = PW / 2, cy = PH / 2, r = Math.min(PW, PH) * 0.35;
+
+    // illuminated fraction: 0 at new moon (angle=0), 1 at full moon (angle=PI)
+    const k = (1 - Math.cos(angle)) / 2;
+    pctx.fillStyle = '#2A2118';
+    pctx.beginPath(); pctx.arc(cx, cy, r, 0, Math.PI * 2); pctx.fill();
+
+    pctx.save();
+    pctx.beginPath(); pctx.arc(cx, cy, r, 0, Math.PI * 2); pctx.clip();
+    pctx.fillStyle = '#F3EDE0';
+    const waxing = Math.sin(angle) < 0; // simplified waxing/waning based on angle direction
+    const ellipseW = Math.abs(Math.cos(angle)) * r;
+    pctx.beginPath();
+    if (k <= 0.5) {
+      // crescent to half
+      pctx.arc(cx, cy, r, Math.PI/2, -Math.PI/2, waxing);
+      pctx.ellipse(cx, cy, ellipseW, r, 0, -Math.PI/2, Math.PI/2, !waxing);
+    } else {
+      pctx.arc(cx, cy, r, -Math.PI/2, Math.PI/2, !waxing);
+      pctx.ellipse(cx, cy, ellipseW, r, 0, Math.PI/2, -Math.PI/2, waxing);
+    }
+    pctx.fill();
+    pctx.restore();
+
+    const names = ['New Moon', 'Waxing Crescent', 'First Quarter', 'Waxing Gibbous', 'Full Moon', 'Waning Gibbous', 'Last Quarter', 'Waning Crescent'];
+    const idx = Math.round(((angle % (2*Math.PI)) / (2*Math.PI)) * 8) % 8;
+    const label = document.getElementById('moon-phase-name');
+    if (label) label.textContent = names[idx];
+  }
+
+  bindSlider('mp-angle', v => {
+    angle = (v * Math.PI) / 180;
+    draw();
+    drawPhase();
+  });
+  draw();
+  drawPhase();
+})();
+
+/* ==========================================================================
+   12. EXOPLANET TRANSIT - a planet crossing its star dims the light curve
+   ========================================================================== */
+(function transitSim() {
+  const starCanvas = document.getElementById('sim-transit-star');
+  const curveCanvas = document.getElementById('sim-transit-curve');
+  if (!starCanvas || !curveCanvas) return;
+  const sctx = starCanvas.getContext('2d');
+  const cctx = curveCanvas.getContext('2d');
+  const SW = starCanvas.width, SH = starCanvas.height;
+  const CW = curveCanvas.width, CH = curveCanvas.height;
+  let planetRadiusFrac = 0.12, speed = 1;
+  let t = -1.3;
+  let history = [];
+
+  function step() {
+    const starR = 60;
+    const planetR = starR * planetRadiusFrac;
+    const cx = SW / 2, cy = SH / 2;
+    const px = cx + t * (SW * 0.42);
+
+    sctx.clearRect(0, 0, SW, SH);
+    sctx.fillStyle = '#F2C14E';
+    sctx.beginPath(); sctx.arc(cx, cy, starR, 0, Math.PI * 2); sctx.fill();
+    sctx.fillStyle = '#0B0D1A';
+    sctx.beginPath(); sctx.arc(px, cy, planetR, 0, Math.PI * 2); sctx.fill();
+
+    // compute overlap area (simplified circle-circle intersection) for brightness dip
+    const d = Math.abs(px - cx);
+    let overlapFrac = 0;
+    if (d < starR + planetR) {
+      const overlapEstimate = Math.max(0, Math.min(1, (starR + planetR - d) / (2 * planetR)));
+      overlapFrac = overlapEstimate * (planetR * planetR) / (starR * starR);
+    }
+    const brightness = 1 - Math.min(overlapFrac, (planetR * planetR) / (starR * starR));
+
+    t += 0.006 * speed;
+    if (t > 1.3) { t = -1.3; history = []; }
+    history.push(brightness);
+    if (history.length > 300) history.shift();
+
+    cctx.clearRect(0, 0, CW, CH);
+    cctx.strokeStyle = 'rgba(243,237,224,0.15)';
+    cctx.beginPath(); cctx.moveTo(0, CH * 0.15); cctx.lineTo(CW, CH * 0.15); cctx.stroke();
+    cctx.strokeStyle = '#5FA8D3';
+    cctx.lineWidth = 2;
+    cctx.beginPath();
+    history.forEach((b, i) => {
+      const x = (i / 300) * CW;
+      const y = CH * 0.15 + (1 - b) * CH * 3.5;
+      if (i === 0) cctx.moveTo(x, y); else cctx.lineTo(x, y);
+    });
+    cctx.stroke();
+
+    const readout = document.getElementById('transit-readout');
+    if (readout) readout.innerHTML = `relative brightness = <strong>${(brightness * 100).toFixed(2)}%</strong>`;
+
+    requestAnimationFrame(step);
+  }
+
+  bindSlider('tr-radius', v => { planetRadiusFrac = v; });
+  bindSlider('tr-speed', v => { speed = v; });
+  requestAnimationFrame(step);
+})();

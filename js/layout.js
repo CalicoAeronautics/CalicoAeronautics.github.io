@@ -37,10 +37,13 @@ const NAV_MORE = [
   { href: 'simulations.html', key: 'simulations', label: 'Simulations' },
   { href: 'timeline.html', key: 'timeline', label: 'Timeline' },
   { href: 'map.html', key: 'map', label: 'Discovery Map' },
-  { href: 'scientists.html', key: 'scientists', label: 'Great Scientists' },
+  { href: 'scientists.html', key: 'scientists', label: 'Aviation Pioneers' },
   { href: 'periodic-table.html', key: 'periodicTable', label: 'Periodic Table' },
   { href: 'si-units.html', key: 'siUnits', label: 'SI Units' },
   { href: 'quizzes.html', key: 'quizzes', label: 'Quizzes & Flashcards' },
+  { href: 'astronomy-tools.html', key: 'astroTools', label: 'Astronomy Tools' },
+  { href: 'deep-space.html', key: 'deepSpace', label: 'Deep Space Encyclopedia' },
+  { href: 'star-database.html', key: 'starDb', label: 'Star Database' },
   { href: 'iphyc.html', key: 'iphyc', label: 'IPhyC' },
   { href: 'contact.html', key: 'contact', label: 'Contact' },
 ];
@@ -87,7 +90,7 @@ function renderHeader() {
 
   el.innerHTML = `
     <div class="container nav-inner">
-      <a href="index.html" class="brand">${CAT_MARK_SVG}<span>Calico Physics</span></a>
+      <a href="index.html" class="brand">${CAT_MARK_SVG}<span>Calico Aeronautics</span></a>
       <nav class="nav-links" id="nav-links">
         ${primaryLinks}
         <div class="nav-item-more" id="more-toggle">
@@ -157,7 +160,7 @@ function renderFooter() {
   el.innerHTML = `
     <div class="container footer-inner">
       <div class="footer-brand">
-        <div class="brand" style="margin-bottom:10px;">${CAT_MARK_SVG}<span>Calico Physics</span></div>
+        <div class="brand" style="margin-bottom:10px;">${CAT_MARK_SVG}<span>Calico Aeronautics</span></div>
         <p>${tr('footer.tagline', 'A calico cat explaining physics: Schr\u00f6dinger\u2019s Calico, tougher than it looks.')}</p>
       </div>
       <div class="footer-links">
@@ -168,7 +171,7 @@ function renderFooter() {
           <a href="calculators.html">${tr('nav.calculators', 'Calculators')}</a>
           <a href="simulations.html">${tr('nav.simulations', 'Simulations')}</a>
           <a href="timeline.html">${tr('nav.timeline', 'Timeline')}</a>
-          <a href="scientists.html">${tr('nav.scientists', 'Great Scientists')}</a>
+          <a href="scientists.html">${tr('nav.scientists', 'Aviation Pioneers')}</a>
         </div>
         <div class="footer-col">
           <h4>${tr('footer.explore', 'Explore')}</h4>
@@ -191,7 +194,7 @@ function renderFooter() {
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>&copy; ${new Date().getFullYear()} Calico Physics</span>
+      <span>&copy; ${new Date().getFullYear()} Calico Aeronautics</span>
       <span>${tr('footer.builtWith', 'Built with curiosity, not textbooks.')}</span>
     </div>
   `;

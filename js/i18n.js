@@ -35,7 +35,7 @@ const TRANSLATIONS = {
     about: {
       eyebrow: 'Bunun neden var olduğu',
       heading: 'Fizik imkansız ders kitaplarının arkasına gizlenmemeli.',
-      sub: 'Merakı engellemek değil, ilham vermek. Calico Physics\u2019in tüm öncülü bu.',
+      sub: 'Merakı engellemek değil, ilham vermek. Calico Aeronautics\u2019in tüm öncülü bu.',
     },
   },
   fr: {
@@ -64,7 +64,7 @@ const TRANSLATIONS = {
     about: {
       eyebrow: 'Pourquoi ce site existe',
       heading: 'La physique ne devrait pas \u00eatre cach\u00e9e derri\u00e8re des manuels impossibles.',
-      sub: 'Elle devrait inspirer la curiosit\u00e9, pas la freiner. C\u2019est toute la raison d\u2019\u00eatre de Calico Physics.',
+      sub: 'Elle devrait inspirer la curiosit\u00e9, pas la freiner. C\u2019est toute la raison d\u2019\u00eatre de Calico Aeronautics.',
     },
   },
 };
