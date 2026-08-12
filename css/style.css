@@ -148,9 +148,16 @@ h1, h2, h3, h4{
   gap: 10px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--cream);
+  min-width: 0;
+  max-width: 220px;
+}
+.brand span{
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 .brand .brand-mark{ width: 26px; height: 26px; flex-shrink: 0; }
 
@@ -722,7 +729,9 @@ h1, h2, h3, h4{
   margin: 36px 0 8px -28px;
   padding-left: 28px;
   border-bottom: 1px solid rgba(226,155,63,0.2);
-  padding-bottom: 6px;
+  padding-bottom: 10px;
+  line-height: 56px;
+  overflow: hidden;
 }
 .timeline-era-marker:first-child{ margin-top: 0; }
 
@@ -883,7 +892,7 @@ h1, h2, h3, h4{
 .hero .hero-main{ min-width: 0; }
 .hero .cat-figure{ width: 72px; height: 72px; margin-bottom: 14px; }
 .hero h1{
-  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  font-size: clamp(2.2rem, 6vw, 3.9rem);
   letter-spacing: -0.02em;
   color: var(--cream);
   margin-bottom: 0.15em;
