@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root{
-  /* ---- Dark Space (default theme) ---- */
+  /* ---- Night (default theme) ---- */
   --void:        #0B0D1A;
   --void-soft:   #12142A;
   --void-edge:   #1B1E3A;
@@ -33,31 +33,19 @@
   color-scheme: dark;
 }
 
-[data-theme="nebula-blue"]{
-  --void:        #060B1C;
-  --void-soft:   #0D1630;
-  --void-edge:   #16224A;
-  --amber:       #5FA8D3;
-  --amber-soft:  #8CC7E8;
-  --lilac:       #6FD6D6;
-}
-
-[data-theme="deep-purple"]{
-  --void:        #12081F;
-  --void-soft:   #1B0F2C;
-  --void-edge:   #2A1740;
-  --amber:       #A96FDB;
-  --amber-soft:  #C79AEB;
-  --lilac:       #E28FD0;
-}
-
-[data-theme="solar-gold"]{
-  --void:        #17110A;
-  --void-soft:   #211A0E;
-  --void-edge:   #332818;
-  --amber:       #F2C14E;
-  --amber-soft:  #F7D57E;
-  --lilac:       #E8956A;
+[data-theme="day"]{
+  /* ---- Day: a full light-mode flip, not just a recolor ---- */
+  --void:        #CFE9F9;
+  --void-soft:   #E3F3FC;
+  --void-edge:   #B7DDF2;
+  --amber:       #D97F2A;
+  --amber-soft:  #C46A1B;
+  --cream:       #16324A;
+  --cream-dim:   #3C5A73;
+  --charcoal:    #F2F7FB;
+  --lilac:       #5B6FA8;
+  --star:        #FFFFFF;
+  color-scheme: light;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
