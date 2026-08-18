@@ -22,37 +22,33 @@ const CAT_MARK_SVG = `
 
 const NAV_PRIMARY = [
   { href: 'index.html', key: 'home', label: 'Home' },
-  { href: 'articles.html', key: 'articles', label: 'Articles' },
-  { href: 'olympiad.html', key: 'olympiad', label: 'Olympiad Hub' },
-  { href: 'space-explorer.html', key: 'spaceExplorer', label: 'Space Explorer' },
+  { href: 'news.html', key: 'news', label: 'News' },
+  { href: 'competitions.html', key: 'competitions', label: 'Competitions' },
+  { href: 'iconic-aircraft.html', key: 'iconicAircraft', label: 'Iconic Aircraft' },
   { href: 'resources.html', key: 'resources', label: 'Resources' },
   { href: 'about.html', key: 'about', label: 'About' },
 ];
 
 const NAV_MORE = [
-  { href: 'problem-of-week.html', key: 'problem', label: 'Problem of the Week' },
-  { href: 'news.html', key: 'news', label: 'News' },
   { href: 'calculators.html', key: 'calculators', label: 'Calculators' },
   { href: 'formulas.html', key: 'formulas', label: 'Formula Library' },
   { href: 'simulations.html', key: 'simulations', label: 'Simulations' },
-  { href: 'timeline.html', key: 'timeline', label: 'Timeline' },
-  { href: 'map.html', key: 'map', label: 'Discovery Map' },
+  { href: 'timeline.html', key: 'timeline', label: 'History of Aeronautics' },
+  { href: 'map.html', key: 'map', label: 'Aviation Map' },
   { href: 'scientists.html', key: 'scientists', label: 'Aviation Pioneers' },
   { href: 'periodic-table.html', key: 'periodicTable', label: 'Periodic Table' },
   { href: 'si-units.html', key: 'siUnits', label: 'SI Units' },
   { href: 'quizzes.html', key: 'quizzes', label: 'Quizzes & Flashcards' },
   { href: 'astronomy-tools.html', key: 'astroTools', label: 'Astronomy Tools' },
-  { href: 'deep-space.html', key: 'deepSpace', label: 'Deep Space Encyclopedia' },
-  { href: 'star-database.html', key: 'starDb', label: 'Star Database' },
+  { href: 'aircraft-anatomy.html', key: 'aircraftAnatomy', label: 'Aircraft Anatomy' },
+  { href: 'aircraft-database.html', key: 'aircraftDb', label: 'Aircraft Database' },
   { href: 'iphyc.html', key: 'iphyc', label: 'IPhyC' },
   { href: 'contact.html', key: 'contact', label: 'Contact' },
 ];
 
 const THEMES = [
-  { id: 'dark-space', label: 'Dark Space' },
-  { id: 'nebula-blue', label: 'Nebula Blue' },
-  { id: 'deep-purple', label: 'Deep Purple' },
-  { id: 'solar-gold', label: 'Solar Gold' },
+  { id: 'night', label: 'Night' },
+  { id: 'day', label: 'Day' },
 ];
 
 const LANGUAGES = [
@@ -125,7 +121,7 @@ function renderHeader() {
   });
 
   const themeSelect = document.getElementById('theme-toggle');
-  const savedTheme = localStorage.getItem('calico-theme') || 'dark-space';
+  const savedTheme = localStorage.getItem('calico-theme') || 'night';
   themeSelect.value = savedTheme;
   applyTheme(savedTheme);
   themeSelect.addEventListener('change', (e) => {
@@ -147,7 +143,7 @@ function renderHeader() {
 }
 
 function applyTheme(id) {
-  if (id === 'dark-space') {
+  if (id === 'night') {
     document.documentElement.removeAttribute('data-theme');
   } else {
     document.documentElement.setAttribute('data-theme', id);
@@ -166,24 +162,24 @@ function renderFooter() {
       <div class="footer-links">
         <div class="footer-col">
           <h4>${tr('footer.learn', 'Learn')}</h4>
-          <a href="articles.html">${tr('nav.articles', 'Articles')}</a>
           <a href="formulas.html">${tr('nav.formulas', 'Formula Library')}</a>
           <a href="calculators.html">${tr('nav.calculators', 'Calculators')}</a>
           <a href="simulations.html">${tr('nav.simulations', 'Simulations')}</a>
-          <a href="timeline.html">${tr('nav.timeline', 'Timeline')}</a>
+          <a href="timeline.html">${tr('nav.timeline', 'History of Aeronautics')}</a>
           <a href="scientists.html">${tr('nav.scientists', 'Aviation Pioneers')}</a>
+          <a href="aircraft-anatomy.html">${tr('nav.aircraftAnatomy', 'Aircraft Anatomy')}</a>
         </div>
         <div class="footer-col">
           <h4>${tr('footer.explore', 'Explore')}</h4>
-          <a href="space-explorer.html">${tr('nav.spaceExplorer', 'Space Explorer')}</a>
+          <a href="iconic-aircraft.html">${tr('nav.iconicAircraft', 'Iconic Aircraft')}</a>
+          <a href="aircraft-database.html">${tr('nav.aircraftDb', 'Aircraft Database')}</a>
           <a href="news.html">${tr('nav.news', 'News')}</a>
-          <a href="map.html">${tr('nav.map', 'Discovery Map')}</a>
+          <a href="map.html">${tr('nav.map', 'Aviation Map')}</a>
           <a href="resources.html">${tr('nav.resources', 'Resources')}</a>
         </div>
         <div class="footer-col">
           <h4>${tr('footer.compete', 'Compete')}</h4>
-          <a href="olympiad.html">${tr('nav.olympiad', 'Olympiad Hub')}</a>
-          <a href="problem-of-week.html">${tr('nav.problem', 'Problem of the Week')}</a>
+          <a href="competitions.html">${tr('nav.competitions', 'Competitions')}</a>
           <a href="iphyc.html">${tr('nav.iphyc', 'IPhyC')}</a>
         </div>
         <div class="footer-col">

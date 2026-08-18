@@ -11,11 +11,11 @@
 const TRANSLATIONS = {
   tr: {
     nav: {
-      home: 'Ana Sayfa', articles: 'Makaleler', olympiad: 'Olimpiyat Merkezi',
-      spaceExplorer: 'Uzay Kaşifi', resources: 'Kaynaklar', about: 'Hakkında',
-      problem: 'Haftanın Problemi', news: 'Haberler', calculators: 'Hesap Makineleri',
-      formulas: 'Formül Kütüphanesi', simulations: 'Simülasyonlar', timeline: 'Zaman Çizelgesi',
-      map: 'Keşif Haritası', scientists: 'Büyük Bilim İnsanları', iphyc: 'IPhyC',
+      home: 'Ana Sayfa', news: 'Haberler', competitions: 'Yarışmalar',
+      iconicAircraft: 'İkonik Uçaklar', resources: 'Kaynaklar', about: 'Hakkında',
+      calculators: 'Hesap Makineleri',
+      formulas: 'Formül Kütüphanesi', simulations: 'Simülasyonlar', timeline: 'Havacılık Tarihi',
+      map: 'Havacılık Haritası', scientists: 'Havacılık Öncüleri', iphyc: 'IPhyC',
       contact: 'İletişim', more: 'Daha Fazla',
     },
     footer: {
@@ -26,8 +26,8 @@ const TRANSLATIONS = {
     home: {
       eyebrow: 'Muhtemelen tensörleri açıklayan Schr\u00f6dinger\u2019in kalikosu',
       tagline: 'Matematik ve fizik zordur, ama kalico kedi hepsini paylaşmak istiyor.',
-      exploreBtn: 'Fiziği Keşfet',
-      readBtn: 'Makaleleri Oku',
+      exploreBtn: 'Formülleri Keşfet',
+      readBtn: 'Havacılık Haberleri',
       sectionEyebrow: 'Buradan başla',
       sectionHeading: 'Bölümlerle değil, merakla düzenlenmiş bir evren',
       sectionSub: 'Aynı fikirlere altı farklı kapıdan giriş - bugün hangisi ilginizi çekiyorsa onu seçin.',
@@ -40,11 +40,11 @@ const TRANSLATIONS = {
   },
   fr: {
     nav: {
-      home: 'Accueil', articles: 'Articles', olympiad: 'Espace Olympiades',
-      spaceExplorer: 'Explorateur Spatial', resources: 'Ressources', about: '\u00c0 propos',
-      problem: 'Probl\u00e8me de la Semaine', news: 'Actualit\u00e9s', calculators: 'Calculatrices',
-      formulas: 'Biblioth\u00e8que de Formules', simulations: 'Simulations', timeline: 'Chronologie',
-      map: 'Carte des D\u00e9couvertes', scientists: 'Grands Scientifiques', iphyc: 'IPhyC',
+      home: 'Accueil', news: 'Actualit\u00e9s', competitions: 'Comp\u00e9titions',
+      iconicAircraft: 'Avions Emblématiques', resources: 'Ressources', about: '\u00c0 propos',
+      calculators: 'Calculatrices',
+      formulas: 'Biblioth\u00e8que de Formules', simulations: 'Simulations', timeline: 'Histoire de l\u2019A\u00e9ronautique',
+      map: 'Carte de l\u2019Aviation', scientists: 'Pionniers de l\u2019Aviation', iphyc: 'IPhyC',
       contact: 'Contact', more: 'Plus',
     },
     footer: {
@@ -55,8 +55,8 @@ const TRANSLATIONS = {
     home: {
       eyebrow: 'Le chat calico de Schr\u00f6dinger, probablement en train d\u2019expliquer les tenseurs',
       tagline: 'Les maths et la physique sont difficiles, mais le chat calico veut tout partager.',
-      exploreBtn: 'Explorer la Physique',
-      readBtn: 'Lire les Articles',
+      exploreBtn: 'Explorer les Formules',
+      readBtn: 'Actualités Aéronautiques',
       sectionEyebrow: 'Commencer ici',
       sectionHeading: 'Un univers organis\u00e9 par curiosit\u00e9, pas par chapitres',
       sectionSub: 'Six portes d\u2019entr\u00e9e vers les m\u00eames id\u00e9es - choisissez celle qui vous int\u00e9resse aujourd\u2019hui.',

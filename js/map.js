@@ -1,41 +1,24 @@
 /* ==========================================================================
-   Discovery Map: a real Leaflet map (OpenStreetMap/CARTO dark tiles, no API
-   key needed) with ~26 real discovery locations. Toggle between Map View
+   Aviation Map: a real Leaflet map (OpenStreetMap/CARTO dark tiles, no API
+   key needed) with real aviation history locations. Toggle between Map View
    and List View. Click a marker or list item for full details in a modal.
    ========================================================================== */
 
 const DISCOVERIES = [
-  { city: 'Cambridge, England', lat: 52.205, lon: 0.121, year: '1687', discovery: 'Newton\u2019s Laws of Motion & Universal Gravitation', person: 'Isaac Newton' },
-  { city: 'London, England', lat: 51.507, lon: -0.128, year: '1831', discovery: 'Electromagnetic Induction', person: 'Michael Faraday' },
-  { city: 'London, England', lat: 51.507, lon: -0.128, year: '1859', discovery: 'On the Origin of Species published', person: 'Charles Darwin' },
-  { city: 'London, England', lat: 51.507, lon: -0.128, year: '1928', discovery: 'Penicillin', person: 'Alexander Fleming' },
-  { city: 'Berlin, Germany', lat: 52.520, lon: 13.405, year: '1915', discovery: 'General Relativity', person: 'Albert Einstein' },
-  { city: 'Berlin, Germany', lat: 52.520, lon: 13.405, year: '1900', discovery: 'Quantum Theory of Blackbody Radiation', person: 'Max Planck' },
-  { city: 'G\u00f6ttingen, Germany', lat: 51.534, lon: 9.935, year: '1918', discovery: 'Noether\u2019s Theorem', person: 'Emmy Noether' },
-  { city: 'Bern, Switzerland', lat: 46.948, lon: 7.447, year: '1905', discovery: 'The "Miracle Year" Papers (Special Relativity, Photoelectric Effect)', person: 'Albert Einstein' },
-  { city: 'Warsaw, Poland', lat: 52.229, lon: 21.012, year: '1867', discovery: 'Birthplace of Marie Curie', person: 'Marie Curie' },
-  { city: 'Paris, France', lat: 48.857, lon: 2.352, year: '1898', discovery: 'Discovery of Polonium & Radium', person: 'Marie & Pierre Curie' },
-  { city: 'Paris, France', lat: 48.857, lon: 2.352, year: '1789', discovery: 'Law of Conservation of Mass', person: 'Antoine Lavoisier' },
-  { city: 'Pisa, Italy', lat: 43.716, lon: 10.400, year: '1589', discovery: 'Experiments on Falling Bodies', person: 'Galileo Galilei' },
-  { city: 'Padua, Italy', lat: 45.406, lon: 11.877, year: '1543', discovery: 'De Humani Corporis Fabrica (Modern Anatomy)', person: 'Andreas Vesalius' },
-  { city: 'Syracuse, Sicily', lat: 37.075, lon: 15.287, year: 'c. 250 BCE', discovery: 'Principle of Buoyancy', person: 'Archimedes' },
-  { city: 'Princeton, USA', lat: 40.348, lon: -74.659, year: '1933\u20131955', discovery: 'Einstein\u2019s later career at the Institute for Advanced Study', person: 'Albert Einstein' },
-  { city: 'Los Alamos, USA', lat: 35.884, lon: -106.304, year: '1945', discovery: 'First Controlled Nuclear Chain Reaction Applications', person: 'Manhattan Project team' },
-  { city: 'Cambridge, USA', lat: 42.361, lon: -71.092, year: '1948', discovery: 'Quantum Electrodynamics (QED)', person: 'Richard Feynman' },
-  { city: 'Copenhagen, Denmark', lat: 55.676, lon: 12.568, year: '1913', discovery: 'The Bohr Model of the Atom', person: 'Niels Bohr' },
-  { city: 'Delft, Netherlands', lat: 52.012, lon: 4.359, year: '1674', discovery: 'First Observations of Bacteria', person: 'Antonie van Leeuwenhoek' },
-  { city: 'The Hague, Netherlands', lat: 52.079, lon: 4.309, year: '1655', discovery: 'Discovery of Titan, Saturn\u2019s Largest Moon', person: 'Christiaan Huygens' },
-  { city: 'Uppsala, Sweden', lat: 59.858, lon: 17.638, year: '1735', discovery: 'Systema Naturae (Binomial Nomenclature)', person: 'Carl Linnaeus' },
-  { city: 'Saint Petersburg, Russia', lat: 59.934, lon: 30.335, year: '1869', discovery: 'The Periodic Table of Elements', person: 'Dmitri Mendeleev' },
-  { city: 'Athens, Greece', lat: 37.984, lon: 23.728, year: 'c. 350 BCE', discovery: 'Foundational Works in Logic & Natural Philosophy', person: 'Aristotle' },
-  { city: 'Alexandria, Egypt', lat: 31.200, lon: 29.918, year: '240 BCE', discovery: 'Earth\u2019s Circumference Measured', person: 'Eratosthenes' },
-  { city: 'Alexandria, Egypt', lat: 31.200, lon: 29.918, year: 'c. 300 BCE', discovery: 'Elements (Foundations of Geometry)', person: 'Euclid' },
-  { city: 'Nanyang, China', lat: 33.000, lon: 112.528, year: '132 CE', discovery: 'The First Seismoscope', person: 'Zhang Heng' },
-  { city: 'Vienna, Austria', lat: 48.208, lon: 16.373, year: '1926', discovery: 'The Schr\u00f6dinger Equation', person: 'Erwin Schr\u00f6dinger' },
-  { city: 'Dublin, Ireland', lat: 53.349, lon: -6.260, year: '1662', discovery: 'Boyle\u2019s Law', person: 'Robert Boyle' },
-  { city: 'Patna, India', lat: 25.612, lon: 85.141, year: 'c. 499 CE', discovery: 'Aryabhatiya (Astronomy & the Value of Pi)', person: 'Aryabhata' },
-  { city: 'Tokyo, Japan', lat: 35.682, lon: 139.759, year: '1935', discovery: 'Meson Theory of Nuclear Forces', person: 'Hideki Yukawa' },
-  { city: 'Bukhara (historic Persia)', lat: 39.768, lon: 64.421, year: 'c. 1025', discovery: 'The Canon of Medicine', person: 'Avicenna' },
+  { city: 'Kitty Hawk, North Carolina, USA', lat: 36.013, lon: -75.672, year: '1903', discovery: 'First powered, controlled, sustained flight', person: 'Wright Brothers' },
+  { city: 'Dayton, Ohio, USA', lat: 39.759, lon: -84.192, year: '1899-1905', discovery: 'Wright Brothers\u2019 bicycle shop and early glider development', person: 'Wright Brothers' },
+  { city: 'Lichterfelde, Berlin, Germany', lat: 52.434, lon: 13.322, year: '1891-1896', discovery: 'Over 2,000 documented glider flights', person: 'Otto Lilienthal' },
+  { city: 'Bagatelle, Paris, France', lat: 48.869, lon: 2.248, year: '1906', discovery: 'First publicly witnessed powered flight in Europe', person: 'Alberto Santos-Dumont' },
+  { city: 'Le Bourget, Paris, France', lat: 48.969, lon: 2.441, year: '1927', discovery: 'Landing site after the first solo transatlantic flight', person: 'Charles Lindbergh' },
+  { city: 'Seattle, Washington, USA', lat: 47.606, lon: -122.332, year: '1916', discovery: 'William Boeing founds what became the Boeing Company', person: 'William Boeing' },
+  { city: 'Edwards Air Force Base, California, USA', lat: 34.905, lon: -117.884, year: '1947', discovery: 'First aircraft to break the sound barrier in level flight', person: 'Chuck Yeager, Bell X-1' },
+  { city: 'Burbank, California, USA', lat: 34.181, lon: -118.309, year: '1943-1990s', discovery: 'Lockheed\u2019s Skunk Works, birthplace of the U-2 and SR-71', person: 'Kelly Johnson' },
+  { city: 'Toulouse, France', lat: 43.605, lon: 1.444, year: '1970-present', discovery: 'Airbus headquarters and final assembly for the A380 and other airliners', person: 'Airbus' },
+  { city: 'Melun-Villaroche, France', lat: 48.600, lon: 2.670, year: '1969', discovery: 'First test flight of the Concorde supersonic airliner', person: 'Concorde' },
+  { city: 'Mojave, California, USA', lat: 35.059, lon: -118.152, year: '1986', discovery: 'Home base for the first non-stop, unrefueled flight around the world', person: 'Rutan Voyager' },
+  { city: 'Biggin Hill, England', lat: 51.331, lon: 0.033, year: '1940', discovery: 'A key Royal Air Force fighter base during the Battle of Britain', person: 'RAF Fighter Command' },
+  { city: 'Farnborough, England', lat: 51.290, lon: -0.760, year: '1930s-present', discovery: 'Historic center of British aviation research and home of the Farnborough Airshow', person: 'Royal Aircraft Establishment' },
+  { city: 'Hawthorne, California, USA', lat: 33.923, lon: -118.326, year: '2004-present', discovery: 'Development site for privately funded crewed spacecraft that grew out of the aerospace industry', person: 'Scaled Composites / SpaceX' },
 ];
 
 let leafletMap = null;

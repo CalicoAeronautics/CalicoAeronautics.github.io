@@ -4,6 +4,8 @@
    ========================================================================== */
 
 const AERO_FORMULAS = [
+["Newton's Second Law","F = ma","F = net force (N), m = mass (kg), a = acceleration (m/s\\u00b2) - every force on an aircraft, thrust, drag, lift, weight, obeys this"],
+["Navier\u2013Stokes Equations","\\rho\\left(\\frac{\\partial u}{\\partial t}+u\\cdot\\nabla u\\right) = -\\nabla p+\\mu\\nabla^2 u+f","u = fluid velocity field, \\rho = fluid density, p = pressure, \\mu = viscosity, f = body forces - the full equations behind computational airflow simulation over a wing"],
 ["Lift Equation","L = \\tfrac{1}{2}\\rho v^2 S C_L","L = lift (N), \\rho = air density (kg/m\\u00b3), v = airspeed (m/s), S = wing area (m\\u00b2), C_L = lift coefficient"],
 ["Drag Equation","D = \\tfrac{1}{2}\\rho v^2 S C_D","D = drag (N), \\rho = air density, v = airspeed, S = wing area, C_D = drag coefficient"],
 ["Dynamic Pressure","q = \\tfrac{1}{2}\\rho v^2","q = dynamic pressure (Pa), \\rho = air density, v = airspeed"],
