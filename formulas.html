@@ -15,164 +15,11 @@
 <main class="container">
   <section class="page-hero">
     <h1>Formula Library</h1>
-    <p>Five flagship equations explained in depth below (three of them core aeronautics), a 23-formula aeronautics reference, and 42 core mechanics/thermo formulas that underlie flight.</p>
-  </section>
-
-  <section style="padding-top:0; max-width:820px;">
-
-    <!-- Newton's Second Law -->
-    <div class="formula-card">
-      <span class="cat-tag">Classical Mechanics</span>
-      <h3>Newton's Second Law</h3>
-      <div class="formula-display">F = m &middot; a</div>
-      <p>The net force on an object equals its mass times its acceleration. Push harder, it accelerates more; the same push on something heavier accelerates it less.</p>
-      <ul class="var-list">
-        <li><strong>F</strong> - net force (newtons, N)</li>
-        <li><strong>m</strong> - mass (kilograms, kg)</li>
-        <li><strong>a</strong> - acceleration (m/s&sup2;)</li>
-      </ul>
-      <button class="btn btn-ghost" data-reveal-target="rev-newton">Show derivation &amp; applications</button>
-      <div class="reveal-box" id="rev-newton">
-        <div class="formula-extra">
-          <h4>Derivation</h4>
-          <p>Momentum is p = mv. Newton's original statement is that force is the rate of change of momentum: F = dp/dt. For an object whose mass doesn't change, this simplifies to F = m(dv/dt) = ma.</p>
-        </div>
-        <div class="formula-extra">
-          <h4>Applications</h4>
-          <ul>
-            <li>Sizing rocket engines against payload mass</li>
-            <li>Calculating a vehicle's braking distance</li>
-            <li>Structural engineering load calculations</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Maxwell's Equations -->
-    <div class="formula-card">
-      <span class="cat-tag">Fluid Dynamics</span>
-      <h3>Bernoulli's Equation</h3>
-      <div class="formula-display">P + &frac12;&rho;v&sup2; + &rho;gh = constant</div>
-      <p>Along a streamline, as a fluid speeds up, its pressure drops. This is one of the two classic explanations for lift: air moving faster over a wing's curved upper surface has lower pressure than the slower air beneath it.</p>
-      <ul class="var-list">
-        <li><strong>P</strong> - static pressure</li>
-        <li><strong>&rho;</strong> - fluid (air) density</li>
-        <li><strong>v</strong> - flow speed</li>
-        <li><strong>h</strong> - height (usually negligible for air)</li>
-      </ul>
-      <button class="btn btn-ghost" data-reveal-target="rev-bernoulli">Show derivation &amp; applications</button>
-      <div class="reveal-box" id="rev-bernoulli">
-        <div class="formula-extra">
-          <h4>Derivation</h4>
-          <p>Apply conservation of energy to a small parcel of fluid moving along a streamline, treating pressure as a form of energy per unit volume. For steady, incompressible, frictionless flow, the sum of pressure energy, kinetic energy, and gravitational potential energy per unit volume stays constant.</p>
-        </div>
-        <div class="formula-extra">
-          <h4>Applications</h4>
-          <ul>
-            <li>Explaining lift generation over a wing's curved surface</li>
-            <li>Airspeed indicators (pitot-static systems)</li>
-            <li>Venturi-effect carburetors and flow meters</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lift Equation -->
-    <div class="formula-card">
-      <span class="cat-tag">Aeronautics</span>
-      <h3>The Lift Equation</h3>
-      <div class="formula-display">L = &frac12;&rho;v&sup2;SC_L</div>
-      <p>The single most important equation in aeronautics. Every aircraft, from a paper plane to an airliner, stays up because this equation produces a force equal to its weight.</p>
-      <ul class="var-list">
-        <li><strong>L</strong> - lift force</li>
-        <li><strong>&rho;</strong> - air density</li>
-        <li><strong>v</strong> - airspeed</li>
-        <li><strong>S</strong> - wing area</li>
-        <li><strong>C_L</strong> - lift coefficient (depends on wing shape and angle of attack)</li>
-      </ul>
-      <button class="btn btn-ghost" data-reveal-target="rev-lift">Show derivation &amp; applications</button>
-      <div class="reveal-box" id="rev-lift">
-        <div class="formula-extra">
-          <h4>Derivation (conceptual)</h4>
-          <p>Lift comes from the pressure difference between a wing's upper and lower surfaces, integrated over the whole wing area. Since that pressure difference scales with dynamic pressure (&frac12;&rho;v&sup2;), the messy details of exact pressure distribution get folded into a single empirically or computationally determined number: the lift coefficient, C_L.</p>
-        </div>
-        <div class="formula-extra">
-          <h4>Applications</h4>
-          <ul>
-            <li>Sizing a wing for a given aircraft weight and cruise speed</li>
-            <li>Calculating stall speed at any given weight and configuration</li>
-            <li>Predicting how lift changes with altitude, speed, or flap setting</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Navier-Stokes -->
-    <div class="formula-card">
-      <span class="cat-tag">Fluid Dynamics</span>
-      <h3>Navier&ndash;Stokes Equations</h3>
-      <div class="formula-display" style="white-space:normal;">&rho;(&part;u/&part;t + u&middot;&nabla;u) = &minus;&nabla;p + &mu;&nabla;&sup2;u + f</div>
-      <p>Newton's second law applied to a moving fluid: inertia on the left, pressure and viscous forces (plus any external force) on the right.</p>
-      <ul class="var-list">
-        <li><strong>u</strong> - fluid velocity field</li>
-        <li><strong>&rho;</strong> - fluid density</li>
-        <li><strong>p</strong> - pressure</li>
-        <li><strong>&mu;</strong> - dynamic viscosity</li>
-        <li><strong>f</strong> - external body forces (e.g. gravity)</li>
-      </ul>
-      <button class="btn btn-ghost" data-reveal-target="rev-navier">Show derivation &amp; applications</button>
-      <div class="reveal-box" id="rev-navier">
-        <div class="formula-extra">
-          <h4>Derivation</h4>
-          <p>Apply conservation of momentum to an infinitesimal parcel of fluid, then add a constitutive relation describing how viscous stress depends on the velocity gradient. The result is a nonlinear partial differential equation - famously still without a general proof of smooth solutions in three dimensions (a Millennium Prize problem).</p>
-        </div>
-        <div class="formula-extra">
-          <h4>Applications</h4>
-          <ul>
-            <li>Full computational fluid dynamics (CFD) simulation of airflow over an aircraft</li>
-            <li>Modeling turbulence and boundary layer separation on a wing</li>
-            <li>Engine intake and exhaust flow design</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Thrust Equation -->
-    <div class="formula-card">
-      <span class="cat-tag">Propulsion</span>
-      <h3>Thrust Equation (Momentum Theory)</h3>
-      <div class="formula-display">T = m&#775;(V_e - V_0)</div>
-      <p>Every engine, propeller or jet, works the same fundamental way: accelerate a mass of air or exhaust backward, and Newton's third law pushes the aircraft forward.</p>
-      <ul class="var-list">
-        <li><strong>T</strong> - thrust force</li>
-        <li><strong>m&#775;</strong> - mass flow rate of air or exhaust</li>
-        <li><strong>V_e</strong> - exhaust (or propeller slipstream) velocity</li>
-        <li><strong>V_0</strong> - inlet velocity (the aircraft's own airspeed)</li>
-      </ul>
-      <button class="btn btn-ghost" data-reveal-target="rev-thrust">Show derivation &amp; applications</button>
-      <div class="reveal-box" id="rev-thrust">
-        <div class="formula-extra">
-          <h4>Derivation</h4>
-          <p>This comes directly from Newton's second law written in terms of momentum: force equals the rate of change of momentum. An engine takes in air at the aircraft's speed and expels it faster; the rate at which that momentum change happens, mass flow times the change in velocity, is the reaction force felt as thrust.</p>
-        </div>
-        <div class="formula-extra">
-          <h4>Applications</h4>
-          <ul>
-            <li>Comparing turbojet, turbofan, and propeller engine performance</li>
-            <li>Sizing an engine for a required thrust at cruise or takeoff</li>
-            <li>Understanding why high-bypass turbofans are more fuel-efficient than turbojets</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
+    <p>25 aeronautics formulas - lift, drag, thrust, Newton's laws, Navier-Stokes, and the rest of what explains how an aircraft flies - plus 42 core mechanics and thermodynamics formulas underneath them.</p>
   </section>
 
   <section style="padding-top:0;">
     <div class="section-head">
-  <section style="padding-top:0;">
-    <div class="section-head">
-      <span class="eyebrow">Flight Mechanics</span>
       <h2>Aeronautics Formulas</h2>
       <p>The equations that actually explain how an aircraft flies - lift, drag, thrust, stability, and performance.</p>
     </div>
@@ -181,12 +28,12 @@
 
   <section style="padding-top:0;">
     <div class="section-head">
-      <h2>100 Formulas</h2>
-      <p>Mechanics through cosmology. Formula, variable legend, no derivation - for when you just need the equation.</p>
+      <h2>Core Mechanics &amp; Thermodynamics</h2>
+      <p>42 formulas underneath flight - forces, motion, energy, waves, and heat.</p>
     </div>
     <div class="grid" id="quickref-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px,1fr));"></div>
     <div class="placeholder-block" style="margin-top:24px; text-align:left; padding:24px;">
-      <p style="margin:0;"><strong>Need something not covered here?</strong> This library doesn't have every formula an olympiad might throw at you. Jaan Kalda's IPhO formula sheet is the standard, far more complete reference used by physics olympiad coaches worldwide - <a href="https://www.ioc.ee/~kalda/ipho/" target="_blank" rel="noopener" style="color:var(--amber-soft);">see it here</a>.</p>
+      <p style="margin:0;"><strong>Need something not covered here?</strong> This library doesn't have every formula an aerospace competition might throw at you. Jaan Kalda's IPhO formula sheet is a far more complete physics reference used by olympiad coaches worldwide - <a href="https://www.ioc.ee/~kalda/ipho/" target="_blank" rel="noopener" style="color:var(--amber-soft);">see it here</a>.</p>
     </div>
   </section>
 </main>

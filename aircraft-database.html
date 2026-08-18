@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aircraft Database - Calico Aeronautics</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="container">
+  <section class="page-hero">
+    <h1>Aircraft Database</h1>
+    <p>The fastest and most-produced aircraft ever built, plus a real interactive performance chart.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <h2>Speed vs. Service Ceiling</h2>
+      <p>15 real aircraft. Hover any point for details.</p>
+    </div>
+    <div class="sim-card">
+      <canvas id="performance-chart" width="600" height="380"></canvas>
+      <div class="sim-readout" id="perf-label">Hover over a point</div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <h2>10 Fastest Aircraft Ever Built</h2>
+    </div>
+    <div class="mission-list" id="fastest-aircraft"></div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-head">
+      <h2>10 Most-Produced Aircraft</h2>
+    </div>
+    <div class="mission-list" id="most-produced-aircraft"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/background.js"></script>
+<script src="js/cat.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/aircraft-database.js"></script>
+</body>
+</html>
