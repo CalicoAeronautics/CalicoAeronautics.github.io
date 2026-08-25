@@ -5,20 +5,20 @@
    ========================================================================== */
 
 const DISCOVERIES = [
-  { city: 'Kitty Hawk, North Carolina, USA', lat: 36.013, lon: -75.672, year: '1903', discovery: 'First powered, controlled, sustained flight', person: 'Wright Brothers' },
-  { city: 'Dayton, Ohio, USA', lat: 39.759, lon: -84.192, year: '1899-1905', discovery: 'Wright Brothers\u2019 bicycle shop and early glider development', person: 'Wright Brothers' },
-  { city: 'Lichterfelde, Berlin, Germany', lat: 52.434, lon: 13.322, year: '1891-1896', discovery: 'Over 2,000 documented glider flights', person: 'Otto Lilienthal' },
-  { city: 'Bagatelle, Paris, France', lat: 48.869, lon: 2.248, year: '1906', discovery: 'First publicly witnessed powered flight in Europe', person: 'Alberto Santos-Dumont' },
-  { city: 'Le Bourget, Paris, France', lat: 48.969, lon: 2.441, year: '1927', discovery: 'Landing site after the first solo transatlantic flight', person: 'Charles Lindbergh' },
-  { city: 'Seattle, Washington, USA', lat: 47.606, lon: -122.332, year: '1916', discovery: 'William Boeing founds what became the Boeing Company', person: 'William Boeing' },
-  { city: 'Edwards Air Force Base, California, USA', lat: 34.905, lon: -117.884, year: '1947', discovery: 'First aircraft to break the sound barrier in level flight', person: 'Chuck Yeager, Bell X-1' },
-  { city: 'Burbank, California, USA', lat: 34.181, lon: -118.309, year: '1943-1990s', discovery: 'Lockheed\u2019s Skunk Works, birthplace of the U-2 and SR-71', person: 'Kelly Johnson' },
-  { city: 'Toulouse, France', lat: 43.605, lon: 1.444, year: '1970-present', discovery: 'Airbus headquarters and final assembly for the A380 and other airliners', person: 'Airbus' },
-  { city: 'Melun-Villaroche, France', lat: 48.600, lon: 2.670, year: '1969', discovery: 'First test flight of the Concorde supersonic airliner', person: 'Concorde' },
-  { city: 'Mojave, California, USA', lat: 35.059, lon: -118.152, year: '1986', discovery: 'Home base for the first non-stop, unrefueled flight around the world', person: 'Rutan Voyager' },
-  { city: 'Biggin Hill, England', lat: 51.331, lon: 0.033, year: '1940', discovery: 'A key Royal Air Force fighter base during the Battle of Britain', person: 'RAF Fighter Command' },
-  { city: 'Farnborough, England', lat: 51.290, lon: -0.760, year: '1930s-present', discovery: 'Historic center of British aviation research and home of the Farnborough Airshow', person: 'Royal Aircraft Establishment' },
-  { city: 'Hawthorne, California, USA', lat: 33.923, lon: -118.326, year: '2004-present', discovery: 'Development site for privately funded crewed spacecraft that grew out of the aerospace industry', person: 'Scaled Composites / SpaceX' },
+  { city: 'Kitty Hawk, North Carolina, USA', lat: 36.013, lon: -75.672, year: '1903', discovery: 'First powered, controlled, sustained flight', person: 'Wright Brothers', wikiTitle: 'Wright Flyer' },
+  { city: 'Dayton, Ohio, USA', lat: 39.759, lon: -84.192, year: '1899-1905', discovery: 'Wright Brothers\u2019 bicycle shop and early glider development', person: 'Wright Brothers', wikiTitle: 'Wright brothers' },
+  { city: 'Lichterfelde, Berlin, Germany', lat: 52.434, lon: 13.322, year: '1891-1896', discovery: 'Over 2,000 documented glider flights', person: 'Otto Lilienthal', wikiTitle: 'Otto Lilienthal' },
+  { city: 'Bagatelle, Paris, France', lat: 48.869, lon: 2.248, year: '1906', discovery: 'First publicly witnessed powered flight in Europe', person: 'Alberto Santos-Dumont', wikiTitle: 'Alberto Santos-Dumont' },
+  { city: 'Le Bourget, Paris, France', lat: 48.969, lon: 2.441, year: '1927', discovery: 'Landing site after the first solo transatlantic flight', person: 'Charles Lindbergh', wikiTitle: 'Spirit of St. Louis' },
+  { city: 'Seattle, Washington, USA', lat: 47.606, lon: -122.332, year: '1916', discovery: 'William Boeing founds what became the Boeing Company', person: 'William Boeing', wikiTitle: 'Boeing' },
+  { city: 'Edwards Air Force Base, California, USA', lat: 34.905, lon: -117.884, year: '1947', discovery: 'First aircraft to break the sound barrier in level flight', person: 'Chuck Yeager, Bell X-1', wikiTitle: 'Bell X-1' },
+  { city: 'Burbank, California, USA', lat: 34.181, lon: -118.309, year: '1943-1990s', discovery: 'Lockheed\u2019s Skunk Works, birthplace of the U-2 and SR-71', person: 'Kelly Johnson', wikiTitle: 'Lockheed SR-71 Blackbird' },
+  { city: 'Toulouse, France', lat: 43.605, lon: 1.444, year: '1970-present', discovery: 'Airbus headquarters and final assembly for the A380 and other airliners', person: 'Airbus', wikiTitle: 'Airbus A380' },
+  { city: 'Melun-Villaroche, France', lat: 48.600, lon: 2.670, year: '1969', discovery: 'First test flight of the Concorde supersonic airliner', person: 'Concorde', wikiTitle: 'Concorde' },
+  { city: 'Mojave, California, USA', lat: 35.059, lon: -118.152, year: '1986', discovery: 'Home base for the first non-stop, unrefueled flight around the world', person: 'Rutan Voyager', wikiTitle: 'Rutan Voyager' },
+  { city: 'Biggin Hill, England', lat: 51.331, lon: 0.033, year: '1940', discovery: 'A key Royal Air Force fighter base during the Battle of Britain', person: 'RAF Fighter Command', wikiTitle: 'Supermarine Spitfire' },
+  { city: 'Farnborough, England', lat: 51.290, lon: -0.760, year: '1930s-present', discovery: 'Historic center of British aviation research and home of the Farnborough Airshow', person: 'Royal Aircraft Establishment', wikiTitle: 'Farnborough Airshow' },
+  { city: 'Hawthorne, California, USA', lat: 33.923, lon: -118.326, year: '2004-present', discovery: 'Development site for privately funded crewed spacecraft that grew out of the aerospace industry', person: 'Scaled Composites / SpaceX', wikiTitle: 'SpaceShipOne' },
 ];
 
 let leafletMap = null;
@@ -69,8 +69,7 @@ async function loadDiscoveryImages() {
     const modalEl = document.getElementById(`disc-modal-img-${i}`);
     if (!el && !modalEl) return;
     try {
-      const cityQuery = d.city.split(',')[0].split('(')[0].trim();
-      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cityQuery)}`);
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(d.wikiTitle)}`);
       if (!res.ok) return;
       const data = await res.json();
       const url = data.thumbnail && data.thumbnail.source;

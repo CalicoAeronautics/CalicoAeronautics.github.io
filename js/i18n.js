@@ -16,11 +16,11 @@ const TRANSLATIONS = {
       calculators: 'Hesap Makineleri',
       formulas: 'Formül Kütüphanesi', simulations: 'Simülasyonlar', timeline: 'Havacılık Tarihi',
       map: 'Havacılık Haritası', scientists: 'Havacılık Öncüleri', iphyc: 'IPhyC',
-      contact: 'İletişim', more: 'Daha Fazla',
+      socials: 'Sosyal Medya', more: 'Daha Fazla',
     },
     footer: {
       learn: 'Öğren', explore: 'Keşfet', compete: 'Yarış', connect: 'Bağlan',
-      tagline: 'Fiziği anlatan bir kalico kedi: Schr\u00f6dinger\u2019in Kalikosu, göründüğünden daha güçlü.',
+      tagline: 'Sadece uçan şeyleri anlatan bir kalico kedi.',
       builtWith: 'Meraktan inşa edildi, ders kitaplarından değil.',
     },
     home: {
@@ -29,13 +29,10 @@ const TRANSLATIONS = {
       exploreBtn: 'Formülleri Keşfet',
       readBtn: 'Havacılık Haberleri',
       sectionEyebrow: 'Buradan başla',
-      sectionHeading: 'Bölümlerle değil, merakla düzenlenmiş bir evren',
-      sectionSub: 'Aynı fikirlere altı farklı kapıdan giriş - bugün hangisi ilginizi çekiyorsa onu seçin.',
     },
     about: {
-      eyebrow: 'Bunun neden var olduğu',
       heading: 'Fizik imkansız ders kitaplarının arkasına gizlenmemeli.',
-      sub: 'Merakı engellemek değil, ilham vermek. Calico Aeronautics\u2019in tüm öncülü bu.',
+      sub: 'Tek gereken merak olmalı. Calico Aeronautics\u2019in tüm öncülü bu.',
     },
   },
   fr: {
@@ -45,11 +42,11 @@ const TRANSLATIONS = {
       calculators: 'Calculatrices',
       formulas: 'Biblioth\u00e8que de Formules', simulations: 'Simulations', timeline: 'Histoire de l\u2019A\u00e9ronautique',
       map: 'Carte de l\u2019Aviation', scientists: 'Pionniers de l\u2019Aviation', iphyc: 'IPhyC',
-      contact: 'Contact', more: 'Plus',
+      socials: 'R\u00e9seaux Sociaux', more: 'Plus',
     },
     footer: {
       learn: 'Apprendre', explore: 'Explorer', compete: 'Concourir', connect: 'Contact',
-      tagline: 'Un chat calico qui explique la physique : le Calico de Schr\u00f6dinger, plus solide qu\u2019il n\u2019y para\u00eet.',
+      tagline: 'Juste un chat calico qui explique les choses qui volent.',
       builtWith: 'Construit avec curiosit\u00e9, pas avec des manuels.',
     },
     home: {
@@ -58,13 +55,10 @@ const TRANSLATIONS = {
       exploreBtn: 'Explorer les Formules',
       readBtn: 'Actualités Aéronautiques',
       sectionEyebrow: 'Commencer ici',
-      sectionHeading: 'Un univers organis\u00e9 par curiosit\u00e9, pas par chapitres',
-      sectionSub: 'Six portes d\u2019entr\u00e9e vers les m\u00eames id\u00e9es - choisissez celle qui vous int\u00e9resse aujourd\u2019hui.',
     },
     about: {
-      eyebrow: 'Pourquoi ce site existe',
       heading: 'La physique ne devrait pas \u00eatre cach\u00e9e derri\u00e8re des manuels impossibles.',
-      sub: 'Elle devrait inspirer la curiosit\u00e9, pas la freiner. C\u2019est toute la raison d\u2019\u00eatre de Calico Aeronautics.',
+      sub: 'La curiosit\u00e9 devrait \u00eatre la seule condition. C\u2019est toute la raison d\u2019\u00eatre de Calico Aeronautics.',
     },
   },
 };

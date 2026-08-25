@@ -43,7 +43,7 @@ const NAV_MORE = [
   { href: 'aircraft-anatomy.html', key: 'aircraftAnatomy', label: 'Aircraft Anatomy' },
   { href: 'aircraft-database.html', key: 'aircraftDb', label: 'Aircraft Database' },
   { href: 'iphyc.html', key: 'iphyc', label: 'IPhyC' },
-  { href: 'contact.html', key: 'contact', label: 'Contact' },
+  { href: 'socials.html', key: 'socials', label: 'Socials' },
 ];
 
 const THEMES = [
@@ -157,7 +157,7 @@ function renderFooter() {
     <div class="container footer-inner">
       <div class="footer-brand">
         <div class="brand" style="margin-bottom:10px;">${CAT_MARK_SVG}<span>Calico Aeronautics</span></div>
-        <p>${tr('footer.tagline', 'A calico cat explaining physics: Schr\u00f6dinger\u2019s Calico, tougher than it looks.')}</p>
+        <p>${tr('footer.tagline', 'Just a calico cat explaining flying things.')}</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
@@ -185,7 +185,7 @@ function renderFooter() {
         <div class="footer-col">
           <h4>${tr('footer.connect', 'Connect')}</h4>
           <a href="about.html">${tr('nav.about', 'About')}</a>
-          <a href="contact.html">${tr('nav.contact', 'Contact')}</a>
+          <a href="socials.html">${tr('nav.socials', 'Socials')}</a>
         </div>
       </div>
     </div>
