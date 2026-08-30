@@ -11,7 +11,7 @@ async function loadNews() {
     const items = await res.json();
     grid.innerHTML = items.map((n, i) => `
       <div class="card">
-        <img id="news-img-${i}" alt="${n.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:14px;">
+        <img id="news-img-${i}" alt="${n.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--bg-panel); margin-bottom:14px;">
         <span class="cat-tag">${n.category}</span>
         <h3>${n.title}</h3>
         <p class="excerpt">${n.summary}</p>
@@ -34,7 +34,7 @@ async function loadNews() {
       } catch (e) { /* leave placeholder */ }
     });
   } catch (e) {
-    grid.innerHTML = '<p style="color:var(--cream-dim);">News couldn\u2019t be loaded right now.</p>';
+    grid.innerHTML = '<p style="color:var(--text-dim);">News couldn\u2019t be loaded right now.</p>';
   }
 }
 

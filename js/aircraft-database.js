@@ -53,14 +53,14 @@ function renderAircraftTables() {
   if (fastEl) {
     fastEl.innerHTML = FASTEST_AIRCRAFT.map(([name, speed, note]) => `
       <div class="mission-card"><span class="yr">${note}</span><h3 style="font-size:1rem; margin:4px 0;">${name}</h3>
-      <p style="color:var(--cream-dim); font-size:0.85rem; margin:0;">${speed}</p></div>
+      <p style="color:var(--text-dim); font-size:0.85rem; margin:0;">${speed}</p></div>
     `).join('');
   }
   const prodEl = document.getElementById('most-produced-aircraft');
   if (prodEl) {
     prodEl.innerHTML = MOST_PRODUCED_AIRCRAFT.map(([name, count, note]) => `
       <div class="mission-card"><span class="yr">${note}</span><h3 style="font-size:1rem; margin:4px 0;">${name}</h3>
-      <p style="color:var(--cream-dim); font-size:0.85rem; margin:0;">${count}</p></div>
+      <p style="color:var(--text-dim); font-size:0.85rem; margin:0;">${count}</p></div>
     `).join('');
   }
 }

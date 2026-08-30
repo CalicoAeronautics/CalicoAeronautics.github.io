@@ -12,7 +12,7 @@ function updateCountdown() {
   const diff = TARGET_DATE - now;
 
   if (diff <= 0) {
-    el.innerHTML = '<p style="color:var(--cream-dim);">The countdown has ended - update TARGET_DATE in js/countdown.js with the next date.</p>';
+    el.innerHTML = '<p style="color:var(--text-dim);">The countdown has ended - update TARGET_DATE in js/countdown.js with the next date.</p>';
     return;
   }
 

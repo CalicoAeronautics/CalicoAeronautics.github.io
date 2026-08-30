@@ -162,7 +162,7 @@ function calcDopplerGeneral() {
   const f = num('dp2-f'), v = num('dp2-v'), vo = num('dp2-vo') || 0, vs = num('dp2-vs') || 0;
   if (!(f > 0) || !(v > 0)) return showResult('dp2-result', 'Enter a positive frequency and wave speed.', true);
   const fPrime = f * ((v + vo) / (v - vs));
-  showResult('dp2-result', `f' = <strong>${fmt(fPrime)} Hz</strong><br><span style="color:var(--cream-dim); font-size:0.8rem;">Positive v\u2092/v\u209b = moving toward; negative = moving away.</span>`);
+  showResult('dp2-result', `f' = <strong>${fmt(fPrime)} Hz</strong><br><span style="color:var(--text-dim); font-size:0.8rem;">Positive v\u2092/v\u209b = moving toward; negative = moving away.</span>`);
 }
 
 /* ---- Decibel ---- */

@@ -27,7 +27,7 @@ async function loadVideos() {
       </div>
     `).join('');
   } catch (e) {
-    grid.innerHTML = '<p style="color:var(--cream-dim);">Videos couldn\u2019t be loaded right now.</p>';
+    grid.innerHTML = '<p style="color:var(--text-dim);">Videos couldn\u2019t be loaded right now.</p>';
   }
 }
 

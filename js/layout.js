@@ -10,14 +10,14 @@
 
 const CAT_MARK_SVG = `
 <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M10 16 L14 6 L19 15 Z" fill="var(--charcoal)"/>
-  <path d="M38 16 L34 6 L29 15 Z" fill="var(--amber)"/>
-  <ellipse cx="24" cy="26" rx="16" ry="14" fill="var(--cream)"/>
-  <path d="M9 22a15 14 0 0 1 8-10 10 8 0 0 0-3 10z" fill="var(--amber)"/>
-  <path d="M39 24a15 14 0 0 0-7-11 10 9 0 0 1 2 11z" fill="var(--charcoal)"/>
-  <circle cx="18" cy="25" r="2.4" fill="var(--void)"/>
-  <circle cx="30" cy="25" r="2.4" fill="var(--void)"/>
-  <path d="M22 30q2 2 4 0" stroke="var(--void)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  <path d="M10 16 L14 6 L19 15 Z" fill="var(--bg-panel)"/>
+  <path d="M38 16 L34 6 L29 15 Z" fill="var(--accent)"/>
+  <ellipse cx="24" cy="26" rx="16" ry="14" fill="var(--text)"/>
+  <path d="M9 22a15 14 0 0 1 8-10 10 8 0 0 0-3 10z" fill="var(--accent)"/>
+  <path d="M39 24a15 14 0 0 0-7-11 10 9 0 0 1 2 11z" fill="var(--bg-panel)"/>
+  <circle cx="18" cy="25" r="2.4" fill="var(--bg)"/>
+  <circle cx="30" cy="25" r="2.4" fill="var(--bg)"/>
+  <path d="M22 30q2 2 4 0" stroke="var(--bg)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
 </svg>`;
 
 const NAV_PRIMARY = [
@@ -101,7 +101,6 @@ function renderHeader() {
         <select id="theme-toggle" aria-label="Theme">
           ${THEMES.map(th => `<option value="${th.id}">${th.label}</option>`).join('')}
         </select>
-        <button id="sound-toggle" aria-label="Toggle sound" style="background:none; border:1px solid rgba(243,237,224,0.18); border-radius:var(--radius-sm); padding:6px 10px; cursor:pointer; font-size:0.85rem;">&#128263;</button>
         <button id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
       </div>
     </div>

@@ -35,7 +35,7 @@ function initLeafletMap() {
 
   const amberIcon = L.divIcon({
     className: '',
-    html: '<div style="width:12px;height:12px;border-radius:50%;background:#E29B3F;box-shadow:0 0 0 5px rgba(226,155,63,0.2);"></div>',
+    html: '<div style="width:12px;height:12px;border-radius:50%;background:#4a90d9;border:2px solid #ffffff;"></div>',
     iconSize: [12, 12],
     iconAnchor: [6, 6],
   });
@@ -51,7 +51,7 @@ function renderListView() {
   if (!el) return;
   el.innerHTML = DISCOVERIES.map((d, i) => `
     <div class="card" data-idx="${i}" style="cursor:pointer;">
-      <img id="disc-img-${i}" alt="${d.city}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:14px;">
+      <img id="disc-img-${i}" alt="${d.city}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--bg-panel); margin-bottom:14px;">
       <span class="cat-tag">${d.year}</span>
       <h3 style="font-size:1.05rem;">${d.discovery}</h3>
       <p class="excerpt">${d.person} &middot; ${d.city}</p>
@@ -82,10 +82,10 @@ async function loadDiscoveryImages() {
 function openDiscoveryModal(i) {
   const d = DISCOVERIES[i];
   document.getElementById('map-modal-body').innerHTML = `
-    <img id="disc-modal-img-${i}" alt="${d.city}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:16px;">
+    <img id="disc-modal-img-${i}" alt="${d.city}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--bg-panel); margin-bottom:16px;">
     <span class="cat-tag">${d.year}</span>
     <h3 style="font-size:1.4rem; margin-top:8px;">${d.discovery}</h3>
-    <p style="color:var(--cream-dim); margin-top:10px;">${d.person} &middot; ${d.city}</p>
+    <p style="color:var(--text-dim); margin-top:10px;">${d.person} &middot; ${d.city}</p>
   `;
   document.getElementById('map-modal').classList.add('open');
   loadDiscoveryImages();

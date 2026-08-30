@@ -46,7 +46,7 @@ function renderTimeline() {
   el.innerHTML = TIMELINE_DATA.map(([era, year, discovery, figures]) => {
     const eraMarker = era !== lastEra
       ? `<div class="timeline-era-marker" data-era="${era}">
-           <img id="era-img-${era.replace(/[^a-zA-Z0-9]/g,'')}" alt="${era}" style="width:56px; height:56px; object-fit:cover; float:left; margin-right:14px; background:var(--void-soft);">
+           <img id="era-img-${era.replace(/[^a-zA-Z0-9]/g,'')}" alt="${era}" style="width:56px; height:56px; object-fit:cover; float:left; margin-right:14px; background:var(--bg-panel);">
            ${era}
          </div>`
       : '';

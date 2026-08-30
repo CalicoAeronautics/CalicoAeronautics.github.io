@@ -47,7 +47,7 @@ function renderAircraftRow() {
   if (!row) return;
   row.innerHTML = AIRCRAFT.map(a => `
     <button class="planet-btn" data-id="${a.id}">
-      <span class="orb" style="width:22px; height:22px; background:var(--amber); border-radius:4px;"></span>
+      <span class="orb" style="width:22px; height:22px; background:var(--accent); border-radius:4px;"></span>
       <span class="p-label">${a.name}</span>
     </button>
   `).join('');
@@ -76,10 +76,10 @@ function showAircraft(id) {
   detail.classList.add('shown');
   detail.innerHTML = `
     <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
-      <img id="aircraft-photo" alt="${a.name}" style="width:220px; height:150px; object-fit:cover; background:var(--void-soft); flex-shrink:0;">
+      <img id="aircraft-photo" alt="${a.name}" style="width:220px; height:150px; object-fit:cover; background:var(--bg-panel); flex-shrink:0;">
       <div style="flex:1; min-width:240px;">
         <h3 style="font-size:1.6rem; margin:0 0 4px;">${a.name}</h3>
-        <p style="color:var(--cream-dim); margin:0;">${a.role} &middot; First flight ${a.year}</p>
+        <p style="color:var(--text-dim); margin:0;">${a.role} &middot; First flight ${a.year}</p>
       </div>
     </div>
     <div class="planet-facts">

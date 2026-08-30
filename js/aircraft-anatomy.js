@@ -31,7 +31,7 @@ function renderAircraftParts() {
   if (!grid) return;
   grid.innerHTML = AIRCRAFT_PARTS.map((p, i) => `
     <div class="card">
-      <img id="ap-img-${i}" alt="${p.name}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--void-soft); margin-bottom:14px;">
+      <img id="ap-img-${i}" alt="${p.name}" style="width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--bg-panel); margin-bottom:14px;">
       <h3>${p.name}</h3>
       <p class="excerpt">${p.text}</p>
     </div>
