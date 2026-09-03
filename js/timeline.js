@@ -45,10 +45,7 @@ function renderTimeline() {
   let lastEra = null;
   el.innerHTML = TIMELINE_DATA.map(([era, year, discovery, figures]) => {
     const eraMarker = era !== lastEra
-      ? `<div class="timeline-era-marker" data-era="${era}">
-           <img id="era-img-${era.replace(/[^a-zA-Z0-9]/g,'')}" alt="${era}" style="width:56px; height:56px; object-fit:cover; float:left; margin-right:14px; background:var(--bg-panel);">
-           ${era}
-         </div>`
+      ? `<div class="timeline-era-marker">${era}</div>`
       : '';
     lastEra = era;
     return `${eraMarker}
@@ -58,37 +55,6 @@ function renderTimeline() {
         <p>${figures}</p>
       </div>`;
   }).join('');
-
-  const eraImages = {
-    'Early Concepts': 'Leonardo da Vinci',
-    'Lighter Than Air': 'Montgolfier brothers',
-    'The Birth of Aerodynamics': 'George Cayley',
-    'Gliding Pioneers': 'Otto Lilienthal',
-    'Powered Flight': 'Wright Flyer',
-    'World War I Era': 'Sopwith Camel',
-    'Crossing Oceans': 'Charles Lindbergh',
-    'Modern Aerodynamics': 'Ludwig Prandtl',
-    'Breaking Barriers': 'Amelia Earhart',
-    'The Jet Age Begins': 'Frank Whittle',
-    'Commercial Aviation': 'Boeing 707',
-    'Supersonic Travel': 'Concorde',
-    'Reusable Spacecraft': 'Space Shuttle',
-    'Endurance Records': 'Rutan Voyager',
-    'Private Spaceflight': 'SpaceShipOne',
-    'Sustainable Flight': 'Solar Impulse',
-  };
-
-  Object.entries(eraImages).forEach(async ([era, wikiTitle]) => {
-    const el2 = document.getElementById(`era-img-${era.replace(/[^a-zA-Z0-9]/g,'')}`);
-    if (!el2) return;
-    try {
-      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`);
-      if (!res.ok) return;
-      const data = await res.json();
-      const url = data.thumbnail && data.thumbnail.source;
-      if (url) el2.src = url;
-    } catch (e) { /* leave placeholder */ }
-  });
 }
 
 document.addEventListener('DOMContentLoaded', renderTimeline);

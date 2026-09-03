@@ -24,15 +24,9 @@ const TRANSLATIONS = {
       builtWith: 'Meraktan inşa edildi, ders kitaplarından değil.',
     },
     home: {
-      eyebrow: 'Muhtemelen tensörleri açıklayan Schr\u00f6dinger\u2019in kalikosu',
-      tagline: 'Matematik ve fizik zordur, ama kalico kedi hepsini paylaşmak istiyor.',
       exploreBtn: 'Formülleri Keşfet',
       readBtn: 'Havacılık Haberleri',
       sectionEyebrow: 'Buradan başla',
-    },
-    about: {
-      heading: 'Fizik imkansız ders kitaplarının arkasına gizlenmemeli.',
-      sub: 'Tek gereken merak olmalı. Calico Aeronautics\u2019in tüm öncülü bu.',
     },
   },
   fr: {
@@ -50,15 +44,9 @@ const TRANSLATIONS = {
       builtWith: 'Construit avec curiosit\u00e9, pas avec des manuels.',
     },
     home: {
-      eyebrow: 'Le chat calico de Schr\u00f6dinger, probablement en train d\u2019expliquer les tenseurs',
-      tagline: 'Les maths et la physique sont difficiles, mais le chat calico veut tout partager.',
       exploreBtn: 'Explorer les Formules',
       readBtn: 'Actualités Aéronautiques',
       sectionEyebrow: 'Commencer ici',
-    },
-    about: {
-      heading: 'La physique ne devrait pas \u00eatre cach\u00e9e derri\u00e8re des manuels impossibles.',
-      sub: 'La curiosit\u00e9 devrait \u00eatre la seule condition. C\u2019est toute la raison d\u2019\u00eatre de Calico Aeronautics.',
     },
   },
 };
