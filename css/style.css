@@ -173,11 +173,11 @@ h1, h2, h3, h4{
 .hero{
   max-width: var(--container);
   margin: 0 auto;
-  padding: 40px 16px;
+  padding: 16px 16px 24px;
   text-align: center;
 }
-.hero .cat-figure{ width: 60px; height: 60px; margin: 0 auto 12px; }
 .hero h1{ font-size: 2rem; margin-bottom: 0.3em; }
+.hero .cat-figure{ width: 60px; height: 60px; margin: 0 auto 12px; }
 .hero .tagline{ color: var(--text-dim); max-width: 50ch; margin: 0 auto 1.5em; }
 .hero-actions{ display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
